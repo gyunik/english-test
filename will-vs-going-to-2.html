@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>5th Grade English — Will vs. Going to (Quiz #2)</title>
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --card: #ffffff;
+      --primary: #e8590c;
+      --primary-dark: #d9480f;
+      --primary-soft: #fff4e6;
+      --accent: #0ca678;
+      --accent-soft: #e6fcf5;
+      --danger: #e03131;
+      --danger-soft: #fff5f5;
+      --warning: #f08c00;
+      --warning-soft: #fff9db;
+      --text: #1e293b;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --radius: 14px;
+      --shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding-bottom: 80px;
+    }
+
+    /* Mode Navigation Bar */
+    .mode-nav {
+      background: #1e293b;
+      padding: 10px 20px;
+    }
+
+    .mode-nav-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .mode-brand {
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: -0.01em;
+    }
+
+    .mode-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .mode-tab {
+      text-decoration: none;
+      color: #cbd5e1;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 999px;
+      transition: all 0.15s ease;
+    }
+
+    .mode-tab:hover {
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+    }
+
+    .mode-tab.active {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    /* Sticky Toolbar */
+    .sticky-bar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 20px;
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
+    }
+
+    .sticky-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .progress-wrap {
+      flex: 1;
+      min-width: 180px;
+    }
+
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .progress-track {
+      height: 10px;
+      background: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--primary), #ff922b);
+      border-radius: 999px;
+      transition: width 0.25s ease;
+    }
+
+    .toolbar-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.88rem;
+      padding: 8px 14px;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background: #fff;
+      color: var(--text);
+      border: 1.5px solid var(--border);
+    }
+    .btn-outline:hover {
+      border-color: var(--primary);
+      color: var(--primary-dark);
+      background: var(--primary-soft);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 28px auto 0;
+      padding: 0 20px;
+    }
+
+    /* Header Card */
+    .exam-header {
+      background: linear-gradient(135deg, #e8590c 0%, #ff922b 100%);
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 28px 30px;
+      box-shadow: var(--shadow);
+      margin-bottom: 24px;
+    }
+
+    .exam-header h1 {
+      margin: 0 0 6px;
+      font-size: 1.85rem;
+      letter-spacing: -0.02em;
+    }
+
+    .exam-header p {
+      margin: 0 0 18px;
+      opacity: 0.95;
+      font-size: 1rem;
+    }
+
+    .student-info {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.18);
+      padding: 14px;
+      border-radius: 10px;
+    }
+
+    .student-field label {
+      display: block;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      opacity: 0.92;
+      margin-bottom: 4px;
+      font-weight: 600;
+    }
+
+    .student-field input {
+      width: 100%;
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: none;
+      font-size: 0.95rem;
+      font-family: inherit;
+      background: rgba(255, 255, 255, 0.96);
+      color: var(--text);
+    }
+
+    .print-header {
+      display: none;
+    }
+
+    /* Results Panel */
+    .results-panel {
+      display: none;
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 24px 28px;
+      box-shadow: var(--shadow);
+      border: 2px solid var(--primary);
+      margin-bottom: 24px;
+    }
+
+    .results-panel.visible {
+      display: block;
+    }
+
+    .results-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .score-big {
+      font-size: 2.3rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      line-height: 1.1;
+    }
+
+    .score-message {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-top: 4px;
+    }
+
+    .section-breakdown {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+
+    .breakdown-item {
+      background: var(--bg);
+      padding: 10px 12px;
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+
+    .badge {
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+    .badge-good { background: var(--accent-soft); color: #087f5b; }
+    .badge-mid { background: var(--warning-soft); color: #b45309; }
+    .badge-low { background: var(--danger-soft); color: var(--danger); }
+
+    .results-controls {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    /* Question Cards */
+    .question-card {
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      margin-bottom: 14px;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.03);
+      transition: border-color 0.2s ease;
+    }
+
+    .question-card.correct {
+      border-color: var(--accent);
+      background: #fbfffe;
+    }
+
+    .question-card.incorrect {
+      border-color: var(--danger);
+      background: #fffafa;
+    }
+
+    .question-card.hidden-by-filter {
+      display: none;
+    }
+
+    .q-header {
+      margin-bottom: 12px;
+    }
+
+    .q-text {
+      font-size: 1.04rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .q-num {
+      color: var(--primary-dark);
+      font-weight: 800;
+      margin-right: 6px;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    @media (max-width: 600px) {
+      .options-grid {
+        grid-template-columns: 1fr;
+      }
+      .student-info {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .option-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.14s ease;
+      background: #fff;
+      font-size: 0.96rem;
+      user-select: none;
+    }
+
+    .option-label:hover {
+      border-color: #ffc078;
+      background: #fffaf5;
+    }
+
+    .option-label input[type="radio"] {
+      display: none;
+    }
+
+    .opt-letter {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--bg);
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 0.82rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      border: 1.5px solid var(--border);
+    }
+
+    .option-label.selected {
+      border-color: var(--primary);
+      background: var(--primary-soft);
+    }
+
+    .option-label.selected .opt-letter {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    .option-label.is-correct {
+      border-color: var(--accent) !important;
+      background: var(--accent-soft) !important;
+      font-weight: 600;
+    }
+
+    .option-label.is-correct .opt-letter {
+      background: var(--accent) !important;
+      color: #fff !important;
+      border-color: var(--accent) !important;
+    }
+
+    .option-label.is-wrong {
+      border-color: var(--danger) !important;
+      background: var(--danger-soft) !important;
+    }
+
+    .option-label.is-wrong .opt-letter {
+      background: var(--danger) !important;
+      color: #fff !important;
+      border-color: var(--danger) !important;
+    }
+
+    .q-feedback {
+      display: none;
+      margin-top: 12px;
+      padding: 10px 14px;
+      border-radius: 9px;
+      font-size: 0.9rem;
+    }
+
+    .q-feedback.visible {
+      display: block;
+    }
+
+    .q-feedback.ok {
+      background: var(--accent-soft);
+      color: #087f5b;
+    }
+
+    .q-feedback.err {
+      background: var(--danger-soft);
+      color: #c92a2a;
+    }
+
+    /* Bottom Submit Box */
+    .submit-footer {
+      margin-top: 32px;
+      text-align: center;
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 24px;
+      border: 1.5px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .submit-footer p {
+      margin: 0 0 14px;
+      color: var(--muted);
+    }
+
+    .btn-large {
+      font-size: 1.05rem;
+      padding: 13px 28px;
+    }
+
+    .answer-key-sheet {
+      display: none;
+    }
+
+    /* ==================== PRINT STYLES ==================== */
+    @media print {
+      body {
+        background: #fff !important;
+        color: #000 !important;
+        padding: 0 !important;
+        font-size: 10.5pt;
+        line-height: 1.38;
+      }
+
+      .mode-nav,
+      .sticky-bar,
+      .results-panel,
+      .submit-footer,
+      .exam-header,
+      .q-feedback {
+        display: none !important;
+      }
+
+      .container {
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      body.print-exam .print-header {
+        display: block !important;
+        border-bottom: 2px solid #000;
+        padding-bottom: 10px;
+        margin-bottom: 14px;
+      }
+
+      .print-header h1 {
+        margin: 0 0 8px;
+        font-size: 16pt;
+      }
+
+      .print-meta {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        font-size: 10.5pt;
+      }
+
+      body.print-exam .question-card {
+        display: block !important;
+        border: 1px solid #ccc !important;
+        background: #fff !important;
+        box-shadow: none !important;
+        padding: 9px 12px !important;
+        margin-bottom: 8px !important;
+        break-inside: avoid;
+      }
+
+      body.print-exam .q-num {
+        color: #000 !important;
+      }
+
+      body.print-exam .options-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 5px 14px !important;
+      }
+
+      body.print-exam .option-label {
+        border: none !important;
+        background: transparent !important;
+        padding: 2px 4px !important;
+        font-weight: 400 !important;
+        font-size: 10pt;
+      }
+
+      body.print-exam .opt-letter {
+        width: 20px;
+        height: 20px;
+        background: #fff !important;
+        color: #000 !important;
+        border: 1.2px solid #000 !important;
+        font-size: 8.5pt;
+      }
+
+      body.print-key #examForm {
+        display: none !important;
+      }
+
+      body.print-key .answer-key-sheet {
+        display: block !important;
+      }
+
+      .answer-key-sheet h1 {
+        font-size: 15pt;
+        margin: 0 0 4px;
+      }
+
+      .answer-key-sheet p {
+        margin: 0 0 12px;
+        font-size: 9.5pt;
+        color: #444;
+      }
+
+      .ak-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 5px 20px;
+        font-size: 9.5pt;
+      }
+
+      .ak-row {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid #ddd;
+        padding: 4px 2px;
+      }
+
+      .ak-num {
+        font-weight: 700;
+        width: 28px;
+      }
+
+      .ak-ans {
+        flex: 1;
+        font-weight: 600;
+      }
+
+      .ak-rule {
+        color: #555;
+        font-size: 8.5pt;
+      }
+    }
+  </style>
+</head>
+<body class="print-exam">
+
+  <!-- Mode Switcher -->
+  <nav class="mode-nav">
+    <div class="mode-nav-inner">
+      <span class="mode-brand">📚 5th Grade English Practice</span>
+      <div class="mode-tabs">
+        <a href="index.html" class="mode-tab">📝 Multiple Choice (50)</a>
+        <a href="fill-in-the-blanks.html" class="mode-tab">✍️ Fill in the Blanks (50)</a>
+        <a href="will-vs-going-to.html" class="mode-tab">🔮 Will vs. Going to (30)</a>
+        <a href="will-vs-going-to-2.html" class="mode-tab active">⚡ Will vs. Going to #2 (20)</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Sticky Toolbar -->
+  <div class="sticky-bar">
+    <div class="sticky-inner">
+      <div class="progress-wrap">
+        <div class="progress-label">
+          <span id="progressText">0 / 20 answered</span>
+          <span id="progressPct">0%</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+      <div class="toolbar-actions">
+        <button type="button" class="btn-outline" onclick="printBlankExam()">
+          🖨️ Print Exam
+        </button>
+        <button type="button" class="btn-outline" onclick="printAnswerKey()">
+          🔑 Answer Key
+        </button>
+        <button type="button" class="btn-primary" onclick="checkExam()">
+          ✅ Check Answers
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Screen Header -->
+    <header class="exam-header">
+      <h1>Will vs. Going to — Multiple Choice Quiz #2</h1>
+      <p>20 brand-new multiple-choice questions! Choose the best future form (A, B, C, or D) for each situation.</p>
+      <div class="student-info">
+        <div class="student-field">
+          <label for="studentName">Student Name</label>
+          <input type="text" id="studentName" placeholder="Write your name here..." />
+        </div>
+        <div class="student-field">
+          <label for="examDate">Date</label>
+          <input type="date" id="examDate" />
+        </div>
+      </div>
+    </header>
+
+    <!-- Print-Only Header -->
+    <div class="print-header">
+      <h1>5th Grade English — Will vs. Going to (Quiz #2)</h1>
+      <div class="print-meta">
+        <span><strong>Name:</strong> ______________________________</span>
+        <span><strong>Date:</strong> _______________</span>
+        <span><strong>Score:</strong> _____ / 20</span>
+      </div>
+    </div>
+
+    <!-- Interactive Results Panel -->
+    <section class="results-panel" id="resultsPanel">
+      <div class="results-top">
+        <div>
+          <div class="score-big" id="scoreBig">0 / 20 (0%)</div>
+          <div class="score-message" id="scoreMessage"></div>
+        </div>
+        <div class="results-controls">
+          <button type="button" class="btn-outline" id="filterMistakesBtn" onclick="toggleMistakesFilter()">
+            🔍 Show Only Mistakes
+          </button>
+          <button type="button" class="btn-primary" onclick="resetExam()">
+            🔄 Try Again
+          </button>
+        </div>
+      </div>
+      <div class="section-breakdown" id="sectionBreakdown"></div>
+    </section>
+
+    <!-- Exam Form -->
+    <form id="examForm"></form>
+
+    <!-- Bottom Submit Box -->
+    <div class="submit-footer">
+      <p>Finished all 20 questions? Click below to see your score and check every rule!</p>
+      <button type="button" class="btn-primary btn-large" onclick="checkExam()">
+        ✅ Finish &amp; Check My Answers
+      </button>
+    </div>
+
+    <!-- Print-Only Answer Key -->
+    <section class="answer-key-sheet" id="answerKeySheet">
+      <h1>Will vs. Going to (Quiz #2) — Answer Key</h1>
+      <p>Total: 20 questions (5 points each = 100 points)</p>
+      <div class="ak-grid" id="answerKeyGrid"></div>
+    </section>
+  </div>
+
+  <script>
+    const LETTERS = ["A", "B", "C", "D"];
+
+    const QUESTIONS = [
+      {
+        rule: "Decision / Offer",
+        q: "\"Oops, I spilled water on the table!\" — \"Don't worry, I ___ a towel right now.\"",
+        options: ["am going to bring", "will bring", "will to bring", "going to bring"],
+        answer: 1,
+        explanation: "Decision made right now to help → will bring."
+      },
+      {
+        rule: "Plan",
+        q: "My parents already bought our plane tickets! We ___ to Brazil in July.",
+        options: ["will fly", "is going to fly", "are going to fly", "fly"],
+        answer: 2,
+        explanation: "A plan already arranged (tickets bought) → are going to fly."
+      },
+      {
+        rule: "Evidence",
+        q: "Look at that huge pile of books in Tom's arms! He ___ them!",
+        options: ["is going to drop", "will drop", "are going to drop", "drops"],
+        answer: 0,
+        explanation: "Visible evidence right now → is going to drop."
+      },
+      {
+        rule: "Opinion / Guess",
+        q: "I think my favourite band ___ a new album next year.",
+        options: ["is going to record", "will to record", "are going to record", "will record"],
+        answer: 3,
+        explanation: "Personal opinion with 'I think' → will record."
+      },
+      {
+        rule: "Decision / Offer",
+        q: "Thank you for lending me your adventure novel! I promise I ___ it back on Monday.",
+        options: ["will give", "am going to give", "won't give", "is going to give"],
+        answer: 0,
+        explanation: "A promise ('I promise') → will give."
+      },
+      {
+        rule: "Plan",
+        q: "Emma has a dentist appointment at 4:00, so she ___ to tennis practice today.",
+        options: ["won't come", "aren't going to come", "isn't going to come", "not going to come"],
+        answer: 2,
+        explanation: "Plan already known because of her appointment → isn't going to come."
+      },
+      {
+        rule: "Evidence",
+        q: "Look at the cake in the oven — it's turning black and smoking! It ___!",
+        options: ["will burn", "are going to burn", "won't burn", "is going to burn"],
+        answer: 3,
+        explanation: "Clear evidence we can see right now → is going to burn."
+      },
+      {
+        rule: "Decision / Offer",
+        q: "\"I can't carry this heavy suitcase up the stairs!\" — \"Let me help! I ___ it for you.\"",
+        options: ["am going to carry", "will carry", "will to carry", "carries"],
+        answer: 1,
+        explanation: "Offering help on the spot → will carry."
+      },
+      {
+        rule: "Plan",
+        q: "You look so excited! What ___ do during the winter holidays?",
+        options: ["are you going to", "will you", "is you going to", "you are going to"],
+        answer: 0,
+        explanation: "Asking about someone's holiday plans → are you going to."
+      },
+      {
+        rule: "Opinion / Guess",
+        q: "I'm sure the detective ___ the mystery before the end of the film!",
+        options: ["is going to solve", "will to solve", "will solve", "are going to solve"],
+        answer: 2,
+        explanation: "Prediction based on belief ('I'm sure') → will solve."
+      },
+      {
+        rule: "Evidence",
+        q: "Watch out! That cyclist isn't looking at the red light — she ___!",
+        options: ["won't stop", "will stop", "aren't going to stop", "isn't going to stop"],
+        answer: 3,
+        explanation: "Visible evidence right in front of us → isn't going to stop."
+      },
+      {
+        rule: "Plan",
+        q: "Lucas saved his money all year because he ___ a new electric guitar next week.",
+        options: ["will buy", "is going to buy", "are going to buy", "going to buy"],
+        answer: 1,
+        explanation: "A plan he has been preparing for all year → is going to buy."
+      },
+      {
+        rule: "Decision / Offer",
+        q: "Waiter: \"Would you like chicken or pasta?\" — \"Hmm, I ___ the pasta, please!\"",
+        options: ["will have", "am going to have", "is going to have", "will to have"],
+        answer: 0,
+        explanation: "Choosing food at a restaurant is a decision made right now → will have."
+      },
+      {
+        rule: "Opinion / Guess",
+        q: "Maybe people ___ paper books in 100 years — maybe everyone will read on tablets.",
+        options: ["aren't going to read", "isn't going to read", "won't read", "will to read"],
+        answer: 2,
+        explanation: "A guess about the distant future ('Maybe') → won't read."
+      },
+      {
+        rule: "Evidence",
+        q: "Look at my little brother's eyes — he can barely keep them open! He ___ asleep any second.",
+        options: ["will fall", "are going to fall", "falls", "is going to fall"],
+        answer: 3,
+        explanation: "Clear physical evidence right now → is going to fall."
+      },
+      {
+        rule: "Plan",
+        q: "We already invited 20 friends and ordered the pizza. We ___ a big birthday party on Friday!",
+        options: ["will have", "are going to have", "is going to have", "have"],
+        answer: 1,
+        explanation: "Already planned and organised → are going to have."
+      },
+      {
+        rule: "Decision / Offer",
+        q: "It's very dark in here. ___ you turn on the light, please?",
+        options: ["Will", "Are", "Going to", "Is"],
+        answer: 0,
+        explanation: "Polite requests use 'Will you...?'."
+      },
+      {
+        rule: "Decision / Offer",
+        q: "Don't be nervous about your audition! I promise I ___ at you if you make a mistake.",
+        options: ["am not going to laugh", "will laugh", "won't laugh", "isn't going to laugh"],
+        answer: 2,
+        explanation: "A promise ('I promise') → won't laugh."
+      },
+      {
+        rule: "Plan",
+        q: "I already chose my costume for the school play: I ___ a striped shirt and a big hat.",
+        options: ["will wear", "is going to wear", "are going to wear", "am going to wear"],
+        answer: 3,
+        explanation: "Plan already decided earlier → am going to wear."
+      },
+      {
+        rule: "Opinion / Guess",
+        q: "Probably, it ___ very sunny and warm at the beach next summer.",
+        options: ["is going to be", "will be", "are going to be", "will to be"],
+        answer: 1,
+        explanation: "Future guess with 'Probably' → will be."
+      }
+    ];
+
+    let examChecked = false;
+    let showingMistakesOnly = false;
+
+    function init() {
+      const dateInput = document.getElementById("examDate");
+      if (dateInput) dateInput.value = new Date().toISOString().split("T")[0];
+      renderExam();
+      renderAnswerKey();
+      updateProgress();
+    }
+
+    function renderExam() {
+      const form = document.getElementById("examForm");
+      form.innerHTML = "";
+
+      QUESTIONS.forEach((qObj, idx) => {
+        const card = document.createElement("div");
+        card.className = "question-card";
+        card.id = `q-card-${idx}`;
+
+        const optionsHtml = qObj.options
+          .map((opt, optIdx) => `
+            <label class="option-label" id="opt-${idx}-${optIdx}" onclick="selectOption(${idx}, ${optIdx})">
+              <input type="radio" name="q${idx}" value="${optIdx}" />
+              <span class="opt-letter">${LETTERS[optIdx]}</span>
+              <span>${opt}</span>
+            </label>
+          `)
+          .join("");
+
+        card.innerHTML = `
+          <div class="q-header">
+            <div class="q-text"><span class="q-num">${idx + 1}.</span>${qObj.q}</div>
+          </div>
+          <div class="options-grid">${optionsHtml}</div>
+          <div class="q-feedback" id="fb-${idx}"></div>
+        `;
+        form.appendChild(card);
+      });
+    }
+
+    function renderAnswerKey() {
+      const grid = document.getElementById("answerKeyGrid");
+      grid.innerHTML = QUESTIONS.map((q, idx) => `
+        <div class="ak-row">
+          <span class="ak-num">${idx + 1}.</span>
+          <span class="ak-ans">${LETTERS[q.answer]} — ${q.options[q.answer]}</span>
+          <span class="ak-rule">${q.rule}</span>
+        </div>
+      `).join("");
+    }
+
+    function selectOption(qIdx, optIdx) {
+      if (examChecked) return;
+      document.querySelectorAll(`#q-card-${qIdx} .option-label`).forEach((l) => l.classList.remove("selected"));
+      const chosen = document.getElementById(`opt-${qIdx}-${optIdx}`);
+      if (chosen) {
+        chosen.classList.add("selected");
+        const radio = chosen.querySelector("input[type='radio']");
+        if (radio) radio.checked = true;
+      }
+      updateProgress();
+    }
+
+    function updateProgress() {
+      let answered = 0;
+      QUESTIONS.forEach((_, idx) => {
+        if (document.querySelector(`input[name="q${idx}"]:checked`)) answered++;
+      });
+      const pct = Math.round((answered / QUESTIONS.length) * 100);
+      document.getElementById("progressText").textContent = `${answered} / ${QUESTIONS.length} answered`;
+      document.getElementById("progressPct").textContent = `${pct}%`;
+      document.getElementById("progressFill").style.width = `${pct}%`;
+    }
+
+    function checkExam() {
+      let unanswered = 0;
+      QUESTIONS.forEach((_, idx) => {
+        if (!document.querySelector(`input[name="q${idx}"]:checked`)) unanswered++;
+      });
+
+      if (unanswered > 0 && !examChecked) {
+        const proceed = confirm(
+          `You still have ${unanswered} unanswered question${unanswered === 1 ? "" : "s"}. Check your answers now anyway?`
+        );
+        if (!proceed) return;
+      }
+
+      examChecked = true;
+      let totalCorrect = 0;
+      const ruleScores = {};
+
+      QUESTIONS.forEach((q, idx) => {
+        if (!ruleScores[q.rule]) ruleScores[q.rule] = { correct: 0, total: 0 };
+        ruleScores[q.rule].total++;
+
+        const card = document.getElementById(`q-card-${idx}`);
+        const fb = document.getElementById(`fb-${idx}`);
+        const checked = document.querySelector(`input[name="q${idx}"]:checked`);
+        const userVal = checked ? parseInt(checked.value, 10) : -1;
+
+        card.classList.remove("correct", "incorrect");
+        card.querySelectorAll(".option-label").forEach((l) => l.classList.remove("is-correct", "is-wrong"));
+
+        document.getElementById(`opt-${idx}-${q.answer}`).classList.add("is-correct");
+
+        if (userVal === q.answer) {
+          totalCorrect++;
+          ruleScores[q.rule].correct++;
+          card.classList.add("correct");
+          fb.className = "q-feedback visible ok";
+          fb.innerHTML = `✅ <strong>Correct!</strong> ${q.explanation}`;
+        } else {
+          card.classList.add("incorrect");
+          if (userVal >= 0) {
+            document.getElementById(`opt-${idx}-${userVal}`).classList.add("is-wrong");
+          }
+          fb.className = "q-feedback visible err";
+          const prefix = userVal === -1 ? "Not answered." : "Not quite.";
+          fb.innerHTML = `❌ <strong>${prefix}</strong> Answer: <strong>${LETTERS[q.answer]} (${q.options[q.answer]})</strong>. ${q.explanation}`;
+        }
+      });
+
+      const pct = Math.round((totalCorrect / QUESTIONS.length) * 100);
+      document.getElementById("scoreBig").textContent = `${totalCorrect} / ${QUESTIONS.length} (${pct}%)`;
+
+      let msg = "";
+      if (pct >= 90) msg = "🌟 Outstanding! You are a Will vs. Going to champion!";
+      else if (pct >= 75) msg = "🎉 Great job! Just a few tricky ones to review.";
+      else if (pct >= 60) msg = "👍 Good effort! Check the rules on the red questions below.";
+      else msg = "💪 Keep practising! Review the explanations below and try again.";
+      document.getElementById("scoreMessage").textContent = msg;
+
+      const breakdownEl = document.getElementById("sectionBreakdown");
+      breakdownEl.innerHTML = Object.entries(ruleScores)
+        .map(([rule, st]) => {
+          const spct = Math.round((st.correct / st.total) * 100);
+          const badgeClass = spct >= 80 ? "badge-good" : spct >= 60 ? "badge-mid" : "badge-low";
+          return `
+            <div class="breakdown-item">
+              <span>${rule}</span>
+              <span class="badge ${badgeClass}">${st.correct}/${st.total}</span>
+            </div>
+          `;
+        })
+        .join("");
+
+      const panel = document.getElementById("resultsPanel");
+      panel.classList.add("visible");
+      panel.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function toggleMistakesFilter() {
+      showingMistakesOnly = !showingMistakesOnly;
+      document.getElementById("filterMistakesBtn").textContent = showingMistakesOnly
+        ? "📋 Show All Questions"
+        : "🔍 Show Only Mistakes";
+
+      QUESTIONS.forEach((_, idx) => {
+        const card = document.getElementById(`q-card-${idx}`);
+        if (showingMistakesOnly && card.classList.contains("correct")) {
+          card.classList.add("hidden-by-filter");
+        } else {
+          card.classList.remove("hidden-by-filter");
+        }
+      });
+    }
+
+    function resetExam() {
+      examChecked = false;
+      showingMistakesOnly = false;
+      document.getElementById("filterMistakesBtn").textContent = "🔍 Show Only Mistakes";
+      document.getElementById("resultsPanel").classList.remove("visible");
+
+      QUESTIONS.forEach((_, idx) => {
+        const card = document.getElementById(`q-card-${idx}`);
+        card.classList.remove("correct", "incorrect", "hidden-by-filter");
+        const fb = document.getElementById(`fb-${idx}`);
+        fb.className = "q-feedback";
+        fb.innerHTML = "";
+        card.querySelectorAll(".option-label").forEach((l) => {
+          l.classList.remove("selected", "is-correct", "is-wrong");
+          const r = l.querySelector("input[type='radio']");
+          if (r) r.checked = false;
+        });
+      });
+
+      updateProgress();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function printBlankExam() {
+      document.body.classList.remove("print-key");
+      document.body.classList.add("print-exam");
+      window.print();
+    }
+
+    function printAnswerKey() {
+      document.body.classList.remove("print-exam");
+      document.body.classList.add("print-key");
+      window.print();
+      setTimeout(() => {
+        document.body.classList.remove("print-key");
+        document.body.classList.add("print-exam");
+      }, 500);
+    }
+
+    init();
+  </script>
+</body>
+</html>
