@@ -1,0 +1,1548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>5th Grade English Exam — Fill in the Blanks</title>
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --card: #ffffff;
+      --primary: #0ca678;
+      --primary-dark: #099268;
+      --primary-soft: #e6fcf5;
+      --blue: #3b5bdb;
+      --blue-soft: #eef2ff;
+      --accent: #0ca678;
+      --accent-soft: #e6fcf5;
+      --danger: #e03131;
+      --danger-soft: #fff5f5;
+      --warning: #f08c00;
+      --warning-soft: #fff9db;
+      --text: #1e293b;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --radius: 14px;
+      --shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding-bottom: 80px;
+    }
+
+    /* Mode Navigation Bar */
+    .mode-nav {
+      background: #1e293b;
+      padding: 10px 20px;
+    }
+
+    .mode-nav-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .mode-brand {
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: -0.01em;
+    }
+
+    .mode-tabs {
+      display: flex;
+      gap: 8px;
+    }
+
+    .mode-tab {
+      text-decoration: none;
+      color: #cbd5e1;
+      font-size: 0.88rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 999px;
+      transition: all 0.15s ease;
+    }
+
+    .mode-tab:hover {
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+    }
+
+    .mode-tab.active {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    /* Top sticky progress bar */
+    .sticky-bar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 20px;
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
+    }
+
+    .sticky-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .progress-wrap {
+      flex: 1;
+      min-width: 180px;
+    }
+
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .progress-track {
+      height: 10px;
+      background: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--primary), #20c997);
+      border-radius: 999px;
+      transition: width 0.25s ease;
+    }
+
+    .toolbar-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.88rem;
+      padding: 8px 14px;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background: #fff;
+      color: var(--text);
+      border: 1.5px solid var(--border);
+    }
+    .btn-outline:hover {
+      border-color: var(--primary);
+      color: var(--primary-dark);
+      background: var(--primary-soft);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 28px auto 0;
+      padding: 0 20px;
+    }
+
+    /* Exam Header Card */
+    .exam-header {
+      background: linear-gradient(135deg, #0ca678 0%, #20c997 100%);
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 28px 30px;
+      box-shadow: var(--shadow);
+      margin-bottom: 24px;
+    }
+
+    .exam-header h1 {
+      margin: 0 0 6px;
+      font-size: 1.85rem;
+      letter-spacing: -0.02em;
+    }
+
+    .exam-header p {
+      margin: 0 0 18px;
+      opacity: 0.94;
+      font-size: 1rem;
+    }
+
+    .student-info {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.16);
+      padding: 14px;
+      border-radius: 10px;
+    }
+
+    .student-field label {
+      display: block;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      opacity: 0.92;
+      margin-bottom: 4px;
+      font-weight: 600;
+    }
+
+    .student-field input {
+      width: 100%;
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: none;
+      font-size: 0.95rem;
+      font-family: inherit;
+      background: rgba(255, 255, 255, 0.96);
+      color: var(--text);
+    }
+
+    .print-header {
+      display: none;
+    }
+
+    /* Results Banner */
+    .results-panel {
+      display: none;
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 24px 28px;
+      box-shadow: var(--shadow);
+      border: 2px solid var(--primary);
+      margin-bottom: 24px;
+    }
+
+    .results-panel.visible {
+      display: block;
+    }
+
+    .results-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .score-big {
+      font-size: 2.3rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      line-height: 1.1;
+    }
+
+    .score-message {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-top: 4px;
+    }
+
+    .section-breakdown {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+
+    .breakdown-item {
+      background: var(--bg);
+      padding: 10px 12px;
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+
+    .badge {
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+    .badge-good { background: var(--accent-soft); color: #087f5b; }
+    .badge-mid { background: var(--warning-soft); color: #b45309; }
+    .badge-low { background: var(--danger-soft); color: var(--danger); }
+
+    .results-controls {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    /* Section Header & Word Bank */
+    .section-block {
+      margin-bottom: 32px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 28px 0 12px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #c3fae8;
+    }
+
+    .section-num {
+      background: var(--primary);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.82rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .section-title h2 {
+      margin: 0;
+      font-size: 1.25rem;
+      color: #087f5b;
+    }
+
+    .word-bank {
+      background: #f0fdf9;
+      border: 1.5px dashed #38d9a9;
+      border-radius: 12px;
+      padding: 12px 16px;
+      margin-bottom: 14px;
+    }
+
+    .word-bank.hidden {
+      display: none;
+    }
+
+    .word-bank-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #087f5b;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .word-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .word-chip {
+      background: #fff;
+      border: 1.5px solid #96f2d7;
+      color: #0b7285;
+      font-weight: 600;
+      font-size: 0.9rem;
+      padding: 4px 11px;
+      border-radius: 999px;
+      transition: all 0.15s ease;
+    }
+
+    .word-chip.used {
+      background: #e2e8f0;
+      border-color: #cbd5e1;
+      color: #94a3b8;
+      text-decoration: line-through;
+    }
+
+    /* Question Card */
+    .question-card {
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.03);
+      transition: border-color 0.2s ease;
+    }
+
+    .question-card.correct {
+      border-color: var(--accent);
+      background: #fbfffe;
+    }
+
+    .question-card.incorrect {
+      border-color: var(--danger);
+      background: #fffafa;
+    }
+
+    .question-card.hidden-by-filter {
+      display: none;
+    }
+
+    .q-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .q-sentence {
+      font-size: 1.04rem;
+      line-height: 2;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .q-num {
+      color: var(--primary-dark);
+      font-weight: 800;
+      margin-right: 6px;
+    }
+
+    .q-hint {
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-style: italic;
+      margin-left: 4px;
+    }
+
+    .q-topic {
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: var(--muted);
+      background: var(--bg);
+      padding: 3px 9px;
+      border-radius: 999px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      margin-top: 4px;
+    }
+
+    .blank-input {
+      font-family: inherit;
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: var(--blue);
+      background: #f8fafc;
+      border: 2px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 3px 10px;
+      margin: 0 4px;
+      width: 175px;
+      max-width: 100%;
+      outline: none;
+      transition: all 0.15s ease;
+    }
+
+    .blank-input:focus {
+      border-color: var(--primary);
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(12, 166, 120, 0.15);
+    }
+
+    .blank-input.input-correct {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      color: #087f5b;
+    }
+
+    .blank-input.input-wrong {
+      border-color: var(--danger);
+      background: var(--danger-soft);
+      color: #c92a2a;
+    }
+
+    .print-blank-line {
+      display: none;
+    }
+
+    .q-feedback {
+      display: none;
+      margin-top: 10px;
+      padding: 9px 13px;
+      border-radius: 9px;
+      font-size: 0.9rem;
+    }
+
+    .q-feedback.visible {
+      display: block;
+    }
+
+    .q-feedback.ok {
+      background: var(--accent-soft);
+      color: #087f5b;
+    }
+
+    .q-feedback.err {
+      background: var(--danger-soft);
+      color: #c92a2a;
+    }
+
+    /* Bottom Submit Bar */
+    .submit-footer {
+      margin-top: 32px;
+      text-align: center;
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 24px;
+      border: 1.5px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .submit-footer p {
+      margin: 0 0 14px;
+      color: var(--muted);
+    }
+
+    .btn-large {
+      font-size: 1.05rem;
+      padding: 13px 28px;
+    }
+
+    .answer-key-sheet {
+      display: none;
+    }
+
+    @media (max-width: 600px) {
+      .student-info {
+        grid-template-columns: 1fr;
+      }
+      .blank-input {
+        width: 145px;
+      }
+    }
+
+    /* ==================== PRINT STYLES ==================== */
+    @media print {
+      body {
+        background: #fff !important;
+        color: #000 !important;
+        padding: 0 !important;
+        font-size: 10.5pt;
+        line-height: 1.4;
+      }
+
+      .mode-nav,
+      .sticky-bar,
+      .results-panel,
+      .submit-footer,
+      .exam-header,
+      .q-feedback,
+      .q-topic {
+        display: none !important;
+      }
+
+      .container {
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      body.print-exam .print-header {
+        display: block !important;
+        border-bottom: 2px solid #000;
+        padding-bottom: 10px;
+        margin-bottom: 14px;
+      }
+
+      .print-header h1 {
+        margin: 0 0 8px;
+        font-size: 16pt;
+      }
+
+      .print-meta {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        font-size: 10.5pt;
+      }
+
+      body.print-exam .section-title {
+        margin: 14px 0 8px;
+        padding-bottom: 4px;
+        border-bottom: 1.5px solid #333;
+        break-after: avoid;
+        page-break-after: avoid;
+      }
+
+      body.print-exam .section-num {
+        background: #eee !important;
+        color: #000 !important;
+        border: 1px solid #333;
+      }
+
+      body.print-exam .section-title h2 {
+        color: #000 !important;
+        font-size: 12pt;
+      }
+
+      body.print-exam .word-bank {
+        display: block !important;
+        background: #f9f9f9 !important;
+        border: 1px solid #666 !important;
+        padding: 7px 10px !important;
+        margin-bottom: 10px !important;
+        break-inside: avoid;
+      }
+
+      body.print-exam .word-bank-label {
+        color: #000 !important;
+        margin-bottom: 4px;
+      }
+
+      body.print-exam .word-chip {
+        background: #fff !important;
+        border: 1px solid #999 !important;
+        color: #000 !important;
+        text-decoration: none !important;
+        font-size: 9.5pt;
+        padding: 2px 8px;
+      }
+
+      body.print-exam .question-card {
+        display: block !important;
+        border: none !important;
+        border-bottom: 1px solid #ddd !important;
+        border-radius: 0 !important;
+        background: #fff !important;
+        box-shadow: none !important;
+        padding: 6px 2px !important;
+        margin-bottom: 4px !important;
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+
+      body.print-exam .q-num {
+        color: #000 !important;
+      }
+
+      body.print-exam .q-sentence {
+        font-size: 10.5pt;
+        line-height: 1.65;
+      }
+
+      body.print-exam .blank-input {
+        display: none !important;
+      }
+
+      body.print-exam .print-blank-line {
+        display: inline-block !important;
+        border-bottom: 1.2px solid #000;
+        width: 140px;
+        margin: 0 4px;
+      }
+
+      /* Answer Key Print Mode */
+      body.print-key #examForm {
+        display: none !important;
+      }
+
+      body.print-key .answer-key-sheet {
+        display: block !important;
+      }
+
+      .answer-key-sheet h1 {
+        font-size: 15pt;
+        margin: 0 0 4px;
+      }
+
+      .answer-key-sheet p {
+        margin: 0 0 12px;
+        font-size: 9.5pt;
+        color: #444;
+      }
+
+      .ak-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 4px 20px;
+        font-size: 9.5pt;
+      }
+
+      .ak-row {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid #ddd;
+        padding: 3px 2px;
+      }
+
+      .ak-num {
+        font-weight: 700;
+        width: 30px;
+      }
+
+      .ak-ans {
+        flex: 1;
+        font-weight: 600;
+      }
+
+      .ak-topic {
+        color: #555;
+        font-size: 8.5pt;
+      }
+    }
+  </style>
+</head>
+<body class="print-exam">
+
+  <!-- Mode Switcher -->
+  <nav class="mode-nav">
+    <div class="mode-nav-inner">
+      <span class="mode-brand">📚 5th Grade English Practice</span>
+      <div class="mode-tabs">
+        <a href="index.html" class="mode-tab">📝 Multiple Choice (50)</a>
+        <a href="fill-in-the-blanks.html" class="mode-tab active">✍️ Fill in the Blanks (50)</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Sticky Toolbar -->
+  <div class="sticky-bar">
+    <div class="sticky-inner">
+      <div class="progress-wrap">
+        <div class="progress-label">
+          <span id="progressText">0 / 50 filled</span>
+          <span id="progressPct">0%</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+      <div class="toolbar-actions">
+        <button type="button" class="btn-outline" id="toggleBankBtn" onclick="toggleWordBanks()">
+          🙈 Hide Word Banks
+        </button>
+        <button type="button" class="btn-outline" onclick="printBlankExam()">
+          🖨️ Print Exam
+        </button>
+        <button type="button" class="btn-outline" onclick="printAnswerKey()">
+          🔑 Answer Key
+        </button>
+        <button type="button" class="btn-primary" onclick="checkExam()">
+          ✅ Check Answers
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Screen Header -->
+    <header class="exam-header">
+      <h1>5th Grade English — Fill in the Blanks</h1>
+      <p>50 new fill-in-the-blank exercises covering all 21 vocabulary topics! Use the Word Bank at the top of each section to help you spell each word correctly.</p>
+      <div class="student-info">
+        <div class="student-field">
+          <label for="studentName">Student Name</label>
+          <input type="text" id="studentName" placeholder="Write your name here..." />
+        </div>
+        <div class="student-field">
+          <label for="examDate">Date</label>
+          <input type="date" id="examDate" />
+        </div>
+      </div>
+    </header>
+
+    <!-- Print-Only Header -->
+    <div class="print-header">
+      <h1>5th Grade English Exam — Fill in the Blanks</h1>
+      <div class="print-meta">
+        <span><strong>Name:</strong> ______________________________</span>
+        <span><strong>Date:</strong> _______________</span>
+        <span><strong>Score:</strong> _____ / 50</span>
+      </div>
+    </div>
+
+    <!-- Interactive Results Panel -->
+    <section class="results-panel" id="resultsPanel">
+      <div class="results-top">
+        <div>
+          <div class="score-big" id="scoreBig">0 / 50 (0%)</div>
+          <div class="score-message" id="scoreMessage"></div>
+        </div>
+        <div class="results-controls">
+          <button type="button" class="btn-outline" id="filterMistakesBtn" onclick="toggleMistakesFilter()">
+            🔍 Show Only Mistakes
+          </button>
+          <button type="button" class="btn-primary" onclick="resetExam()">
+            🔄 Try Again
+          </button>
+        </div>
+      </div>
+      <div class="section-breakdown" id="sectionBreakdown"></div>
+    </section>
+
+    <!-- Exam Form -->
+    <form id="examForm" autocomplete="off" onsubmit="return false;"></form>
+
+    <!-- Bottom Submit Box -->
+    <div class="submit-footer">
+      <p>Finished filling in all 50 blanks? Click below to check your spelling and see your score!</p>
+      <button type="button" class="btn-primary btn-large" onclick="checkExam()">
+        ✅ Finish &amp; Check My Answers
+      </button>
+    </div>
+
+    <!-- Print-Only Answer Key -->
+    <section class="answer-key-sheet" id="answerKeySheet">
+      <h1>5th Grade English (Fill in the Blanks) — Answer Key</h1>
+      <p>Total: 50 questions (2 points each = 100 points)</p>
+      <div class="ak-grid" id="answerKeyGrid"></div>
+    </section>
+  </div>
+
+  <script>
+    const SECTIONS = [
+      { id: 1, title: "Clothes, Style & Hairstyles" },
+      { id: 2, title: "Personality & Negative Adjectives" },
+      { id: 3, title: "Jobs & Describing Work" },
+      { id: 4, title: "School, Exams & Everyday Expressions" },
+      { id: 5, title: "Sports & Experiences" },
+      { id: 6, title: "Films, Books & Life Stages" },
+      { id: 7, title: "Verbs with Prepositions, Music & Crime" }
+    ];
+
+    // Each question uses "___" for the blank.
+    // "accept" lists all valid lowercase answers (for spelling variants like hyphen/no-hyphen).
+    const QUESTIONS = [
+      // ==================== SECTION 1: Clothes, Style & Hairstyles (7) ====================
+      {
+        section: 1,
+        topic: "Clothes & accessories",
+        q: "My jeans are a bit loose, so I need to wear a ___ around my waist.",
+        answer: "belt",
+        accept: ["belt"],
+        explanation: "A belt holds trousers or jeans around your waist."
+      },
+      {
+        section: 1,
+        topic: "Clothes & accessories",
+        q: "It is chilly outside, so Leo put on his warm ___ and pulled the hood over his head.",
+        answer: "hoodie",
+        accept: ["hoodie"],
+        explanation: "A hoodie is a warm sweatshirt with a hood."
+      },
+      {
+        section: 1,
+        topic: "Clothes & accessories",
+        q: "On hot summer days at the beach, I love wearing open ___ on my feet.",
+        answer: "sandals",
+        accept: ["sandals"],
+        explanation: "Sandals are open shoes worn in warm weather."
+      },
+      {
+        section: 1,
+        topic: "Describing clothes",
+        q: "My sister's summer dress has pretty pink and yellow flowers on it. It is ___.",
+        answer: "floral",
+        accept: ["floral"],
+        explanation: "Floral means decorated with a flower pattern."
+      },
+      {
+        section: 1,
+        topic: "Describing clothes",
+        q: "A Dalmatian dog has black dots all over, just like my ___ pyjamas.",
+        answer: "spotted",
+        accept: ["spotted"],
+        explanation: "Spotted means covered with round dots or spots."
+      },
+      {
+        section: 1,
+        topic: "Hairstyles",
+        q: "Santa Claus has a long white ___ covering his chin and cheeks.",
+        answer: "beard",
+        accept: ["beard"],
+        explanation: "A beard is hair growing on the chin and lower face."
+      },
+      {
+        section: 1,
+        topic: "Hairstyles",
+        q: "Mia's hair isn't straight at all; it has lots of tight curls. She has ___.",
+        answer: "curly hair",
+        accept: ["curly hair", "curly"],
+        explanation: "Curly hair is hair shaped in curls."
+      },
+
+      // ==================== SECTION 2: Personality & Negative Adjectives (6) ====================
+      {
+        section: 2,
+        topic: "Personality adjectives",
+        q: "Lucas always studies carefully and finishes all his projects on time. He is very ___.",
+        answer: "hard-working",
+        accept: ["hard-working", "hard working", "hardworking"],
+        explanation: "Hard-working describes someone who puts a lot of effort into their work."
+      },
+      {
+        section: 2,
+        topic: "Personality adjectives",
+        q: "When we meet new people, my little brother hides behind Mum because he is ___.",
+        answer: "shy",
+        accept: ["shy"],
+        explanation: "Shy describes someone who feels nervous around new people."
+      },
+      {
+        section: 2,
+        topic: "Personality adjectives",
+        q: "Ben never shares his toys and only thinks about himself. That is very ___.",
+        answer: "selfish",
+        accept: ["selfish"],
+        explanation: "Selfish means caring only about yourself and not sharing."
+      },
+      {
+        section: 2,
+        topic: "Negative adjectives",
+        q: "Saying mean things to your classmates is very ___.",
+        hint: "(opposite of kind)",
+        answer: "unkind",
+        accept: ["unkind"],
+        explanation: "The negative prefix for kind is un- → unkind."
+      },
+      {
+        section: 2,
+        topic: "Negative adjectives",
+        q: "Telling lies to your parents or teachers is ___.",
+        hint: "(opposite of honest)",
+        answer: "dishonest",
+        accept: ["dishonest"],
+        explanation: "The negative prefix for honest is dis- → dishonest."
+      },
+      {
+        section: 2,
+        topic: "Negative adjectives",
+        q: "Talking with your mouth full at the dinner table is ___.",
+        hint: "(opposite of polite)",
+        answer: "impolite",
+        accept: ["impolite"],
+        explanation: "The negative prefix for polite is im- → impolite."
+      },
+
+      // ==================== SECTION 3: Jobs & Describing Work (6) ====================
+      {
+        section: 3,
+        topic: "Jobs",
+        q: "If you have a toothache, you should visit the ___.",
+        answer: "dentist",
+        accept: ["dentist"],
+        explanation: "A dentist takes care of your teeth."
+      },
+      {
+        section: 3,
+        topic: "Jobs",
+        q: "My hair is getting too long, so I am going to the ___ for a haircut.",
+        answer: "hairdresser",
+        accept: ["hairdresser"],
+        explanation: "A hairdresser cuts and styles people's hair."
+      },
+      {
+        section: 3,
+        topic: "Jobs",
+        q: "A ___ writes code to create apps, websites, and video games.",
+        answer: "computer programmer",
+        accept: ["computer programmer"],
+        explanation: "A computer programmer writes computer software."
+      },
+      {
+        section: 3,
+        topic: "Jobs",
+        q: "The ___ sweeps and mops the floors so our school is always neat and tidy.",
+        answer: "cleaner",
+        accept: ["cleaner"],
+        explanation: "A cleaner cleans buildings and rooms."
+      },
+      {
+        section: 3,
+        topic: "Describing jobs",
+        q: "Learning to play the violin is difficult at first, but it is a fun and ___ skill.",
+        answer: "challenging",
+        accept: ["challenging"],
+        explanation: "Challenging means difficult in an interesting way that tests your ability."
+      },
+      {
+        section: 3,
+        topic: "Describing jobs",
+        q: "Being a pilot and flying to new countries every week sounds like an ___ job!",
+        answer: "exciting",
+        accept: ["exciting"],
+        explanation: "Exciting means very fun and full of energy or adventure."
+      },
+
+      // ==================== SECTION 4: School, Exams & Everyday Expressions (8) ====================
+      {
+        section: 4,
+        topic: "Make and do",
+        q: "Please tidy your room! You always ___ a mess when you play with your Lego.",
+        answer: "make",
+        accept: ["make"],
+        explanation: "The correct collocation is 'make a mess'."
+      },
+      {
+        section: 4,
+        topic: "Make and do",
+        q: "On Saturday mornings, my dad goes to the supermarket to ___ the shopping.",
+        answer: "do",
+        accept: ["do"],
+        explanation: "The correct collocation is 'do the shopping'."
+      },
+      {
+        section: 4,
+        topic: "Make and do",
+        q: "I always do my ___ right after school before I watch TV.",
+        answer: "homework",
+        accept: ["homework"],
+        explanation: "The expression is 'do my homework'."
+      },
+      {
+        section: 4,
+        topic: "Learning and exams",
+        q: "During a test, you must write your own answers and never ___ someone's work.",
+        answer: "copy",
+        accept: ["copy"],
+        explanation: "We say 'copy someone's work'."
+      },
+      {
+        section: 4,
+        topic: "Learning and exams",
+        q: "If you don't study at all for the exam, you might ___ it.",
+        answer: "fail",
+        accept: ["fail"],
+        explanation: "To fail an exam is the opposite of passing it."
+      },
+      {
+        section: 4,
+        topic: "Learning and exams",
+        q: "Emma was super happy because she got a really good ___ on her English test.",
+        answer: "mark",
+        accept: ["mark"],
+        explanation: "We say 'get a good / bad mark' on a test."
+      },
+      {
+        section: 4,
+        topic: "Expressions with take",
+        q: "Smile everyone! I want to take a ___ of the whole class.",
+        answer: "photo",
+        accept: ["photo", "picture"],
+        explanation: "The expression is 'take a photo'."
+      },
+      {
+        section: 4,
+        topic: "Expressions with take",
+        q: "Our school is far from home, so we take the ___ every morning at 7:30.",
+        answer: "bus",
+        accept: ["bus"],
+        explanation: "The expression is 'take the bus'."
+      },
+
+      // ==================== SECTION 5: Sports & Experiences (7) ====================
+      {
+        section: 5,
+        topic: "Experiences",
+        q: "On our holiday by the sea, we went ___ underwater to see colourful fish.",
+        answer: "scuba diving",
+        accept: ["scuba diving", "scuba-diving"],
+        explanation: "The expression is 'go scuba diving'."
+      },
+      {
+        section: 5,
+        topic: "Experiences",
+        q: "When we visited Scotland, we got to stay in a ___ that was 500 years old!",
+        answer: "castle",
+        accept: ["castle"],
+        explanation: "The expression is 'stay in a castle'."
+      },
+      {
+        section: 5,
+        topic: "Sports verbs",
+        q: "Thousands of fans go to the stadium every weekend to ___ their favourite football team.",
+        answer: "support",
+        accept: ["support"],
+        explanation: "To support a team means to cheer for them and want them to win."
+      },
+      {
+        section: 5,
+        topic: "Sports verbs",
+        q: "Runners from many different schools will ___ in the big race on Saturday.",
+        answer: "compete",
+        accept: ["compete"],
+        explanation: "To compete means to take part in a race or competition."
+      },
+      {
+        section: 5,
+        topic: "Sports equipment",
+        q: "You need a pair of ___ to glide across the frozen rink.",
+        answer: "ice skates",
+        accept: ["ice skates"],
+        explanation: "Ice skates are boots with metal blades for skating on ice."
+      },
+      {
+        section: 5,
+        topic: "Sports equipment",
+        q: "In hockey, players use a ___ to hit the ball or puck into the goal.",
+        answer: "hockey stick",
+        accept: ["hockey stick"],
+        explanation: "A hockey stick is used to play hockey."
+      },
+      {
+        section: 5,
+        topic: "Sports equipment",
+        q: "I put on my ___ so I could see clearly underwater and breathe while floating.",
+        answer: "snorkel mask",
+        accept: ["snorkel mask"],
+        explanation: "A snorkel mask helps you see and breathe at the surface of the water."
+      },
+
+      // ==================== SECTION 6: Films, Books & Life Stages (8) ====================
+      {
+        section: 6,
+        topic: "Types of films",
+        q: "We laughed so much at that ___ last night — it was hilarious!",
+        answer: "comedy",
+        accept: ["comedy"],
+        explanation: "A comedy is a funny film that makes you laugh."
+      },
+      {
+        section: 6,
+        topic: "Types of films",
+        q: "I don't like watching a ___ before bed because scary monsters give me nightmares.",
+        answer: "horror film",
+        accept: ["horror film"],
+        explanation: "A horror film is a scary movie."
+      },
+      {
+        section: 6,
+        topic: "Types of books",
+        q: "Harry Potter is a famous ___ full of magic, wizards, and dragons.",
+        answer: "fantasy novel",
+        accept: ["fantasy novel"],
+        explanation: "A fantasy novel is a book with magic and imaginary worlds."
+      },
+      {
+        section: 6,
+        topic: "Types of books",
+        q: "A ___ tells a story set in the past, like in Ancient Rome or the Middle Ages.",
+        answer: "historical novel",
+        accept: ["historical novel"],
+        explanation: "A historical novel is set in a real time period from history."
+      },
+      {
+        section: 6,
+        topic: "Life stages",
+        q: "When I ___, I want to be a vet and help animals.",
+        answer: "grow up",
+        accept: ["grow up"],
+        explanation: "To grow up means to become an adult."
+      },
+      {
+        section: 6,
+        topic: "Life stages",
+        q: "My aunt and uncle are having a big wedding next summer because they are going to ___.",
+        answer: "get married",
+        accept: ["get married"],
+        explanation: "To get married means to have a wedding and become husband/wife."
+      },
+      {
+        section: 6,
+        topic: "Film jobs",
+        q: "The ___ is the boss on a movie set and tells the actors and crew what to do.",
+        answer: "film director",
+        accept: ["film director"],
+        explanation: "A film director guides the actors and controls how the film is made."
+      },
+      {
+        section: 6,
+        topic: "Film jobs",
+        q: "The ___ painted green skin on the actor's face to make him look like a monster.",
+        answer: "make-up artist",
+        accept: ["make-up artist", "makeup artist"],
+        explanation: "A make-up artist puts make-up and special effects on actors."
+      },
+
+      // ==================== SECTION 7: Verbs + Prepositions, Music & Crime (8) ====================
+      {
+        section: 7,
+        topic: "Verbs + prepositions",
+        q: "Hurry up! The school bus is here and the driver won't wait ___ us!",
+        answer: "for",
+        accept: ["for"],
+        explanation: "We say 'wait for' someone or something."
+      },
+      {
+        section: 7,
+        topic: "Verbs + prepositions",
+        q: "Our dog is so friendly — whenever you smile ___ him, he wags his tail.",
+        answer: "at",
+        accept: ["at"],
+        explanation: "We say 'smile at' someone."
+      },
+      {
+        section: 7,
+        topic: "Verbs + prepositions",
+        q: "Last night I had a crazy dream ___ flying to the Moon on a giant pizza!",
+        answer: "about",
+        accept: ["about"],
+        explanation: "We say 'dream about' something."
+      },
+      {
+        section: 7,
+        topic: "Music styles & instruments",
+        q: "Rock bands love playing loud solos on the ___.",
+        answer: "electric guitar",
+        accept: ["electric guitar"],
+        explanation: "An electric guitar is a key instrument in rock and heavy metal music."
+      },
+      {
+        section: 7,
+        topic: "Music collocations",
+        q: "Sam plays the drums really well, so his friends invited him to ___ a band.",
+        answer: "join",
+        accept: ["join"],
+        explanation: "The correct collocation is 'join a band'."
+      },
+      {
+        section: 7,
+        topic: "Music collocations",
+        q: "After the show, I met my favourite singer and she agreed to sign an ___ on my notebook!",
+        answer: "autograph",
+        accept: ["autograph"],
+        explanation: "The correct collocation is 'sign an autograph'."
+      },
+      {
+        section: 7,
+        topic: "Crime",
+        q: "Sherlock Holmes is a famous ___ who solves mysteries by looking for clues.",
+        answer: "detective",
+        accept: ["detective"],
+        explanation: "A detective investigates crimes and looks for clues."
+      },
+      {
+        section: 7,
+        topic: "Crime",
+        q: "The police arrived quickly after a ___ happened at the jewellery shop.",
+        answer: "robbery",
+        accept: ["robbery"],
+        explanation: "A robbery is the crime of stealing money or valuable things from a place."
+      }
+    ];
+
+    let examChecked = false;
+    let showingMistakesOnly = false;
+    let banksHidden = false;
+
+    function normalize(str) {
+      return (str || "").trim().toLowerCase().replace(/\s+/g, " ");
+    }
+
+    // Deterministic shuffle per section so Word Bank is not in question order
+    function getShuffledWords(words, seed) {
+      const arr = [...words];
+      let s = seed * 9301 + 49297;
+      for (let i = arr.length - 1; i > 0; i--) {
+        s = (s * 9301 + 49297) % 233280;
+        const j = s % (i + 1);
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    function init() {
+      const dateInput = document.getElementById("examDate");
+      if (dateInput) {
+        dateInput.value = new Date().toISOString().split("T")[0];
+      }
+      renderExam();
+      renderAnswerKey();
+      updateProgressAndBanks();
+    }
+
+    function renderExam() {
+      const form = document.getElementById("examForm");
+      form.innerHTML = "";
+      let qGlobalIndex = 0;
+
+      SECTIONS.forEach((sec) => {
+        const secQuestions = QUESTIONS
+          .map((q, idx) => ({ ...q, idx }))
+          .filter((q) => q.section === sec.id);
+
+        const secBlock = document.createElement("div");
+        secBlock.className = "section-block";
+        secBlock.dataset.section = sec.id;
+
+        const secHeader = document.createElement("div");
+        secHeader.className = "section-title";
+        secHeader.innerHTML = `<span class="section-num">Section ${sec.id}</span><h2>${sec.title}</h2>`;
+        secBlock.appendChild(secHeader);
+
+        // Word Bank for this section
+        const bankWords = getShuffledWords(secQuestions.map((q) => q.answer), sec.id + 7);
+        const bankDiv = document.createElement("div");
+        bankDiv.className = "word-bank";
+        bankDiv.id = `bank-${sec.id}`;
+        bankDiv.innerHTML = `
+          <span class="word-bank-label">Word Bank — Section ${sec.id}</span>
+          <div class="word-chips">
+            ${bankWords
+              .map((w) => `<span class="word-chip" data-word="${normalize(w)}">${w}</span>`)
+              .join("")}
+          </div>
+        `;
+        secBlock.appendChild(bankDiv);
+
+        secQuestions.forEach((qObj) => {
+          qGlobalIndex++;
+          const card = document.createElement("div");
+          card.className = "question-card";
+          card.id = `q-card-${qObj.idx}`;
+
+          const inputHtml = `<input type="text" class="blank-input" id="input-${qObj.idx}" data-section="${sec.id}" placeholder="type here..." oninput="onBlankInput(${qObj.idx})" /><span class="print-blank-line"></span>`;
+          const sentenceHtml = qObj.q.replace("___", inputHtml);
+          const hintHtml = qObj.hint ? ` <span class="q-hint">${qObj.hint}</span>` : "";
+
+          card.innerHTML = `
+            <div class="q-row">
+              <div class="q-sentence">
+                <span class="q-num">${qGlobalIndex}.</span>${sentenceHtml}${hintHtml}
+              </div>
+              <span class="q-topic">${qObj.topic}</span>
+            </div>
+            <div class="q-feedback" id="fb-${qObj.idx}"></div>
+          `;
+
+          secBlock.appendChild(card);
+        });
+
+        form.appendChild(secBlock);
+      });
+    }
+
+    function renderAnswerKey() {
+      const grid = document.getElementById("answerKeyGrid");
+      grid.innerHTML = QUESTIONS.map((q, idx) => {
+        return `
+          <div class="ak-row">
+            <span class="ak-num">${idx + 1}.</span>
+            <span class="ak-ans">${q.answer}</span>
+            <span class="ak-topic">${q.topic}</span>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function onBlankInput() {
+      if (examChecked) return;
+      updateProgressAndBanks();
+    }
+
+    function updateProgressAndBanks() {
+      let filled = 0;
+      const typedBySection = {};
+      SECTIONS.forEach((s) => (typedBySection[s.id] = new Set()));
+
+      QUESTIONS.forEach((q, idx) => {
+        const el = document.getElementById(`input-${idx}`);
+        if (!el) return;
+        const val = normalize(el.value);
+        if (val.length > 0) {
+          filled++;
+          typedBySection[q.section].add(val);
+        }
+      });
+
+      const pct = Math.round((filled / QUESTIONS.length) * 100);
+      document.getElementById("progressText").textContent = `${filled} / ${QUESTIONS.length} filled`;
+      document.getElementById("progressPct").textContent = `${pct}%`;
+      document.getElementById("progressFill").style.width = `${pct}%`;
+
+      // Cross out words in each section's Word Bank once typed
+      SECTIONS.forEach((s) => {
+        const chips = document.querySelectorAll(`#bank-${s.id} .word-chip`);
+        chips.forEach((chip) => {
+          const w = chip.dataset.word;
+          if (typedBySection[s.id].has(w)) {
+            chip.classList.add("used");
+          } else {
+            chip.classList.remove("used");
+          }
+        });
+      });
+    }
+
+    function toggleWordBanks() {
+      banksHidden = !banksHidden;
+      const btn = document.getElementById("toggleBankBtn");
+      btn.textContent = banksHidden ? "👀 Show Word Banks" : "🙈 Hide Word Banks";
+      document.querySelectorAll(".word-bank").forEach((b) => {
+        b.classList.toggle("hidden", banksHidden);
+      });
+    }
+
+    function checkExam() {
+      let emptyCount = 0;
+      QUESTIONS.forEach((_, idx) => {
+        const val = normalize(document.getElementById(`input-${idx}`).value);
+        if (!val) emptyCount++;
+      });
+
+      if (emptyCount > 0 && !examChecked) {
+        const proceed = confirm(
+          `You still have ${emptyCount} empty blank${emptyCount === 1 ? "" : "s"}. Do you want to check your answers now anyway?`
+        );
+        if (!proceed) return;
+      }
+
+      examChecked = true;
+      let totalCorrect = 0;
+      const sectionScores = {};
+      SECTIONS.forEach((s) => (sectionScores[s.id] = { correct: 0, total: 0, title: s.title }));
+
+      QUESTIONS.forEach((q, idx) => {
+        sectionScores[q.section].total++;
+        const card = document.getElementById(`q-card-${idx}`);
+        const input = document.getElementById(`input-${idx}`);
+        const fb = document.getElementById(`fb-${idx}`);
+        const userVal = normalize(input.value);
+
+        card.classList.remove("correct", "incorrect");
+        input.classList.remove("input-correct", "input-wrong");
+        input.readOnly = true;
+
+        const isCorrect = q.accept.map(normalize).includes(userVal);
+
+        if (isCorrect) {
+          totalCorrect++;
+          sectionScores[q.section].correct++;
+          card.classList.add("correct");
+          input.classList.add("input-correct");
+          fb.className = "q-feedback visible ok";
+          fb.innerHTML = `✅ <strong>Correct!</strong> ${q.explanation}`;
+        } else {
+          card.classList.add("incorrect");
+          input.classList.add("input-wrong");
+          fb.className = "q-feedback visible err";
+          const prefix = !userVal ? "Not answered." : "Not quite.";
+          fb.innerHTML = `❌ <strong>${prefix}</strong> The correct answer is <strong>${q.answer}</strong>. ${q.explanation}`;
+        }
+      });
+
+      const pct = Math.round((totalCorrect / QUESTIONS.length) * 100);
+      document.getElementById("scoreBig").textContent = `${totalCorrect} / ${QUESTIONS.length} (${pct}%)`;
+
+      let msg = "";
+      if (pct >= 90) msg = "🌟 Outstanding! Your vocabulary and spelling are amazing!";
+      else if (pct >= 75) msg = "🎉 Great job! Just a few words to review.";
+      else if (pct >= 60) msg = "👍 Good effort! Review the highlighted words below.";
+      else msg = "💪 Keep practising! Check the red answers below and try again.";
+
+      document.getElementById("scoreMessage").textContent = msg;
+
+      const breakdownEl = document.getElementById("sectionBreakdown");
+      breakdownEl.innerHTML = SECTIONS.map((s) => {
+        const st = sectionScores[s.id];
+        const spct = Math.round((st.correct / st.total) * 100);
+        const badgeClass = spct >= 80 ? "badge-good" : spct >= 60 ? "badge-mid" : "badge-low";
+        return `
+          <div class="breakdown-item">
+            <span>Sec ${s.id}: ${s.title}</span>
+            <span class="badge ${badgeClass}">${st.correct}/${st.total}</span>
+          </div>
+        `;
+      }).join("");
+
+      const panel = document.getElementById("resultsPanel");
+      panel.classList.add("visible");
+      panel.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function toggleMistakesFilter() {
+      showingMistakesOnly = !showingMistakesOnly;
+      const btn = document.getElementById("filterMistakesBtn");
+      btn.textContent = showingMistakesOnly ? "📋 Show All Questions" : "🔍 Show Only Mistakes";
+
+      QUESTIONS.forEach((_, idx) => {
+        const card = document.getElementById(`q-card-${idx}`);
+        if (showingMistakesOnly && card.classList.contains("correct")) {
+          card.classList.add("hidden-by-filter");
+        } else {
+          card.classList.remove("hidden-by-filter");
+        }
+      });
+    }
+
+    function resetExam() {
+      examChecked = false;
+      showingMistakesOnly = false;
+      document.getElementById("filterMistakesBtn").textContent = "🔍 Show Only Mistakes";
+      document.getElementById("resultsPanel").classList.remove("visible");
+
+      QUESTIONS.forEach((_, idx) => {
+        const card = document.getElementById(`q-card-${idx}`);
+        const input = document.getElementById(`input-${idx}`);
+        const fb = document.getElementById(`fb-${idx}`);
+
+        card.classList.remove("correct", "incorrect", "hidden-by-filter");
+        input.classList.remove("input-correct", "input-wrong");
+        input.value = "";
+        input.readOnly = false;
+        fb.className = "q-feedback";
+        fb.innerHTML = "";
+      });
+
+      updateProgressAndBanks();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function printBlankExam() {
+      document.body.classList.remove("print-key");
+      document.body.classList.add("print-exam");
+      window.print();
+    }
+
+    function printAnswerKey() {
+      document.body.classList.remove("print-exam");
+      document.body.classList.add("print-key");
+      window.print();
+      setTimeout(() => {
+        document.body.classList.remove("print-key");
+        document.body.classList.add("print-exam");
+      }, 500);
+    }
+
+    init();
+  </script>
+</body>
+</html>

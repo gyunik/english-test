@@ -37,6 +37,54 @@
       padding-bottom: 80px;
     }
 
+    /* Mode Navigation Bar */
+    .mode-nav {
+      background: #1e293b;
+      padding: 10px 20px;
+    }
+
+    .mode-nav-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .mode-brand {
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: -0.01em;
+    }
+
+    .mode-tabs {
+      display: flex;
+      gap: 8px;
+    }
+
+    .mode-tab {
+      text-decoration: none;
+      color: #cbd5e1;
+      font-size: 0.88rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 999px;
+      transition: all 0.15s ease;
+    }
+
+    .mode-tab:hover {
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+    }
+
+    .mode-tab.active {
+      background: var(--primary);
+      color: #fff;
+    }
+
     /* Top sticky progress bar */
     .sticky-bar {
       position: sticky;
@@ -506,6 +554,7 @@
         line-height: 1.35;
       }
 
+      .mode-nav,
       .sticky-bar,
       .results-panel,
       .submit-footer,
@@ -657,6 +706,17 @@
   </style>
 </head>
 <body class="print-exam">
+
+  <!-- Mode Switcher -->
+  <nav class="mode-nav">
+    <div class="mode-nav-inner">
+      <span class="mode-brand">📚 5th Grade English Practice</span>
+      <div class="mode-tabs">
+        <a href="index.html" class="mode-tab active">📝 Multiple Choice (50)</a>
+        <a href="fill-in-the-blanks.html" class="mode-tab">✍️ Fill in the Blanks (50)</a>
+      </div>
+    </div>
+  </nav>
 
   <!-- Sticky Toolbar -->
   <div class="sticky-bar">
