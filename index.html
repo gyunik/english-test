@@ -1,0 +1,1434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>5th Grade English Vocabulary Exam</title>
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --card: #ffffff;
+      --primary: #3b5bdb;
+      --primary-dark: #2b44b8;
+      --primary-soft: #eef2ff;
+      --accent: #0ca678;
+      --accent-soft: #e6fcf5;
+      --danger: #e03131;
+      --danger-soft: #fff5f5;
+      --warning: #f08c00;
+      --warning-soft: #fff9db;
+      --text: #1e293b;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --radius: 14px;
+      --shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding-bottom: 80px;
+    }
+
+    /* Top sticky progress bar */
+    .sticky-bar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 20px;
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
+    }
+
+    .sticky-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .progress-wrap {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .progress-track {
+      height: 10px;
+      background: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--primary), #5c7cfa);
+      border-radius: 999px;
+      transition: width 0.25s ease;
+    }
+
+    .toolbar-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      padding: 9px 15px;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background: #fff;
+      color: var(--text);
+      border: 1.5px solid var(--border);
+    }
+    .btn-outline:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: var(--primary-soft);
+    }
+
+    .btn-success {
+      background: var(--accent);
+      color: #fff;
+    }
+    .btn-success:hover {
+      background: #099268;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 28px auto 0;
+      padding: 0 20px;
+    }
+
+    /* Exam Header Card */
+    .exam-header {
+      background: linear-gradient(135deg, #3b5bdb 0%, #5c7cfa 100%);
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 28px 30px;
+      box-shadow: var(--shadow);
+      margin-bottom: 24px;
+    }
+
+    .exam-header h1 {
+      margin: 0 0 6px;
+      font-size: 1.85rem;
+      letter-spacing: -0.02em;
+    }
+
+    .exam-header p {
+      margin: 0 0 18px;
+      opacity: 0.92;
+      font-size: 1rem;
+    }
+
+    .student-info {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.14);
+      padding: 14px;
+      border-radius: 10px;
+    }
+
+    .student-field label {
+      display: block;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      opacity: 0.9;
+      margin-bottom: 4px;
+      font-weight: 600;
+    }
+
+    .student-field input {
+      width: 100%;
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: none;
+      font-size: 0.95rem;
+      font-family: inherit;
+      background: rgba(255, 255, 255, 0.95);
+      color: var(--text);
+    }
+
+    /* Print-only header */
+    .print-header {
+      display: none;
+    }
+
+    /* Results Banner */
+    .results-panel {
+      display: none;
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 24px 28px;
+      box-shadow: var(--shadow);
+      border: 2px solid var(--primary);
+      margin-bottom: 24px;
+    }
+
+    .results-panel.visible {
+      display: block;
+    }
+
+    .results-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .score-big {
+      font-size: 2.3rem;
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1.1;
+    }
+
+    .score-message {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-top: 4px;
+    }
+
+    .section-breakdown {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+
+    .breakdown-item {
+      background: var(--bg);
+      padding: 10px 12px;
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+
+    .badge {
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+    .badge-good { background: var(--accent-soft); color: #087f5b; }
+    .badge-mid { background: var(--warning-soft); color: #b45309; }
+    .badge-low { background: var(--danger-soft); color: var(--danger); }
+
+    .results-controls {
+      margin-top: 16px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    /* Section Header */
+    .section-block {
+      margin-bottom: 30px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 28px 0 14px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #dbe4ff;
+    }
+
+    .section-num {
+      background: var(--primary);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.82rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .section-title h2 {
+      margin: 0;
+      font-size: 1.25rem;
+      color: #1e3a8a;
+    }
+
+    /* Question Card */
+    .question-card {
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      margin-bottom: 14px;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.03);
+      transition: border-color 0.2s ease;
+    }
+
+    .question-card.correct {
+      border-color: var(--accent);
+      background: #fbfffe;
+    }
+
+    .question-card.incorrect {
+      border-color: var(--danger);
+      background: #fffafa;
+    }
+
+    .question-card.hidden-by-filter {
+      display: none;
+    }
+
+    .q-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .q-text {
+      font-size: 1.04rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .q-num {
+      color: var(--primary);
+      font-weight: 800;
+      margin-right: 6px;
+    }
+
+    .q-topic {
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: var(--muted);
+      background: var(--bg);
+      padding: 3px 9px;
+      border-radius: 999px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    @media (max-width: 600px) {
+      .options-grid {
+        grid-template-columns: 1fr;
+      }
+      .student-info {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .option-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.14s ease;
+      background: #fff;
+      font-size: 0.96rem;
+      user-select: none;
+    }
+
+    .option-label:hover {
+      border-color: #91a7ff;
+      background: #f8faff;
+    }
+
+    .option-label input[type="radio"] {
+      display: none;
+    }
+
+    .opt-letter {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--bg);
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 0.82rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      border: 1.5px solid var(--border);
+    }
+
+    .option-label.selected {
+      border-color: var(--primary);
+      background: var(--primary-soft);
+    }
+
+    .option-label.selected .opt-letter {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    .option-label.is-correct {
+      border-color: var(--accent) !important;
+      background: var(--accent-soft) !important;
+      font-weight: 600;
+    }
+
+    .option-label.is-correct .opt-letter {
+      background: var(--accent) !important;
+      color: #fff !important;
+      border-color: var(--accent) !important;
+    }
+
+    .option-label.is-wrong {
+      border-color: var(--danger) !important;
+      background: var(--danger-soft) !important;
+    }
+
+    .option-label.is-wrong .opt-letter {
+      background: var(--danger) !important;
+      color: #fff !important;
+      border-color: var(--danger) !important;
+    }
+
+    .q-feedback {
+      display: none;
+      margin-top: 12px;
+      padding: 10px 14px;
+      border-radius: 9px;
+      font-size: 0.9rem;
+    }
+
+    .q-feedback.visible {
+      display: block;
+    }
+
+    .q-feedback.ok {
+      background: var(--accent-soft);
+      color: #087f5b;
+    }
+
+    .q-feedback.err {
+      background: var(--danger-soft);
+      color: #c92a2a;
+    }
+
+    /* Bottom Submit Bar */
+    .submit-footer {
+      margin-top: 32px;
+      text-align: center;
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 24px;
+      border: 1.5px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .submit-footer p {
+      margin: 0 0 14px;
+      color: var(--muted);
+    }
+
+    .btn-large {
+      font-size: 1.05rem;
+      padding: 13px 28px;
+    }
+
+    /* Answer Key section (only visible when printing answer key) */
+    .answer-key-sheet {
+      display: none;
+    }
+
+    /* ==================== PRINT STYLES ==================== */
+    @media print {
+      body {
+        background: #fff !important;
+        color: #000 !important;
+        padding: 0 !important;
+        font-size: 10.5pt;
+        line-height: 1.35;
+      }
+
+      .sticky-bar,
+      .results-panel,
+      .submit-footer,
+      .exam-header,
+      .q-feedback,
+      .q-topic {
+        display: none !important;
+      }
+
+      .container {
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      /* Blank Exam Print Mode */
+      body.print-exam .print-header {
+        display: block !important;
+        border-bottom: 2px solid #000;
+        padding-bottom: 10px;
+        margin-bottom: 16px;
+      }
+
+      .print-header h1 {
+        margin: 0 0 8px;
+        font-size: 16pt;
+      }
+
+      .print-meta {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        font-size: 10.5pt;
+      }
+
+      body.print-exam .section-title {
+        margin: 14px 0 8px;
+        padding-bottom: 4px;
+        border-bottom: 1.5px solid #333;
+        break-after: avoid;
+        page-break-after: avoid;
+      }
+
+      body.print-exam .section-num {
+        background: #eee !important;
+        color: #000 !important;
+        border: 1px solid #333;
+      }
+
+      body.print-exam .section-title h2 {
+        color: #000 !important;
+        font-size: 12pt;
+      }
+
+      body.print-exam .question-card {
+        display: block !important;
+        border: 1px solid #ccc !important;
+        background: #fff !important;
+        box-shadow: none !important;
+        padding: 9px 12px !important;
+        margin-bottom: 8px !important;
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+
+      body.print-exam .q-header {
+        margin-bottom: 6px;
+      }
+
+      body.print-exam .q-num {
+        color: #000 !important;
+      }
+
+      body.print-exam .q-text {
+        font-size: 10.5pt;
+      }
+
+      body.print-exam .options-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 6px 14px !important;
+      }
+
+      body.print-exam .option-label {
+        border: none !important;
+        background: transparent !important;
+        padding: 2px 4px !important;
+        font-weight: 400 !important;
+        font-size: 10pt;
+      }
+
+      body.print-exam .opt-letter {
+        width: 20px;
+        height: 20px;
+        background: #fff !important;
+        color: #000 !important;
+        border: 1.2px solid #000 !important;
+        font-size: 8.5pt;
+      }
+
+      /* Answer Key Print Mode */
+      body.print-key #examForm {
+        display: none !important;
+      }
+
+      body.print-key .answer-key-sheet {
+        display: block !important;
+      }
+
+      .answer-key-sheet h1 {
+        font-size: 15pt;
+        margin: 0 0 4px;
+      }
+
+      .answer-key-sheet p {
+        margin: 0 0 12px;
+        font-size: 9.5pt;
+        color: #444;
+      }
+
+      .ak-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 4px 20px;
+        font-size: 9.5pt;
+      }
+
+      .ak-row {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid #ddd;
+        padding: 3px 2px;
+      }
+
+      .ak-num {
+        font-weight: 700;
+        width: 30px;
+      }
+
+      .ak-ans {
+        flex: 1;
+        font-weight: 600;
+      }
+
+      .ak-topic {
+        color: #555;
+        font-size: 8.5pt;
+      }
+    }
+  </style>
+</head>
+<body class="print-exam">
+
+  <!-- Sticky Toolbar -->
+  <div class="sticky-bar">
+    <div class="sticky-inner">
+      <div class="progress-wrap">
+        <div class="progress-label">
+          <span id="progressText">0 / 50 answered</span>
+          <span id="progressPct">0%</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+      <div class="toolbar-actions">
+        <button type="button" class="btn-outline" onclick="printBlankExam()" title="Print a clean blank copy of the exam">
+          🖨️ Print Exam
+        </button>
+        <button type="button" class="btn-outline" onclick="printAnswerKey()" title="Print the 1-page answer key for grading">
+          🔑 Answer Key
+        </button>
+        <button type="button" class="btn-primary" onclick="checkExam()">
+          ✅ Check Answers
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Screen Header -->
+    <header class="exam-header">
+      <h1>5th Grade English Vocabulary Exam</h1>
+      <p>50 multiple-choice questions covering all 21 vocabulary topics. Choose the best answer (A, B, C, or D) for each question.</p>
+      <div class="student-info">
+        <div class="student-field">
+          <label for="studentName">Student Name</label>
+          <input type="text" id="studentName" placeholder="Write your name here..." />
+        </div>
+        <div class="student-field">
+          <label for="examDate">Date</label>
+          <input type="date" id="examDate" />
+        </div>
+      </div>
+    </header>
+
+    <!-- Print-Only Header -->
+    <div class="print-header">
+      <h1>5th Grade English Vocabulary Exam</h1>
+      <div class="print-meta">
+        <span><strong>Name:</strong> ______________________________</span>
+        <span><strong>Date:</strong> _______________</span>
+        <span><strong>Score:</strong> _____ / 50</span>
+      </div>
+    </div>
+
+    <!-- Interactive Results Panel -->
+    <section class="results-panel" id="resultsPanel">
+      <div class="results-top">
+        <div>
+          <div class="score-big" id="scoreBig">0 / 50 (0%)</div>
+          <div class="score-message" id="scoreMessage"></div>
+        </div>
+        <div class="results-controls" style="margin-top:0;">
+          <button type="button" class="btn-outline" id="filterMistakesBtn" onclick="toggleMistakesFilter()">
+            🔍 Show Only Mistakes
+          </button>
+          <button type="button" class="btn-primary" onclick="resetExam()">
+            🔄 Try Again
+          </button>
+        </div>
+      </div>
+      <div class="section-breakdown" id="sectionBreakdown"></div>
+    </section>
+
+    <!-- Exam Form -->
+    <form id="examForm"></form>
+
+    <!-- Bottom Submit Box -->
+    <div class="submit-footer" id="submitFooter">
+      <p>Finished answering all 50 questions? Click below to see your score and review your answers!</p>
+      <button type="button" class="btn-success btn-large" onclick="checkExam()">
+        ✅ Finish &amp; Check My Answers
+      </button>
+    </div>
+
+    <!-- Print-Only Answer Key -->
+    <section class="answer-key-sheet" id="answerKeySheet">
+      <h1>5th Grade English Vocabulary Exam — Answer Key</h1>
+      <p>Total: 50 questions (2 points each = 100 points)</p>
+      <div class="ak-grid" id="answerKeyGrid"></div>
+    </section>
+  </div>
+
+  <script>
+    const SECTIONS = [
+      { id: 1, title: "Clothes, Style & Hairstyles" },
+      { id: 2, title: "Personality & Negative Adjectives" },
+      { id: 3, title: "Jobs & Describing Work" },
+      { id: 4, title: "School, Exams & Everyday Expressions" },
+      { id: 5, title: "Sports & Experiences" },
+      { id: 6, title: "Films, Books & Life Stages" },
+      { id: 7, title: "Verbs with Prepositions, Music & Crime" }
+    ];
+
+    const QUESTIONS = [
+      // ==================== SECTION 1: Clothes, Style & Hairstyles (7) ====================
+      {
+        section: 1,
+        topic: "Clothes & accessories",
+        q: "It is very cold and snowy today! Don't forget to put a warm ___ around your neck.",
+        options: ["belt", "scarf", "bracelet", "tie"],
+        answer: 1,
+        explanation: "A scarf is worn around your neck to keep warm."
+      },
+      {
+        section: 1,
+        topic: "Clothes & accessories",
+        q: "We have P.E. class today, so I need to wear my ___ to run and play sports.",
+        options: ["sandals", "boots", "trainers", "tights"],
+        answer: 2,
+        explanation: "Trainers (sneakers) are sports shoes for running and exercise."
+      },
+      {
+        section: 1,
+        topic: "Clothes & accessories",
+        q: "Mum always keeps her keys, phone, and wallet inside her ___.",
+        options: ["handbag", "cardigan", "hoodie", "skirt"],
+        answer: 0,
+        explanation: "A handbag is a small bag used to carry personal things."
+      },
+      {
+        section: 1,
+        topic: "Describing clothes",
+        q: "A zebra has black and white lines. Leo is wearing a ___ T-shirt with blue and white lines.",
+        options: ["floral", "spotted", "plain", "striped"],
+        answer: 3,
+        explanation: "Striped means having lines or stripes."
+      },
+      {
+        section: 1,
+        topic: "Describing clothes",
+        q: "These trousers are very big and loose, not tight at all. They are ___.",
+        options: ["smart", "tight", "baggy", "checked"],
+        answer: 2,
+        explanation: "Baggy clothes are big and loose-fitting."
+      },
+      {
+        section: 1,
+        topic: "Hairstyles",
+        q: "My grandfather doesn't have any hair on the top of his head. He is ___.",
+        options: ["curly", "bald", "spiky", "wavy"],
+        answer: 1,
+        explanation: "Bald means having little or no hair on the head."
+      },
+      {
+        section: 1,
+        topic: "Hairstyles",
+        q: "My uncle has hair growing just above his top lip. He has a ___.",
+        options: ["moustache", "shaved hair", "dyed hair", "straight hair"],
+        answer: 0,
+        explanation: "A moustache is hair that grows above the upper lip."
+      },
+
+      // ==================== SECTION 2: Personality & Negative Adjectives (6) ====================
+      {
+        section: 2,
+        topic: "Personality adjectives",
+        q: "Emma always shares her snacks and buys nice gifts for her friends. She is very ___.",
+        options: ["selfish", "generous", "lazy", "rude"],
+        answer: 1,
+        explanation: "Generous people like to give and share with others."
+      },
+      {
+        section: 2,
+        topic: "Personality adjectives",
+        q: "Tom never says 'please' or 'thank you' and interrupts people. He is ___.",
+        options: ["polite", "kind", "rude", "honest"],
+        answer: 2,
+        explanation: "Rude means not polite."
+      },
+      {
+        section: 2,
+        topic: "Personality adjectives",
+        q: "Sofia loves chatting with everyone in class and never stops talking! She is very ___.",
+        options: ["shy", "serious", "talkative", "lazy"],
+        answer: 2,
+        explanation: "Talkative describes someone who talks a lot."
+      },
+      {
+        section: 2,
+        topic: "Negative adjectives",
+        q: "What is the opposite of 'friendly'?",
+        options: ["disfriendly", "imfriendly", "unfriendly", "infriendly"],
+        answer: 2,
+        explanation: "We use the prefix un- with friendly → unfriendly."
+      },
+      {
+        section: 2,
+        topic: "Negative adjectives",
+        q: "Sam can never find his homework because his desk is always messy. He is very ___.",
+        options: ["unorganised", "disorganised", "imorganised", "inorganised"],
+        answer: 1,
+        explanation: "We use the prefix dis- with organised → disorganised."
+      },
+      {
+        section: 2,
+        topic: "Negative adjectives",
+        q: "Lucas hates waiting in a queue for even two minutes! He is very ___.",
+        options: ["unpatient", "dispatient", "impatient", "nonpatient"],
+        answer: 2,
+        explanation: "We use the prefix im- with patient → impatient."
+      },
+
+      // ==================== SECTION 3: Jobs & Describing Work (5) ====================
+      {
+        section: 3,
+        topic: "Jobs",
+        q: "An ___ designs houses, schools, and other buildings.",
+        options: ["architect", "dentist", "cleaner", "secretary"],
+        answer: 0,
+        explanation: "An architect designs buildings."
+      },
+      {
+        section: 3,
+        topic: "Jobs",
+        q: "A ___ shows visitors around a city or a museum and tells them interesting facts.",
+        options: ["factory worker", "firefighter", "tour guide", "hairdresser"],
+        answer: 2,
+        explanation: "A tour guide shows tourists around places."
+      },
+      {
+        section: 3,
+        topic: "Jobs",
+        q: "A ___ writes news stories and articles for newspapers, magazines, or TV.",
+        options: ["computer programmer", "journalist", "engineer", "dentist"],
+        answer: 1,
+        explanation: "A journalist reports and writes the news."
+      },
+      {
+        section: 3,
+        topic: "Describing jobs",
+        q: "Being a firefighter is a ___ job because you have to go near big fires.",
+        options: ["boring", "safe", "dangerous", "easy"],
+        answer: 2,
+        explanation: "Dangerous means it can be risky or cause harm."
+      },
+      {
+        section: 3,
+        topic: "Describing jobs",
+        q: "My aunt earns a lot of money as an engineer. Her job is very ___.",
+        options: ["badly paid", "well-paid", "boring", "easy"],
+        answer: 1,
+        explanation: "Well-paid means you earn a good amount of money."
+      },
+
+      // ==================== SECTION 4: School, Exams & Everyday Expressions (8) ====================
+      {
+        section: 4,
+        topic: "Make and do",
+        q: "Every morning before school, I ___ my bed.",
+        options: ["do", "make", "take", "get"],
+        answer: 1,
+        explanation: "The correct collocation is 'make your bed'."
+      },
+      {
+        section: 4,
+        topic: "Make and do",
+        q: "After dinner, my brother and I help our parents ___ the dishes.",
+        options: ["make", "take", "do", "give"],
+        answer: 2,
+        explanation: "The correct collocation is 'do the dishes'."
+      },
+      {
+        section: 4,
+        topic: "Make and do",
+        q: "Don't worry about the race — just try hard and ___ your best!",
+        options: ["make", "do", "take", "have"],
+        answer: 1,
+        explanation: "The correct expression is 'do your best'."
+      },
+      {
+        section: 4,
+        topic: "Learning and exams",
+        q: "We have a big maths test tomorrow, so I need to ___ for it tonight.",
+        options: ["copy", "revise", "hand in", "fail"],
+        answer: 1,
+        explanation: "To revise for a test means to study and review what you learned."
+      },
+      {
+        section: 4,
+        topic: "Learning and exams",
+        q: "Please remember to ___ your homework to the teacher on Friday morning.",
+        options: ["hand in", "copy", "fail", "do badly"],
+        answer: 0,
+        explanation: "To hand in your homework means to give it to your teacher."
+      },
+      {
+        section: 4,
+        topic: "Learning and exams",
+        q: "Mia studied really hard and got 98%! She was so happy to ___ the exam.",
+        options: ["fail", "copy", "pass", "revise"],
+        answer: 2,
+        explanation: "To pass an exam means to get a good enough mark to succeed."
+      },
+      {
+        section: 4,
+        topic: "Expressions with take",
+        q: "You have a bad cold. Remember to ___ your medicine after lunch.",
+        options: ["make", "do", "take", "go"],
+        answer: 2,
+        explanation: "We say 'take medicine'."
+      },
+      {
+        section: 4,
+        topic: "Expressions with take",
+        q: "During the science lesson, the students ___ notes in their notebooks.",
+        options: ["take", "do", "pass", "sign"],
+        answer: 0,
+        explanation: "We say 'take notes' when writing down important information."
+      },
+
+      // ==================== SECTION 5: Sports & Experiences (7) ====================
+      {
+        section: 5,
+        topic: "Experiences",
+        q: "When we visited the desert in Egypt, we got to ___ a camel!",
+        options: ["stay in", "ride", "learn to", "do"],
+        answer: 1,
+        explanation: "The expression is 'ride a camel'."
+      },
+      {
+        section: 5,
+        topic: "Experiences",
+        q: "My cousin is very brave — last summer she decided to ___ a parachute jump from a plane!",
+        options: ["go", "stay in", "do", "meet"],
+        answer: 2,
+        explanation: "The expression is 'do a parachute jump'."
+      },
+      {
+        section: 5,
+        topic: "Sports verbs",
+        q: "Athletes have to ___ every day to get stronger and faster before the Olympics.",
+        options: ["lose", "score", "train", "support"],
+        answer: 2,
+        explanation: "To train means to practise and exercise for a sport."
+      },
+      {
+        section: 5,
+        topic: "Sports verbs",
+        q: "In the last minute of the football match, Mateo kicked the ball and managed to ___ a goal!",
+        options: ["score", "support", "lose", "compete"],
+        answer: 0,
+        explanation: "To score means to get a goal or point in a game."
+      },
+      {
+        section: 5,
+        topic: "Sports equipment",
+        q: "Always wear a ___ on your head when you ride a bike or a skateboard.",
+        options: ["swimsuit", "helmet", "racket", "gloves"],
+        answer: 1,
+        explanation: "A helmet protects your head."
+      },
+      {
+        section: 5,
+        topic: "Sports equipment",
+        q: "When I go swimming in the pool, I wear ___ so the water doesn't get in my eyes.",
+        options: ["skis", "boots", "goggles", "ice skates"],
+        answer: 2,
+        explanation: "Goggles protect your eyes when swimming."
+      },
+      {
+        section: 5,
+        topic: "Sports equipment",
+        q: "To play tennis, you need a ball and a ___.",
+        options: ["hockey stick", "tennis racket", "snorkel mask", "skateboard"],
+        answer: 1,
+        explanation: "You use a tennis racket to hit the ball in tennis."
+      },
+
+      // ==================== SECTION 6: Films, Books & Life Stages (8) ====================
+      {
+        section: 6,
+        topic: "Types of films",
+        q: "I love films with drawings or computer-made characters like 'Toy Story' or 'Frozen'. That's an ___.",
+        options: ["animation", "horror film", "historical film", "romantic comedy"],
+        answer: 0,
+        explanation: "An animation is a film made with drawings or animated characters."
+      },
+      {
+        section: 6,
+        topic: "Types of films",
+        q: "A ___ is a film where the actors sing and dance as part of the story.",
+        options: ["science fiction film", "action film", "musical", "comedy"],
+        answer: 2,
+        explanation: "A musical has lots of singing and dancing."
+      },
+      {
+        section: 6,
+        topic: "Types of books",
+        q: "My dad wants to learn how to make Italian pasta, so he bought a new ___.",
+        options: ["fantasy novel", "cookbook", "horror story", "autobiography"],
+        answer: 1,
+        explanation: "A cookbook has recipes for cooking food."
+      },
+      {
+        section: 6,
+        topic: "Types of books",
+        q: "A famous football player wrote a book all about his own life. It is an ___.",
+        options: ["adventure novel", "romance", "science fiction novel", "autobiography"],
+        answer: 3,
+        explanation: "An autobiography is a book someone writes about their own life."
+      },
+      {
+        section: 6,
+        topic: "Life stages",
+        q: "After finishing university and passing all her exams, my sister will ___ next month.",
+        options: ["be born", "graduate", "retire", "grow up"],
+        answer: 1,
+        explanation: "To graduate means to finish school or university with a degree."
+      },
+      {
+        section: 6,
+        topic: "Life stages",
+        q: "When people get older, around age 65, they usually stop working and ___.",
+        options: ["retire", "get a job", "go to school", "fall in love"],
+        answer: 0,
+        explanation: "To retire means to stop working when you are older."
+      },
+      {
+        section: 6,
+        topic: "Film jobs",
+        q: "The ___ writes the story and all the words that the actors say in a film.",
+        options: ["make-up artist", "scriptwriter", "cameraman", "extra"],
+        answer: 1,
+        explanation: "A scriptwriter writes the script (dialogue and story) for a film."
+      },
+      {
+        section: 6,
+        topic: "Film jobs",
+        q: "The ___ chooses and makes the clothes that the actors wear in a movie.",
+        options: ["film director", "costume designer", "actor", "extra"],
+        answer: 1,
+        explanation: "A costume designer designs and chooses the actors' outfits."
+      },
+
+      // ==================== SECTION 7: Verbs + Prepositions, Music & Crime (9) ====================
+      {
+        section: 7,
+        topic: "Verbs + prepositions",
+        q: "My brother wants to work at the cinema, so he is going to apply ___ a job there.",
+        options: ["at", "about", "for", "on"],
+        answer: 2,
+        explanation: "We say 'apply for' a job."
+      },
+      {
+        section: 7,
+        topic: "Verbs + prepositions",
+        q: "It's not nice to laugh ___ someone when they make a mistake.",
+        options: ["for", "at", "about", "in"],
+        answer: 1,
+        explanation: "We say 'laugh at' someone."
+      },
+      {
+        section: 7,
+        topic: "Verbs + prepositions",
+        q: "Don't worry ___ the exam! You studied very well and you will do great.",
+        options: ["at", "for", "about", "to"],
+        answer: 2,
+        explanation: "We say 'worry about' something."
+      },
+      {
+        section: 7,
+        topic: "Music styles & instruments",
+        q: "Mozart and Beethoven wrote famous ___ music.",
+        options: ["heavy metal", "hip hop", "classical", "techno"],
+        answer: 2,
+        explanation: "Mozart and Beethoven are famous classical music composers."
+      },
+      {
+        section: 7,
+        topic: "Music styles & instruments",
+        q: "You hit the ___ with two wooden sticks to keep the rhythm in a band.",
+        options: ["flute", "violin", "drums", "saxophone"],
+        answer: 2,
+        explanation: "You play the drums by hitting them with drumsticks."
+      },
+      {
+        section: 7,
+        topic: "Music collocations",
+        q: "Next Saturday, our favourite pop singer is going to ___ a concert at the stadium!",
+        options: ["give", "join", "sign", "record"],
+        answer: 0,
+        explanation: "The correct collocation is 'give a concert'."
+      },
+      {
+        section: 7,
+        topic: "Music collocations",
+        q: "If you want to get better at playing the guitar, you should ___ your instrument every day.",
+        options: ["compose", "practise", "go on", "sign"],
+        answer: 1,
+        explanation: "The correct collocation is 'practise an instrument'."
+      },
+      {
+        section: 7,
+        topic: "Crime",
+        q: "A ___ is someone who saw a crime happen and can tell the police about it.",
+        options: ["thief", "witness", "criminal", "robbery"],
+        answer: 1,
+        explanation: "A witness is a person who sees a crime or event happen."
+      },
+      {
+        section: 7,
+        topic: "Crime",
+        q: "The detective found a ___ on the glass door, which helped the police catch the thief.",
+        options: ["robbery", "witness", "fingerprint", "criminal"],
+        answer: 2,
+        explanation: "A fingerprint is the mark left by a person's finger."
+      }
+    ];
+
+    const LETTERS = ["A", "B", "C", "D"];
+    let examChecked = false;
+    let showingMistakesOnly = false;
+
+    function init() {
+      // Set today's date by default
+      const dateInput = document.getElementById("examDate");
+      if (dateInput) {
+        const today = new Date().toISOString().split("T")[0];
+        dateInput.value = today;
+      }
+
+      renderExam();
+      renderAnswerKey();
+      updateProgress();
+    }
+
+    function renderExam() {
+      const form = document.getElementById("examForm");
+      form.innerHTML = "";
+
+      let qGlobalIndex = 0;
+
+      SECTIONS.forEach((sec) => {
+        const secQuestions = QUESTIONS
+          .map((q, idx) => ({ ...q, idx }))
+          .filter((q) => q.section === sec.id);
+
+        const secBlock = document.createElement("div");
+        secBlock.className = "section-block";
+        secBlock.dataset.section = sec.id;
+
+        const secHeader = document.createElement("div");
+        secHeader.className = "section-title";
+        secHeader.innerHTML = `<span class="section-num">Section ${sec.id}</span><h2>${sec.title}</h2>`;
+        secBlock.appendChild(secHeader);
+
+        secQuestions.forEach((qObj) => {
+          qGlobalIndex++;
+          const card = document.createElement("div");
+          card.className = "question-card";
+          card.id = `q-card-${qObj.idx}`;
+
+          const optionsHtml = qObj.options
+            .map((opt, optIdx) => {
+              return `
+                <label class="option-label" id="opt-${qObj.idx}-${optIdx}" onclick="selectOption(${qObj.idx}, ${optIdx})">
+                  <input type="radio" name="q${qObj.idx}" value="${optIdx}" />
+                  <span class="opt-letter">${LETTERS[optIdx]}</span>
+                  <span class="opt-text">${opt}</span>
+                </label>
+              `;
+            })
+            .join("");
+
+          card.innerHTML = `
+            <div class="q-header">
+              <div class="q-text"><span class="q-num">${qGlobalIndex}.</span>${qObj.q}</div>
+              <span class="q-topic">${qObj.topic}</span>
+            </div>
+            <div class="options-grid">
+              ${optionsHtml}
+            </div>
+            <div class="q-feedback" id="fb-${qObj.idx}"></div>
+          `;
+
+          secBlock.appendChild(card);
+        });
+
+        form.appendChild(secBlock);
+      });
+    }
+
+    function renderAnswerKey() {
+      const grid = document.getElementById("answerKeyGrid");
+      grid.innerHTML = QUESTIONS.map((q, idx) => {
+        return `
+          <div class="ak-row">
+            <span class="ak-num">${idx + 1}.</span>
+            <span class="ak-ans">${LETTERS[q.answer]} — ${q.options[q.answer]}</span>
+            <span class="ak-topic">${q.topic}</span>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function selectOption(qIdx, optIdx) {
+      if (examChecked) return;
+
+      const labels = document.querySelectorAll(`#q-card-${qIdx} .option-label`);
+      labels.forEach((lbl) => lbl.classList.remove("selected"));
+
+      const chosen = document.getElementById(`opt-${qIdx}-${optIdx}`);
+      if (chosen) {
+        chosen.classList.add("selected");
+        const radio = chosen.querySelector("input[type='radio']");
+        if (radio) radio.checked = true;
+      }
+
+      updateProgress();
+    }
+
+    function updateProgress() {
+      let answered = 0;
+      QUESTIONS.forEach((_, idx) => {
+        const checked = document.querySelector(`input[name="q${idx}"]:checked`);
+        if (checked) answered++;
+      });
+
+      const pct = Math.round((answered / QUESTIONS.length) * 100);
+      document.getElementById("progressText").textContent = `${answered} / ${QUESTIONS.length} answered`;
+      document.getElementById("progressPct").textContent = `${pct}%`;
+      document.getElementById("progressFill").style.width = `${pct}%`;
+    }
+
+    function checkExam() {
+      // Warn if unanswered questions remain
+      let unanswered = 0;
+      QUESTIONS.forEach((_, idx) => {
+        if (!document.querySelector(`input[name="q${idx}"]:checked`)) unanswered++;
+      });
+
+      if (unanswered > 0 && !examChecked) {
+        const proceed = confirm(
+          `You still have ${unanswered} unanswered question${unanswered === 1 ? "" : "s"}. Do you want to check your answers now anyway?`
+        );
+        if (!proceed) return;
+      }
+
+      examChecked = true;
+      let totalCorrect = 0;
+      const sectionScores = {};
+      SECTIONS.forEach((s) => (sectionScores[s.id] = { correct: 0, total: 0, title: s.title }));
+
+      QUESTIONS.forEach((q, idx) => {
+        sectionScores[q.section].total++;
+        const card = document.getElementById(`q-card-${idx}`);
+        const fb = document.getElementById(`fb-${idx}`);
+        const checked = document.querySelector(`input[name="q${idx}"]:checked`);
+        const userVal = checked ? parseInt(checked.value, 10) : -1;
+
+        card.classList.remove("correct", "incorrect");
+        const labels = card.querySelectorAll(".option-label");
+        labels.forEach((l) => l.classList.remove("is-correct", "is-wrong"));
+
+        const correctLabel = document.getElementById(`opt-${idx}-${q.answer}`);
+        if (correctLabel) correctLabel.classList.add("is-correct");
+
+        if (userVal === q.answer) {
+          totalCorrect++;
+          sectionScores[q.section].correct++;
+          card.classList.add("correct");
+          fb.className = "q-feedback visible ok";
+          fb.innerHTML = `✅ <strong>Correct!</strong> ${q.explanation}`;
+        } else {
+          card.classList.add("incorrect");
+          if (userVal >= 0) {
+            const wrongLabel = document.getElementById(`opt-${idx}-${userVal}`);
+            if (wrongLabel) wrongLabel.classList.add("is-wrong");
+          }
+          fb.className = "q-feedback visible err";
+          const prefix = userVal === -1 ? "Not answered." : "Not quite.";
+          fb.innerHTML = `❌ <strong>${prefix}</strong> The correct answer is <strong>${LETTERS[q.answer]} (${q.options[q.answer]})</strong>. ${q.explanation}`;
+        }
+      });
+
+      const pct = Math.round((totalCorrect / QUESTIONS.length) * 100);
+      document.getElementById("scoreBig").textContent = `${totalCorrect} / ${QUESTIONS.length} (${pct}%)`;
+
+      let msg = "";
+      if (pct >= 90) msg = "🌟 Outstanding! You know this vocabulary really well!";
+      else if (pct >= 75) msg = "🎉 Great job! Just a few words to review.";
+      else if (pct >= 60) msg = "👍 Good effort! Review the highlighted questions below.";
+      else msg = "💪 Keep practising! Check the red questions below and try again.";
+
+      document.getElementById("scoreMessage").textContent = msg;
+
+      const breakdownEl = document.getElementById("sectionBreakdown");
+      breakdownEl.innerHTML = SECTIONS.map((s) => {
+        const st = sectionScores[s.id];
+        const spct = Math.round((st.correct / st.total) * 100);
+        const badgeClass = spct >= 80 ? "badge-good" : spct >= 60 ? "badge-mid" : "badge-low";
+        return `
+          <div class="breakdown-item">
+            <span>Sec ${s.id}: ${s.title}</span>
+            <span class="badge ${badgeClass}">${st.correct}/${st.total}</span>
+          </div>
+        `;
+      }).join("");
+
+      const panel = document.getElementById("resultsPanel");
+      panel.classList.add("visible");
+      panel.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function toggleMistakesFilter() {
+      showingMistakesOnly = !showingMistakesOnly;
+      const btn = document.getElementById("filterMistakesBtn");
+      btn.textContent = showingMistakesOnly ? "📋 Show All Questions" : "🔍 Show Only Mistakes";
+
+      QUESTIONS.forEach((_, idx) => {
+        const card = document.getElementById(`q-card-${idx}`);
+        if (showingMistakesOnly && card.classList.contains("correct")) {
+          card.classList.add("hidden-by-filter");
+        } else {
+          card.classList.remove("hidden-by-filter");
+        }
+      });
+    }
+
+    function resetExam() {
+      examChecked = false;
+      showingMistakesOnly = false;
+      document.getElementById("filterMistakesBtn").textContent = "🔍 Show Only Mistakes";
+      document.getElementById("resultsPanel").classList.remove("visible");
+
+      QUESTIONS.forEach((_, idx) => {
+        const card = document.getElementById(`q-card-${idx}`);
+        card.classList.remove("correct", "incorrect", "hidden-by-filter");
+        const fb = document.getElementById(`fb-${idx}`);
+        fb.className = "q-feedback";
+        fb.innerHTML = "";
+
+        const labels = card.querySelectorAll(".option-label");
+        labels.forEach((l) => {
+          l.classList.remove("selected", "is-correct", "is-wrong");
+          const r = l.querySelector("input[type='radio']");
+          if (r) r.checked = false;
+        });
+      });
+
+      updateProgress();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function printBlankExam() {
+      document.body.classList.remove("print-key");
+      document.body.classList.add("print-exam");
+      window.print();
+    }
+
+    function printAnswerKey() {
+      document.body.classList.remove("print-exam");
+      document.body.classList.add("print-key");
+      window.print();
+      // Restore default print mode after dialog closes
+      setTimeout(() => {
+        document.body.classList.remove("print-key");
+        document.body.classList.add("print-exam");
+      }, 500);
+    }
+
+    init();
+  </script>
+</body>
+</html>
