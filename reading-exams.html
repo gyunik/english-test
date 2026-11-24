@@ -1,0 +1,1693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>5th Grade Reading Exams — Aztecs, Tom Sawyer & Sherlock Holmes</title>
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --card: #ffffff;
+      --primary: #0b7285;
+      --primary-dark: #085666;
+      --primary-soft: #e3fafc;
+      --accent: #0ca678;
+      --accent-soft: #e6fcf5;
+      --danger: #e03131;
+      --danger-soft: #fff5f5;
+      --warning: #f08c00;
+      --warning-soft: #fff9db;
+      --text: #1e293b;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --radius: 14px;
+      --shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding-bottom: 80px;
+    }
+
+    /* Site Navigation Bar */
+    .mode-nav {
+      background: #1e293b;
+      padding: 10px 20px;
+    }
+
+    .mode-nav-inner {
+      max-width: 980px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .mode-brand { color: #fff; font-weight: 700; font-size: 0.95rem; }
+
+    .mode-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+
+    .mode-tab {
+      text-decoration: none;
+      color: #cbd5e1;
+      font-size: 0.83rem;
+      font-weight: 600;
+      padding: 6px 11px;
+      border-radius: 999px;
+      transition: all 0.15s ease;
+    }
+    .mode-tab:hover { background: rgba(255, 255, 255, 0.12); color: #fff; }
+    .mode-tab.active { background: var(--primary); color: #fff; }
+
+    /* Sticky Toolbar */
+    .sticky-bar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 20px;
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
+    }
+
+    .sticky-inner {
+      max-width: 920px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .progress-wrap { flex: 1; min-width: 170px; }
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .progress-track {
+      height: 10px;
+      background: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--primary), #15aabf);
+      border-radius: 999px;
+      transition: width 0.25s ease;
+    }
+
+    .toolbar-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.87rem;
+      padding: 8px 13px;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); }
+
+    .btn-outline { background: #fff; color: var(--text); border: 1.5px solid var(--border); }
+    .btn-outline:hover { border-color: var(--primary); color: var(--primary-dark); background: var(--primary-soft); }
+
+    .container {
+      max-width: 920px;
+      margin: 24px auto 0;
+      padding: 0 20px;
+    }
+
+    /* Book Selector Cards */
+    .book-selector {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    @media (max-width: 680px) {
+      .book-selector { grid-template-columns: 1fr; }
+    }
+
+    .book-btn {
+      background: var(--card);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 18px;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+      color: var(--text);
+    }
+
+    .book-btn:hover {
+      border-color: #66d9e8;
+      transform: translateY(-2px);
+    }
+
+    .book-btn.active {
+      border-color: var(--primary);
+      background: linear-gradient(135deg, #e3fafc 0%, #ffffff 100%);
+      box-shadow: 0 6px 18px rgba(11, 114, 133, 0.14);
+    }
+
+    .book-btn .b-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+    }
+
+    .book-btn .b-sub {
+      font-size: 0.82rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    /* Exam Header Card */
+    .exam-header {
+      background: linear-gradient(135deg, #0b7285 0%, #15aabf 100%);
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 26px 30px;
+      box-shadow: var(--shadow);
+      margin-bottom: 22px;
+    }
+
+    .exam-header h1 { margin: 0 0 6px; font-size: 1.8rem; letter-spacing: -0.02em; }
+    .exam-header p { margin: 0 0 18px; opacity: 0.94; font-size: 0.98rem; }
+
+    .student-info {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.16);
+      padding: 14px;
+      border-radius: 10px;
+    }
+
+    .student-field label {
+      display: block;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      opacity: 0.92;
+      margin-bottom: 4px;
+      font-weight: 600;
+    }
+
+    .student-field input {
+      width: 100%;
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: none;
+      font-size: 0.95rem;
+      font-family: inherit;
+      background: rgba(255, 255, 255, 0.96);
+      color: var(--text);
+    }
+
+    .print-header { display: none; }
+
+    /* Results Panel */
+    .results-panel {
+      display: none;
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 22px 26px;
+      box-shadow: var(--shadow);
+      border: 2px solid var(--primary);
+      margin-bottom: 24px;
+    }
+    .results-panel.visible { display: block; }
+
+    .results-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .score-big { font-size: 2.2rem; font-weight: 800; color: var(--primary-dark); line-height: 1.1; }
+    .score-message { font-size: 1.05rem; font-weight: 600; margin-top: 4px; }
+
+    .section-breakdown {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    .breakdown-item {
+      background: var(--bg);
+      padding: 10px 12px;
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+
+    .badge { padding: 3px 9px; border-radius: 999px; font-size: 0.8rem; font-weight: 700; }
+    .badge-good { background: var(--accent-soft); color: #087f5b; }
+    .badge-mid { background: var(--warning-soft); color: #b45309; }
+    .badge-low { background: var(--danger-soft); color: var(--danger); }
+
+    /* Section Header */
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 28px 0 8px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #99e9f2;
+    }
+
+    .section-num {
+      background: var(--primary);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.82rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      text-transform: uppercase;
+    }
+
+    .section-title h2 { margin: 0; font-size: 1.24rem; color: var(--primary-dark); }
+    .section-subtitle { margin: 0 0 14px; color: var(--muted); font-size: 0.92rem; }
+
+    /* Word Bank */
+    .word-bank {
+      background: #f0fdff;
+      border: 1.5px dashed #22b8cf;
+      border-radius: 12px;
+      padding: 12px 16px;
+      margin-bottom: 14px;
+    }
+    .word-bank.hidden { display: none; }
+    .word-bank-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--primary-dark);
+      margin-bottom: 8px;
+      display: block;
+    }
+    .word-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .word-chip {
+      background: #fff;
+      border: 1.5px solid #66d9e8;
+      color: var(--primary-dark);
+      font-weight: 600;
+      font-size: 0.9rem;
+      padding: 4px 11px;
+      border-radius: 999px;
+    }
+    .word-chip.used {
+      background: #e2e8f0;
+      border-color: #cbd5e1;
+      color: #94a3b8;
+      text-decoration: line-through;
+    }
+
+    /* Question Cards */
+    .question-card {
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.03);
+    }
+    .question-card.correct { border-color: var(--accent); background: #fbfffe; }
+    .question-card.incorrect { border-color: var(--danger); background: #fffafa; }
+    .question-card.hidden-by-filter { display: none; }
+
+    .q-text { font-size: 1.03rem; font-weight: 600; margin-bottom: 11px; }
+    .q-sentence { font-size: 1.03rem; line-height: 2; font-weight: 500; }
+    .q-num { color: var(--primary-dark); font-weight: 800; margin-right: 6px; }
+
+    /* True / False Grid */
+    .tf-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(120px, 180px));
+      gap: 10px;
+    }
+
+    /* Multiple Choice Grid */
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    @media (max-width: 600px) {
+      .options-grid { grid-template-columns: 1fr; }
+      .student-info { grid-template-columns: 1fr; }
+    }
+
+    .option-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      cursor: pointer;
+      background: #fff;
+      font-size: 0.95rem;
+      user-select: none;
+      transition: all 0.14s ease;
+    }
+    .option-label:hover { border-color: #66d9e8; background: #f5feff; }
+    .option-label input[type="radio"] { display: none; }
+
+    .opt-letter {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--bg);
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 0.82rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      border: 1.5px solid var(--border);
+    }
+
+    .option-label.selected { border-color: var(--primary); background: var(--primary-soft); font-weight: 600; }
+    .option-label.selected .opt-letter { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .option-label.is-correct { border-color: var(--accent) !important; background: var(--accent-soft) !important; font-weight: 700; }
+    .option-label.is-correct .opt-letter { background: var(--accent) !important; color: #fff !important; border-color: var(--accent) !important; }
+    .option-label.is-wrong { border-color: var(--danger) !important; background: var(--danger-soft) !important; }
+    .option-label.is-wrong .opt-letter { background: var(--danger) !important; color: #fff !important; border-color: var(--danger) !important; }
+
+    /* Fill Input */
+    .blank-input {
+      font-family: inherit;
+      font-size: 0.96rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      background: #f8fafc;
+      border: 2px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 3px 10px;
+      margin: 0 4px;
+      width: 190px;
+      max-width: 100%;
+      outline: none;
+    }
+    .blank-input:focus { border-color: var(--primary); background: #fff; }
+    .blank-input.input-correct { border-color: var(--accent); background: var(--accent-soft); color: #087f5b; }
+    .blank-input.input-wrong { border-color: var(--danger); background: var(--danger-soft); color: #c92a2a; }
+
+    .print-blank-line { display: none; }
+
+    .q-feedback {
+      display: none;
+      margin-top: 10px;
+      padding: 9px 13px;
+      border-radius: 9px;
+      font-size: 0.9rem;
+    }
+    .q-feedback.visible { display: block; }
+    .q-feedback.ok { background: var(--accent-soft); color: #087f5b; }
+    .q-feedback.err { background: var(--danger-soft); color: #c92a2a; }
+
+    .submit-footer {
+      margin-top: 28px;
+      text-align: center;
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 22px;
+      border: 1.5px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .btn-large { font-size: 1.05rem; padding: 13px 28px; }
+    .answer-key-sheet { display: none; }
+
+    /* ==================== PRINT STYLES ==================== */
+    @media print {
+      body { background: #fff !important; color: #000 !important; padding: 0 !important; font-size: 10.5pt; line-height: 1.38; }
+      .mode-nav, .sticky-bar, .book-selector, .results-panel, .submit-footer, .exam-header, .q-feedback {
+        display: none !important;
+      }
+      .container { max-width: 100% !important; margin: 0 !important; padding: 0 !important; }
+
+      body.print-exam .print-header {
+        display: block !important;
+        border-bottom: 2px solid #000;
+        padding-bottom: 10px;
+        margin-bottom: 14px;
+      }
+      .print-header h1 { margin: 0 0 8px; font-size: 16pt; }
+      .print-meta { display: flex; justify-content: space-between; gap: 20px; font-size: 10.5pt; }
+
+      body.print-exam .section-title { margin: 14px 0 6px; padding-bottom: 4px; border-bottom: 1.5px solid #333; break-after: avoid; }
+      body.print-exam .section-num { background: #eee !important; color: #000 !important; border: 1px solid #333; }
+      body.print-exam .section-title h2 { color: #000 !important; font-size: 12pt; }
+      body.print-exam .word-bank { display: block !important; background: #f9f9f9 !important; border: 1px solid #666 !important; padding: 7px 10px !important; break-inside: avoid; }
+      body.print-exam .word-bank-label { color: #000 !important; }
+      body.print-exam .word-chip { background: #fff !important; border: 1px solid #999 !important; color: #000 !important; text-decoration: none !important; font-size: 9.5pt; }
+
+      body.print-exam .question-card {
+        display: block !important;
+        border: 1px solid #ccc !important;
+        background: #fff !important;
+        box-shadow: none !important;
+        padding: 8px 11px !important;
+        margin-bottom: 7px !important;
+        break-inside: avoid;
+      }
+      body.print-exam .q-num { color: #000 !important; }
+      body.print-exam .options-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 5px 14px !important; }
+      body.print-exam .tf-grid { grid-template-columns: repeat(2, 120px) !important; gap: 10px !important; }
+      body.print-exam .option-label { border: none !important; background: transparent !important; padding: 2px 4px !important; font-weight: 400 !important; font-size: 10pt; }
+      body.print-exam .opt-letter { width: 20px; height: 20px; background: #fff !important; color: #000 !important; border: 1.2px solid #000 !important; font-size: 8.5pt; }
+      body.print-exam .blank-input { display: none !important; }
+      body.print-exam .print-blank-line { display: inline-block !important; border-bottom: 1.2px solid #000; width: 155px; margin: 0 4px; }
+
+      body.print-key #examForm { display: none !important; }
+      body.print-key .answer-key-sheet { display: block !important; }
+      .answer-key-sheet h1 { font-size: 15pt; margin: 0 0 4px; }
+      .answer-key-sheet p { margin: 0 0 12px; font-size: 9.5pt; color: #444; }
+      .ak-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 4px 20px; font-size: 9.5pt; }
+      .ak-row { display: flex; justify-content: space-between; border-bottom: 1px solid #ddd; padding: 3px 2px; }
+      .ak-num { font-weight: 700; width: 28px; }
+      .ak-ans { flex: 1; font-weight: 600; }
+      .ak-part { color: #555; font-size: 8.5pt; }
+    }
+  </style>
+</head>
+<body class="print-exam">
+
+  <!-- Site Navigation -->
+  <nav class="mode-nav">
+    <div class="mode-nav-inner">
+      <span class="mode-brand">📚 5th Grade English Practice</span>
+      <div class="mode-tabs">
+        <a href="index.html" class="mode-tab">📝 Vocab MC (50)</a>
+        <a href="fill-in-the-blanks.html" class="mode-tab">✍️ Vocab Blanks (50)</a>
+        <a href="will-vs-going-to.html" class="mode-tab">🔮 Will/Going to (30)</a>
+        <a href="will-vs-going-to-2.html" class="mode-tab">⚡ Will/Going to #2 (20)</a>
+        <a href="reading-exams.html" class="mode-tab active">📖 Reading Exams (3)</a>
+        <a href="create-exam.html" class="mode-tab">✨ Crear Examen</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Sticky Toolbar -->
+  <div class="sticky-bar">
+    <div class="sticky-inner">
+      <div class="progress-wrap">
+        <div class="progress-label">
+          <span id="progressText">0 / 30 answered</span>
+          <span id="progressPct">0%</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+      <div class="toolbar-actions">
+        <button type="button" class="btn-outline" id="toggleBankBtn" onclick="toggleWordBank()">🙈 Hide Word Bank</button>
+        <button type="button" class="btn-outline" onclick="printBlankExam()">🖨️ Print Exam</button>
+        <button type="button" class="btn-outline" onclick="printAnswerKey()">🔑 Answer Key</button>
+        <button type="button" class="btn-primary" onclick="checkExam()">✅ Check Answers</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- 3 Book Selector Cards -->
+    <div class="book-selector">
+      <button type="button" class="book-btn active" id="btn-aztecs" onclick="switchBook('aztecs')">
+        <span class="b-title">🦅 The Aztecs</span>
+        <span class="b-sub">True/False • Vocabulary • Fill in the Blanks (30)</span>
+      </button>
+      <button type="button" class="book-btn" id="btn-tomsawyer" onclick="switchBook('tomsawyer')">
+        <span class="b-title">🎣 Tom Sawyer</span>
+        <span class="b-sub">True/False • Vocabulary • Fill in the Blanks (30)</span>
+      </button>
+      <button type="button" class="book-btn" id="btn-sherlock" onclick="switchBook('sherlock')">
+        <span class="b-title">🔍 Sherlock Holmes</span>
+        <span class="b-sub">True/False • Vocabulary • Fill in the Blanks (30)</span>
+      </button>
+    </div>
+
+    <!-- Header -->
+    <header class="exam-header">
+      <h1 id="examTitle">The Aztecs — Reading Exam</h1>
+      <p id="examSubtitle"></p>
+      <div class="student-info">
+        <div class="student-field">
+          <label for="studentName">Student Name</label>
+          <input type="text" id="studentName" placeholder="Write your name here..." />
+        </div>
+        <div class="student-field">
+          <label for="examDate">Date</label>
+          <input type="date" id="examDate" />
+        </div>
+      </div>
+    </header>
+
+    <!-- Print-Only Header -->
+    <div class="print-header">
+      <h1 id="printTitle">Reading Exam</h1>
+      <div class="print-meta">
+        <span><strong>Name:</strong> ______________________________</span>
+        <span><strong>Date:</strong> _______________</span>
+        <span><strong>Score:</strong> _____ / 30</span>
+      </div>
+    </div>
+
+    <!-- Results Panel -->
+    <section class="results-panel" id="resultsPanel">
+      <div class="results-top">
+        <div>
+          <div class="score-big" id="scoreBig">0 / 30 (0%)</div>
+          <div class="score-message" id="scoreMessage"></div>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <button type="button" class="btn-outline" id="filterMistakesBtn" onclick="toggleMistakesFilter()">🔍 Show Only Mistakes</button>
+          <button type="button" class="btn-primary" onclick="resetExam()">🔄 Try Again</button>
+        </div>
+      </div>
+      <div class="section-breakdown" id="sectionBreakdown"></div>
+    </section>
+
+    <!-- Exam Form -->
+    <form id="examForm" autocomplete="off" onsubmit="return false;"></form>
+
+    <!-- Bottom Submit -->
+    <div class="submit-footer">
+      <p style="margin:0 0 14px;color:var(--muted);">Finished all 30 questions? Click below to check your answers and see the explanations!</p>
+      <button type="button" class="btn-primary btn-large" onclick="checkExam()">✅ Finish &amp; Check My Answers</button>
+    </div>
+
+    <!-- Print-Only Answer Key -->
+    <section class="answer-key-sheet" id="answerKeySheet">
+      <h1 id="akTitle">Answer Key</h1>
+      <p>Total: 30 questions (Part 1: 10 True/False • Part 2: 10 Vocabulary • Part 3: 10 Fill in the Blanks)</p>
+      <div class="ak-grid" id="answerKeyGrid"></div>
+    </section>
+  </div>
+
+  <script>
+    const LETTERS = ["A", "B", "C", "D"];
+
+    const BOOKS = {
+      aztecs: {
+        title: "🦅 Journey into Civilization: The Aztecs",
+        subtitle: "30 questions about Aztec history, food, clothes, homes, gods, and daily life: 10 True or False, 10 Vocabulary, and 10 Fill in the Blanks.",
+        tf: [
+          {
+            q: "The Aztecs lived over 500 years ago in the region we now call Mexico.",
+            answer: true,
+            explanation: "True! Over 500 years ago, the Aztecs lived in Mexico and built Tenochtitlan."
+          },
+          {
+            q: "The Aztecs used carts and vehicles with wheels to transport everything across Tenochtitlan.",
+            answer: false,
+            explanation: "False! They did NOT use vehicles with wheels at all; they transported everything by water on canals or on their backs."
+          },
+          {
+            q: "The Great Speaker (Huey Tlatoani) was trained as a priest and also led the Aztecs to war.",
+            answer: true,
+            explanation: "True! The Great Speaker was a nobleman trained as a priest who also had to be a brave warrior."
+          },
+          {
+            q: "The Aztec solar calendar had 365 days, divided into 18 months of 20 days plus 5 extra days.",
+            answer: true,
+            explanation: "True! They also had a separate religious calendar of 260 days."
+          },
+          {
+            q: "Aztec priests had to cut and wash their hair every morning before ceremonies.",
+            answer: false,
+            explanation: "False! Priests were NOT allowed to cut or wash their hair, and they were not allowed to marry."
+          },
+          {
+            q: "The Aztecs ate a lot of beef and lamb because they kept large farms of cattle and sheep.",
+            answer: false,
+            explanation: "False! They ate hardly any meat and kept no cattle or sheep; they ate lots of vegetables (corn, beans, squash, avocados) plus chickens, turkeys, fish, rabbits, and even dogs."
+          },
+          {
+            q: "Only rich Aztecs could afford to drink chocolate because cacao beans were also used as money.",
+            answer: true,
+            explanation: "True! Cacao beans were very valuable because they were used as money."
+          },
+          {
+            q: "Both Aztec boys and Aztec girls had to go to calpolli school to learn how to be warriors.",
+            answer: false,
+            explanation: "False! All boys had to go to calpolli school to learn to be warriors, but girls did not have to go to school."
+          },
+          {
+            q: "Poor Aztecs lived in small one-room houses made of branches plastered with mud and thatched roofs.",
+            answer: true,
+            explanation: "True! Wealthier people lived in larger volcanic stone houses coated with shiny white limestone cement."
+          },
+          {
+            q: "Only Aztec women wore make-up; Aztec men never wore make-up or jewelry.",
+            answer: false,
+            explanation: "False! Both men and women wore jewelry (jade, emeralds, opals) and bright make-up (yellow and red for women; black, white, and blue for men)."
+          }
+        ],
+        vocab: [
+          {
+            q: "What was <strong>Tenochtitlan</strong>?",
+            options: [
+              "A famous Aztec mountain god",
+              "The huge Aztec capital city built on an island in a lake",
+              "A special corn pancake eaten at breakfast",
+              "A stone knife used by priests"
+            ],
+            answer: 1,
+            explanation: "Tenochtitlan was the huge Aztec city built on an island in Lake Texcoco."
+          },
+          {
+            q: "What were <strong>chinampas</strong>?",
+            options: [
+              "Floating gardens made from fertile lake mud and woven plants",
+              "Golden sandals worn by the Great Speaker",
+              "Small flutes played by Aztec children",
+              "Tall stone pyramids in the city centre"
+            ],
+            answer: 0,
+            explanation: "Chinampas were floating garden islands around Tenochtitlan used to grow crops."
+          },
+          {
+            q: "What was a <strong>tlaxcalli</strong>?",
+            options: [
+              "A strong drink made from cactus",
+              "A wooden boat used on the canals",
+              "A corn pancake eaten with most Aztec meals",
+              "A feather headdress worn by warriors"
+            ],
+            answer: 2,
+            explanation: "A tlaxcalli was a corn pancake eaten with most Aztec meals."
+          },
+          {
+            q: "What was a <strong>maxtli</strong>?",
+            options: [
+              "A loose sleeveless tunic worn by women",
+              "A simple loincloth worn by ordinary Aztec men",
+              "A carved stone box for ashes",
+              "A temple school for noble boys"
+            ],
+            answer: 1,
+            explanation: "Ordinary Aztec men wore a simple loincloth called a maxtli and a cape over one shoulder."
+          },
+          {
+            q: "What were <strong>calpollis</strong>?",
+            options: [
+              "Aztec books written on deerskin",
+              "Small Aztec family groups, each with a head man",
+              "Volcanic rock bridges over the lake",
+              "Special cakes shaped like gods"
+            ],
+            answer: 1,
+            explanation: "The Aztecs were divided into small family groups called calpollis."
+          },
+          {
+            q: "What was <strong>pulque</strong>?",
+            options: [
+              "A sweet chocolate dessert for children",
+              "A tool used for digging trenches",
+              "A very strong drink made from a kind of cactus",
+              "A bright blue paint used on shields"
+            ],
+            answer: 2,
+            explanation: "Pulque was a very strong drink made out of a sort of cactus."
+          },
+          {
+            q: "What were <strong>pictograms</strong>?",
+            options: [
+              "Pictures that represented words instead of letters",
+              "Songs sung during the War of the Flowers",
+              "Hard rubber balls used in temple games",
+              "Straw cushions used for sitting at home"
+            ],
+            answer: 0,
+            explanation: "The Aztecs did not use letters; they wrote using pictograms (pictures representing words)."
+          },
+          {
+            q: "What were <strong>codices</strong>?",
+            options: [
+              "Pottery bowls decorated in gold and black",
+              "Aztec books made of folded deerskin or bark paper",
+              "Three main causeways into Tenochtitlan",
+              "Cactus needles used for morning sacrifices"
+            ],
+            answer: 1,
+            explanation: "Aztec books, called codices, were written on folded deerskin or bark paper."
+          },
+          {
+            q: "What was <strong>obsidian</strong>?",
+            options: [
+              "A green jewel used for necklaces",
+              "A tropical rain forest animal",
+              "Volcanic glass used to make knife blades, vases, and mirrors",
+              "White cement made from limestone"
+            ],
+            answer: 2,
+            explanation: "Obsidian is volcanic glass that Aztec craftsmen shaped into blades, vases, and polished mirrors."
+          },
+          {
+            q: "Who was <strong>Quetzalcoatl</strong> ('feathered serpent')?",
+            options: [
+              "The Aztec god of war and battles",
+              "The goddess of the earth",
+              "The god of the fireplace in every home",
+              "The Aztec god of learning, hope, and healing"
+            ],
+            answer: 3,
+            explanation: "Quetzalcoatl ('feathered serpent') was the god of learning, hope, and healing."
+          }
+        ],
+        fill: [
+          {
+            q: "The Aztecs called their land ___, which means 'the land at the edge of the water.'",
+            answer: "Anahuac",
+            accept: ["anahuac"],
+            explanation: "Anahuac means 'the land at the edge of the water'."
+          },
+          {
+            q: "The most important crop that Aztec farmers grew was ___.",
+            answer: "corn",
+            accept: ["corn"],
+            explanation: "Corn was the most important Aztec crop (along with squash, avocados, beans, peppers, and tomatoes)."
+          },
+          {
+            q: "Because the Aztecs had no ploughs, farmers used a simple ___ to plant seeds.",
+            answer: "digging stick",
+            accept: ["digging stick"],
+            explanation: "Aztec farmers used a small digging stick to dig trenches for seeds."
+          },
+          {
+            q: "Rich Aztecs drank chocolate made from ___, which were also used as money.",
+            answer: "cacao beans",
+            accept: ["cacao beans", "cacao"],
+            explanation: "Cacao beans were used both as money and to make chocolate for rich Aztecs."
+          },
+          {
+            q: "Aztec clothes were usually made from fiber from the ___ plant.",
+            answer: "maguey",
+            accept: ["maguey"],
+            explanation: "Most Aztec clothes were made from maguey plant fiber."
+          },
+          {
+            q: "Only rich Aztecs could afford clothes made of ___.",
+            answer: "cotton",
+            accept: ["cotton"],
+            explanation: "Only the rich could afford cotton clothes."
+          },
+          {
+            q: "As a sign of his high position, the Great Speaker wore ___ on his feet.",
+            answer: "golden sandals",
+            accept: ["golden sandals", "gold sandals"],
+            explanation: "The Great Speaker wore golden sandals."
+          },
+          {
+            q: "Instead of a bathroom, many Aztec houses had a stone ___ heated by fires outside to make steam.",
+            answer: "sweat-room",
+            accept: ["sweat-room", "sweat room", "sweatroom"],
+            explanation: "Aztecs splashed water on hot stone walls inside a sweat-room, then jumped into a stream or pool."
+          },
+          {
+            q: "The Aztecs built large four-sided ___ with temples on top for ceremonies and sacrifices.",
+            answer: "pyramids",
+            accept: ["pyramids", "pyramid"],
+            explanation: "Aztec temples sat at the top of large four-sided pyramids."
+          },
+          {
+            q: "The patron god of the Aztecs and god of war was ___, whose name means 'blue hummingbird.'",
+            answer: "Huitzilopochtli",
+            accept: ["huitzilopochtli"],
+            explanation: "Huitzilopochtli ('blue hummingbird') was the patron god of the Aztecs and god of war."
+          }
+        ]
+      },
+
+      tomsawyer: {
+        title: "🎣 The Adventures of Tom Sawyer",
+        subtitle: "30 questions covering Chapters 1–6 (Aunt Polly, Huck Finn, the graveyard, Jackson's Island, McDougal's Cave & the treasure).",
+        tf: [
+          {
+            q: "Tom Sawyer lived with his Aunt Polly in the village of St Petersburg.",
+            answer: true,
+            explanation: "True! Tom was the son of Aunt Polly's dead sister and lived with her in St Petersburg."
+          },
+          {
+            q: "On Saturday, Tom painted the whole 30-metre fence all by himself with no help.",
+            answer: false,
+            explanation: "False! He pretended painting was fun and tricked Joe Harper and other boys into painting it for him."
+          },
+          {
+            q: "Huckleberry Finn went to school every day and always wore clean new shirts.",
+            answer: false,
+            explanation: "False! Huck lived in the streets, didn't go to school, was always dirty, and never had a new shirt."
+          },
+          {
+            q: "Tom got to sit next to the new girl, Becky Thatcher, after telling the teacher he stopped to talk with Huck Finn.",
+            answer: true,
+            explanation: "True! The angry teacher punished Tom by making him sit with the girls — right next to Becky!"
+          },
+          {
+            q: "In the graveyard at midnight, Muff Potter killed Doctor Robinson with a knife.",
+            answer: false,
+            explanation: "False! Injun Joe stabbed Doctor Robinson with Muff Potter's knife and then put the knife in Muff's hand."
+          },
+          {
+            q: "Tom, Joe Harper, and Huck ran away to Jackson's Island and cooked meat and fish over a fire.",
+            answer: true,
+            explanation: "True! They brought bread and meat, caught six big fish for breakfast, and swam in the Mississippi."
+          },
+          {
+            q: "Tom and Joe loved smoking pipes so much that they smoked every day on the island.",
+            answer: false,
+            explanation: "False! After ten minutes they felt sick, went off into the trees, and never smoked their pipes again."
+          },
+          {
+            q: "On Sunday morning, the three boys walked into the church during their own funeral.",
+            answer: true,
+            explanation: "True! Everyone cried with joy, and it became St Petersburg's happiest funeral."
+          },
+          {
+            q: "At Muff Potter's trial, Tom told the judge the truth and Injun Joe escaped by jumping through a window.",
+            answer: true,
+            explanation: "True! Injun Joe crashed through the courtroom window and got away."
+          },
+          {
+            q: "Tom and Becky escaped from McDougal's Cave after three days, and later Tom and Huck found twelve thousand dollars under the cross.",
+            answer: true,
+            explanation: "True! They climbed out through a small hole in the sixth tunnel, and later Tom and Huck found the $12,000 box."
+          }
+        ],
+        vocab: [
+          {
+            q: "What is a <strong>fence</strong> (what Aunt Polly told Tom to paint)?",
+            options: [
+              "A small wooden boat",
+              "A wooden wall around a garden or yard",
+              "A secret room inside a cave",
+              "A big pot of white paint"
+            ],
+            answer: 1,
+            explanation: "Aunt Polly's fence was three metres high and thirty metres long."
+          },
+          {
+            q: "What is a <strong>graveyard</strong>?",
+            options: [
+              "A schoolroom for boys and girls",
+              "A place where dead people are buried",
+              "An island in the middle of a river",
+              "A house at the foot of a hill"
+            ],
+            answer: 1,
+            explanation: "Tom and Huck went to the graveyard on a hill a mile from St Petersburg."
+          },
+          {
+            q: "What is a <strong>graverobber</strong>?",
+            options: [
+              "A person who digs up graves to steal bodies or things",
+              "A judge who works in a courtroom",
+              "A doctor who helps sick children",
+              "A boy who skips school to go fishing"
+            ],
+            answer: 0,
+            explanation: "Doctor Robinson paid Muff Potter and Injun Joe to rob Hoss Williams' grave."
+          },
+          {
+            q: "What is a <strong>trial</strong> (like Muff Potter's trial)?",
+            options: [
+              "A birthday picnic by the river",
+              "A race between boats on the Mississippi",
+              "A meeting in court where a judge decides if someone is guilty",
+              "A long walk through a dark tunnel"
+            ],
+            answer: 2,
+            explanation: "Muff Potter waited four weeks in jail for his trial before the judge."
+          },
+          {
+            q: "What is a <strong>funeral</strong>?",
+            options: [
+              "A summer holiday with no school",
+              "A ceremony for someone who has died",
+              "A secret treasure hidden under a tree",
+              "A fight between two robbers"
+            ],
+            answer: 1,
+            explanation: "St Petersburg held a Sunday funeral at the church because they thought the three boys had drowned."
+          },
+          {
+            q: "What are a <strong>pick and shovel</strong> (what Huck brought to Cardiff Hill)?",
+            options: [
+              "Tools used for digging in the ground",
+              "Things used for catching fish in the river",
+              "Clothes worn by the old Spaniard",
+              "Food packed for Becky's picnic"
+            ],
+            answer: 0,
+            explanation: "Huck brought an old pick and shovel to dig for treasure under the dead tree."
+          },
+          {
+            q: "What does <strong>whisper</strong> mean?",
+            options: [
+              "To shout loudly across the river",
+              "To speak very quietly so others cannot hear",
+              "To run away very fast",
+              "To climb out of a bedroom window"
+            ],
+            answer: 1,
+            explanation: "Tom and Huck whispered so the robbers downstairs wouldn't hear them."
+          },
+          {
+            q: "What is a <strong>cave</strong> (like McDougal's Cave)?",
+            options: [
+              "A wooden church in a village",
+              "A large natural hole or set of tunnels inside a hill",
+              "A small jail with iron bars",
+              "A campfire under a big tree"
+            ],
+            answer: 1,
+            explanation: "McDougal's Cave had hundreds of dark tunnels and rooms inside the hill."
+          },
+          {
+            q: "What is a <strong>bat</strong> (hundreds woke up in the cave)?",
+            options: [
+              "A small flying animal that sleeps in dark caves",
+              "A fish caught in the Mississippi River",
+              "A stick used by the school teacher",
+              "A ghost in the graveyard"
+            ],
+            answer: 0,
+            explanation: "Hundreds of bats woke up from the candle light and chased Tom and Becky."
+          },
+          {
+            q: "What is <strong>daylight</strong> (what Tom saw in the sixth tunnel)?",
+            options: [
+              "Light from a candle flame",
+              "Moonlight in the graveyard",
+              "Natural light from the sun during the day",
+              "Smoke marks on a tunnel wall"
+            ],
+            answer: 2,
+            explanation: "Tom saw daylight through a small hole in the sixth tunnel and found the way out."
+          }
+        ],
+        fill: [
+          {
+            q: "Joe Harper gave Tom his whole ___ for a chance to paint Aunt Polly's fence.",
+            answer: "apple",
+            accept: ["apple"],
+            explanation: "Joe traded his whole apple to paint the fence."
+          },
+          {
+            q: "Huck took a ___ to the graveyard at midnight because Old Mrs Hopkins said it could call ghosts.",
+            answer: "dead cat",
+            accept: ["dead cat"],
+            explanation: "Huck carried a dead cat to put on a grave at midnight."
+          },
+          {
+            q: "Doctor Robinson was killed in the graveyard by ___, who then blamed Muff Potter.",
+            answer: "Injun Joe",
+            accept: ["injun joe"],
+            explanation: "Injun Joe stabbed Doctor Robinson with Muff Potter's knife."
+          },
+          {
+            q: "Tom, Joe, and Huck ran away in a small boat to live on ___.",
+            answer: "Jackson's Island",
+            accept: ["jackson's island", "jacksons island"],
+            explanation: "Jackson's Island was three miles south of St Petersburg."
+          },
+          {
+            q: "St Petersburg and Jackson's Island were both on the ___ River.",
+            answer: "Mississippi",
+            accept: ["mississippi"],
+            explanation: "The boys fished, swam, and took boats on the Mississippi River."
+          },
+          {
+            q: "In the old house on Cardiff Hill, Injun Joe was disguised as an old Spaniard wearing a ___ and long white hair.",
+            answer: "green hat",
+            accept: ["green hat"],
+            explanation: "The 'Spaniard' took off his green hat and white wig, revealing Injun Joe."
+          },
+          {
+            q: "Inside McDougal's Cave, Tom made marks on the tunnel walls with smoke from his ___.",
+            answer: "candle",
+            accept: ["candle"],
+            explanation: "Tom used candle smoke to mark the walls so they could find their way back."
+          },
+          {
+            q: "Tom used a long ___ from his pocket to explore small tunnels and find his way back to Becky.",
+            answer: "string",
+            accept: ["string"],
+            explanation: "Tom tied and unrolled his long string to explore tunnels safely."
+          },
+          {
+            q: "Injun Joe hid the box of treasure under a big smoke ___ on the cave wall.",
+            answer: "cross",
+            accept: ["cross"],
+            explanation: "Injun Joe had said 'Let's put it under the cross', referring to the smoke cross in the cave."
+          },
+          {
+            q: "When Tom opened the treasure box at Aunt Polly's house, there were ___ dollars inside!",
+            answer: "twelve thousand",
+            accept: ["twelve thousand", "12,000", "12000"],
+            explanation: "There were twelve thousand dollars in the box, making Tom and Huck the richest people in St Petersburg."
+          }
+        ]
+      },
+
+      sherlock: {
+        title: "🔍 Sherlock Holmes and the Strange Mr Angel",
+        subtitle: "30 questions about Mary Sutherland, Mr Windibank, Mr Hosmer Angel, and how Sherlock Holmes solved the mystery.",
+        tf: [
+          {
+            q: "Sherlock Holmes and Dr Watson lived in a flat on Baker Street in London.",
+            answer: true,
+            explanation: "True! Holmes looked out of his Baker Street window and saw Mary Sutherland hesitating across the street."
+          },
+          {
+            q: "Miss Mary Sutherland worked as a typist and had weak eyes.",
+            answer: true,
+            explanation: "True! Holmes noticed red lines on her arms from typing and a line across her nose from wearing glasses."
+          },
+          {
+            q: "Mary's stepfather, Mr Windibank, was 30 years older than Mary's mother.",
+            answer: false,
+            explanation: "False! Mr Windibank was nearly 15 years YOUNGER than Mary's mother, and only 5 years older than Mary."
+          },
+          {
+            q: "Mary inherited £100 a year from her Uncle Ned in New Zealand.",
+            answer: true,
+            explanation: "True! She gave the £100 a year to her mother and stepfather while living at home."
+          },
+          {
+            q: "Mr Windibank wanted Mary and her mother to go to the annual dance together with him.",
+            answer: false,
+            explanation: "False! He told them not to go ('haven't got the right clothes'), and they went while he was supposedly in France."
+          },
+          {
+            q: "Mr Hosmer Angel and Mr Windibank were never in the same place at the same time.",
+            answer: true,
+            explanation: "True! That was a huge clue — Angel only visited when Windibank was supposedly in France."
+          },
+          {
+            q: "Mr Hosmer Angel wrote all his letters by hand so Mary would recognize his writing.",
+            answer: false,
+            explanation: "False! He TYPED all four letters — even his own signature — so Mary wouldn't recognize Windibank's handwriting."
+          },
+          {
+            q: "On the wedding day, Mr Hosmer Angel disappeared from his cab before reaching the church near King's Cross.",
+            answer: true,
+            explanation: "True! He climbed in through one door of the cab and stepped right out the other door."
+          },
+          {
+            q: "The police arrested Mr Windibank and put him in prison at the end of the story.",
+            answer: false,
+            explanation: "False! The police could not arrest him because no technical crime was committed; Holmes frightened him and Windibank ran away."
+          },
+          {
+            q: "Sherlock Holmes decided not to tell Mary the truth so she would always think kindly of Mr Hosmer Angel.",
+            answer: true,
+            explanation: "True! Holmes told Watson that Mary would always think kindly of Mr Hosmer Angel."
+          }
+        ],
+        vocab: [
+          {
+            q: "What is a <strong>typist</strong> (Mary Sutherland's job)?",
+            options: [
+              "A person who sells wine in France",
+              "A person whose job is typing letters and documents on a typewriter",
+              "A driver of a horse-drawn cab",
+              "A clerk who works at a bank"
+            ],
+            answer: 1,
+            explanation: "Mary earned money as a typist, which left red lines on her arms from resting on a desk."
+          },
+          {
+            q: "Who is a <strong>stepfather</strong> (what Mr Windibank is to Mary)?",
+            options: [
+              "Your mother's brother",
+              "The man who married your mother after your father died or left",
+              "Your older brother",
+              "A detective who helps your family"
+            ],
+            answer: 1,
+            explanation: "Mr Windibank married Mary's mother shortly after Mary's biological father died."
+          },
+          {
+            q: "What is a <strong>typewriter</strong>?",
+            options: [
+              "A pair of dark glasses for weak eyes",
+              "A machine with keys used to print letters onto paper",
+              "A large hat worn by women in London",
+              "A notebook used by detectives"
+            ],
+            answer: 1,
+            explanation: "Holmes matched the flaws on the old office typewriter used for both Windibank's and Angel's letters."
+          },
+          {
+            q: "What is a <strong>cab</strong> (in Sherlock Holmes's London)?",
+            options: [
+              "A horse-drawn carriage that carries passengers for money",
+              "A small room above an office",
+              "A ship that sails to New Zealand",
+              "A church near King's Cross"
+            ],
+            answer: 0,
+            explanation: "Mary and her mother took one cab to the church, and Mr Angel stepped in and out of a second cab."
+          },
+          {
+            q: "What is a <strong>newspaper advertisement</strong> (what Mary placed on Saturday)?",
+            options: [
+              "A secret letter sent to Bordeaux",
+              "A public notice printed in a newspaper to share information or find someone",
+              "A ticket to an annual dance",
+              "A photo of a detective"
+            ],
+            answer: 1,
+            explanation: "Mary placed a newspaper advertisement describing Mr Hosmer Angel to try to find him."
+          },
+          {
+            q: "What is a <strong>beard</strong> (part of Mr Angel's disguise)?",
+            options: [
+              "A black coat and grey trousers",
+              "Hair growing on a man's chin and lower face",
+              "A mark across someone's nose",
+              "A type of hat worn in London"
+            ],
+            answer: 1,
+            explanation: "Mr Windibank wore a fake black beard and dark glasses to disguise himself as Mr Angel."
+          },
+          {
+            q: "What is a <strong>post office</strong> (on Leadenhall Street)?",
+            options: [
+              "A wine company office",
+              "A place where letters and parcels are sent and collected",
+              "A hotel near Baker Street",
+              "A hall where dances are held"
+            ],
+            answer: 1,
+            explanation: "Mr Angel collected Mary's letters at the Leadenhall Street Post Office."
+          },
+          {
+            q: "What is a <strong>wedding</strong> (planned for Friday)?",
+            options: [
+              "A business trip to France",
+              "A ceremony where two people get married",
+              "A meeting with a detective",
+              "A walk in the evening"
+            ],
+            answer: 1,
+            explanation: "Mary and Mr Hosmer Angel planned their wedding for Friday at a church near King's Cross."
+          },
+          {
+            q: "What does it mean to <strong>disguise</strong> yourself (what Mr Windibank did)?",
+            options: [
+              "To change how you look so people don't recognize you",
+              "To travel to another country to buy wine",
+              "To lock the door of a room",
+              "To write a letter by hand"
+            ],
+            answer: 0,
+            explanation: "Windibank disguised himself with a black beard, dark glasses, and a quiet voice."
+          },
+          {
+            q: "What is a <strong>detective</strong> (Sherlock Holmes's job)?",
+            options: [
+              "A person who investigates mysteries and finds clues",
+              "A person who owns a wine company",
+              "A person who drives a cab in London",
+              "A person who organizes dances"
+            ],
+            answer: 0,
+            explanation: "Sherlock Holmes is a famous detective who solved the case using careful clues."
+          }
+        ],
+        fill: [
+          {
+            q: "Miss Mary Sutherland came to Sherlock Holmes's flat on ___ to ask for help.",
+            answer: "Baker Street",
+            accept: ["baker street"],
+            explanation: "Sherlock Holmes lived on Baker Street in London."
+          },
+          {
+            q: "Holmes knew Mary had weak eyes because he saw a mark across her nose from her ___.",
+            answer: "glasses",
+            accept: ["glasses"],
+            explanation: "Her glasses left a line across her nose."
+          },
+          {
+            q: "Mary's £100 a year came from her Uncle Ned, who had lived in ___.",
+            answer: "New Zealand",
+            accept: ["new zealand"],
+            explanation: "Mary inherited £100 a year from her Uncle Ned in New Zealand."
+          },
+          {
+            q: "Mr Windibank worked for Westhouse and Marbank, a ___ company.",
+            answer: "wine",
+            accept: ["wine"],
+            explanation: "Westhouse and Marbank was a wine company."
+          },
+          {
+            q: "Mr Angel only visited Mary when Mr Windibank was supposedly away in ___.",
+            answer: "France",
+            accept: ["france", "bordeaux"],
+            explanation: "Windibank pretended to be away in France (Bordeaux) whenever Angel visited."
+          },
+          {
+            q: "To hide his face, Mr Windibank wore a black beard and ___ when pretending to be Mr Angel.",
+            answer: "dark glasses",
+            accept: ["dark glasses"],
+            explanation: "Mr Angel wore dark glasses (claiming he had weak eyes) and a black beard."
+          },
+          {
+            q: "On Friday, Mary and her mother rode in a cab to the ___ near King's Cross for the wedding.",
+            answer: "church",
+            accept: ["church"],
+            explanation: "The wedding was planned at a church near King's Cross."
+          },
+          {
+            q: "Holmes proved Windibank was Mr Angel because both notes came from the exact same old ___.",
+            answer: "typewriter",
+            accept: ["typewriter"],
+            explanation: "Both Windibank's note and Angel's four letters were typed on the same office typewriter."
+          },
+          {
+            q: "On that machine, the ___ was darker than the others and the bottom of the letter 'r' was missing.",
+            answer: "letter e",
+            accept: ["letter e", "e"],
+            explanation: "The letter 'e' was darker and the bottom of 'r' was missing, plus 14 other small defects."
+          },
+          {
+            q: "When Holmes unlocked the door and threatened to catch him, Mr Windibank ___ fast down the road.",
+            answer: "ran away",
+            accept: ["ran away"],
+            explanation: "Windibank bolted through the door and ran away fast down the road."
+          }
+        ]
+      }
+    };
+
+    let activeBookKey = "aztecs";
+    let examChecked = false;
+    let showingMistakesOnly = false;
+    let bankHidden = false;
+
+    function normalize(str) {
+      return (str || "").trim().toLowerCase().replace(/’/g, "'").replace(/\s+/g, " ");
+    }
+
+    function getShuffledWords(words, seed) {
+      const arr = [...words];
+      let s = seed * 9301 + 49297;
+      for (let i = arr.length - 1; i > 0; i--) {
+        s = (s * 9301 + 49297) % 233280;
+        const j = s % (i + 1);
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    function init() {
+      const dateInput = document.getElementById("examDate");
+      if (dateInput) dateInput.value = new Date().toISOString().split("T")[0];
+      switchBook("aztecs");
+    }
+
+    function switchBook(bookKey) {
+      activeBookKey = bookKey;
+      examChecked = false;
+      showingMistakesOnly = false;
+      bankHidden = false;
+
+      document.querySelectorAll(".book-btn").forEach((b) => b.classList.remove("active"));
+      document.getElementById(`btn-${bookKey}`).classList.add("active");
+      document.getElementById("resultsPanel").classList.remove("visible");
+      document.getElementById("filterMistakesBtn").textContent = "🔍 Show Only Mistakes";
+      document.getElementById("toggleBankBtn").textContent = "🙈 Hide Word Bank";
+
+      const book = BOOKS[bookKey];
+      document.getElementById("examTitle").textContent = book.title;
+      document.getElementById("examSubtitle").textContent = book.subtitle;
+      document.getElementById("printTitle").textContent = book.title.replace(/^[^\w]+/, "").trim() + " — Exam";
+      document.getElementById("akTitle").textContent = book.title.replace(/^[^\w]+/, "").trim() + " — Answer Key";
+
+      renderBookExam(book);
+      renderAnswerKey(book);
+      updateProgress();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function renderBookExam(book) {
+      const form = document.getElementById("examForm");
+      form.innerHTML = "";
+
+      // PART 1: TRUE OR FALSE
+      const p1 = document.createElement("div");
+      p1.innerHTML = `
+        <div class="section-title">
+          <span class="section-num">Part 1</span>
+          <h2>True or False (10 questions)</h2>
+        </div>
+        <p class="section-subtitle">Read each sentence about the story and choose <strong>True</strong> or <strong>False</strong>.</p>
+      `;
+
+      book.tf.forEach((item, idx) => {
+        const card = document.createElement("div");
+        card.className = "question-card";
+        card.id = `tf-card-${idx}`;
+        card.innerHTML = `
+          <div class="q-text"><span class="q-num">${idx + 1}.</span>${item.q}</div>
+          <div class="tf-grid">
+            <label class="option-label" id="tf-opt-${idx}-true" onclick="selectTf(${idx}, 'true')">
+              <input type="radio" name="tf${idx}" value="true" />
+              <span class="opt-letter">T</span>
+              <span>True</span>
+            </label>
+            <label class="option-label" id="tf-opt-${idx}-false" onclick="selectTf(${idx}, 'false')">
+              <input type="radio" name="tf${idx}" value="false" />
+              <span class="opt-letter">F</span>
+              <span>False</span>
+            </label>
+          </div>
+          <div class="q-feedback" id="tf-fb-${idx}"></div>
+        `;
+        p1.appendChild(card);
+      });
+      form.appendChild(p1);
+
+      // PART 2: VOCABULARY
+      const p2 = document.createElement("div");
+      p2.innerHTML = `
+        <div class="section-title">
+          <span class="section-num">Part 2</span>
+          <h2>Vocabulary (10 questions)</h2>
+        </div>
+        <p class="section-subtitle">Choose the best meaning (A, B, C, or D) for each key word from the book.</p>
+      `;
+
+      book.vocab.forEach((item, idx) => {
+        const qNum = 11 + idx;
+        const card = document.createElement("div");
+        card.className = "question-card";
+        card.id = `vc-card-${idx}`;
+        const optsHtml = item.options
+          .map(
+            (opt, optIdx) => `
+            <label class="option-label" id="vc-opt-${idx}-${optIdx}" onclick="selectVc(${idx}, ${optIdx})">
+              <input type="radio" name="vc${idx}" value="${optIdx}" />
+              <span class="opt-letter">${LETTERS[optIdx]}</span>
+              <span>${opt}</span>
+            </label>
+          `
+          )
+          .join("");
+        card.innerHTML = `
+          <div class="q-text"><span class="q-num">${qNum}.</span>${item.q}</div>
+          <div class="options-grid">${optsHtml}</div>
+          <div class="q-feedback" id="vc-fb-${idx}"></div>
+        `;
+        p2.appendChild(card);
+      });
+      form.appendChild(p2);
+
+      // PART 3: FILL IN THE BLANKS
+      const p3 = document.createElement("div");
+      const shuffledWords = getShuffledWords(book.fill.map((f) => f.answer), activeBookKey.length + 5);
+      p3.innerHTML = `
+        <div class="section-title">
+          <span class="section-num">Part 3</span>
+          <h2>Fill in the Blanks (10 questions)</h2>
+        </div>
+        <p class="section-subtitle">Complete each sentence using a word or phrase from the Word Bank below.</p>
+        <div class="word-bank" id="wordBank">
+          <span class="word-bank-label">Word Bank</span>
+          <div class="word-chips">
+            ${shuffledWords.map((w) => `<span class="word-chip" data-word="${normalize(w)}">${w}</span>`).join("")}
+          </div>
+        </div>
+      `;
+
+      book.fill.forEach((item, idx) => {
+        const qNum = 21 + idx;
+        const card = document.createElement("div");
+        card.className = "question-card";
+        card.id = `fl-card-${idx}`;
+        const inputHtml = `<input type="text" class="blank-input" id="fl-input-${idx}" placeholder="type here..." oninput="updateProgress()" /><span class="print-blank-line"></span>`;
+        card.innerHTML = `
+          <div class="q-sentence"><span class="q-num">${qNum}.</span>${item.q.replace("___", inputHtml)}</div>
+          <div class="q-feedback" id="fl-fb-${idx}"></div>
+        `;
+        p3.appendChild(card);
+      });
+      form.appendChild(p3);
+    }
+
+    function renderAnswerKey(book) {
+      const rows = [];
+      book.tf.forEach((q, idx) => {
+        rows.push(`<div class="ak-row"><span class="ak-num">${idx + 1}.</span><span class="ak-ans">${q.answer ? "TRUE" : "FALSE"}</span><span class="ak-part">True/False</span></div>`);
+      });
+      book.vocab.forEach((q, idx) => {
+        rows.push(`<div class="ak-row"><span class="ak-num">${11 + idx}.</span><span class="ak-ans">${LETTERS[q.answer]} — ${q.options[q.answer]}</span><span class="ak-part">Vocab</span></div>`);
+      });
+      book.fill.forEach((q, idx) => {
+        rows.push(`<div class="ak-row"><span class="ak-num">${21 + idx}.</span><span class="ak-ans">${q.answer}</span><span class="ak-part">Blank</span></div>`);
+      });
+      document.getElementById("answerKeyGrid").innerHTML = rows.join("");
+    }
+
+    function selectTf(idx, val) {
+      if (examChecked) return;
+      document.querySelectorAll(`#tf-card-${idx} .option-label`).forEach((l) => l.classList.remove("selected"));
+      const lbl = document.getElementById(`tf-opt-${idx}-${val}`);
+      lbl.classList.add("selected");
+      lbl.querySelector("input").checked = true;
+      updateProgress();
+    }
+
+    function selectVc(idx, optIdx) {
+      if (examChecked) return;
+      document.querySelectorAll(`#vc-card-${idx} .option-label`).forEach((l) => l.classList.remove("selected"));
+      const lbl = document.getElementById(`vc-opt-${idx}-${optIdx}`);
+      lbl.classList.add("selected");
+      lbl.querySelector("input").checked = true;
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const book = BOOKS[activeBookKey];
+      let answered = 0;
+      const typedSet = new Set();
+
+      book.tf.forEach((_, idx) => {
+        if (document.querySelector(`input[name="tf${idx}"]:checked`)) answered++;
+      });
+      book.vocab.forEach((_, idx) => {
+        if (document.querySelector(`input[name="vc${idx}"]:checked`)) answered++;
+      });
+      book.fill.forEach((_, idx) => {
+        const val = normalize(document.getElementById(`fl-input-${idx}`)?.value);
+        if (val) {
+          answered++;
+          typedSet.add(val);
+        }
+      });
+
+      const pct = Math.round((answered / 30) * 100);
+      document.getElementById("progressText").textContent = `${answered} / 30 answered`;
+      document.getElementById("progressPct").textContent = `${pct}%`;
+      document.getElementById("progressFill").style.width = `${pct}%`;
+
+      document.querySelectorAll("#wordBank .word-chip").forEach((chip) => {
+        chip.classList.toggle("used", typedSet.has(chip.dataset.word));
+      });
+    }
+
+    function toggleWordBank() {
+      bankHidden = !bankHidden;
+      const wb = document.getElementById("wordBank");
+      if (wb) wb.classList.toggle("hidden", bankHidden);
+      document.getElementById("toggleBankBtn").textContent = bankHidden ? "👀 Show Word Bank" : "🙈 Hide Word Bank";
+    }
+
+    function checkExam() {
+      const book = BOOKS[activeBookKey];
+      let unanswered = 0;
+      book.tf.forEach((_, i) => { if (!document.querySelector(`input[name="tf${i}"]:checked`)) unanswered++; });
+      book.vocab.forEach((_, i) => { if (!document.querySelector(`input[name="vc${i}"]:checked`)) unanswered++; });
+      book.fill.forEach((_, i) => { if (!normalize(document.getElementById(`fl-input-${i}`).value)) unanswered++; });
+
+      if (unanswered > 0 && !examChecked) {
+        if (!confirm(`You still have ${unanswered} unanswered question(s). Check your answers now anyway?`)) return;
+      }
+
+      examChecked = true;
+      let tfOk = 0, vcOk = 0, flOk = 0;
+
+      // Check Part 1: True/False
+      book.tf.forEach((q, idx) => {
+        const card = document.getElementById(`tf-card-${idx}`);
+        const fb = document.getElementById(`tf-fb-${idx}`);
+        const checked = document.querySelector(`input[name="tf${idx}"]:checked`);
+        const userStr = checked ? checked.value : null;
+        const correctStr = q.answer ? "true" : "false";
+
+        card.classList.remove("correct", "incorrect");
+        card.querySelectorAll(".option-label").forEach((l) => l.classList.remove("is-correct", "is-wrong"));
+        document.getElementById(`tf-opt-${idx}-${correctStr}`).classList.add("is-correct");
+
+        if (userStr === correctStr) {
+          tfOk++;
+          card.classList.add("correct");
+          fb.className = "q-feedback visible ok";
+          fb.innerHTML = `✅ <strong>Correct!</strong> ${q.explanation}`;
+        } else {
+          card.classList.add("incorrect");
+          if (userStr) document.getElementById(`tf-opt-${idx}-${userStr}`).classList.add("is-wrong");
+          fb.className = "q-feedback visible err";
+          fb.innerHTML = `❌ <strong>${userStr ? "Not quite." : "Not answered."}</strong> ${q.explanation}`;
+        }
+      });
+
+      // Check Part 2: Vocabulary
+      book.vocab.forEach((q, idx) => {
+        const card = document.getElementById(`vc-card-${idx}`);
+        const fb = document.getElementById(`vc-fb-${idx}`);
+        const checked = document.querySelector(`input[name="vc${idx}"]:checked`);
+        const userVal = checked ? parseInt(checked.value, 10) : -1;
+
+        card.classList.remove("correct", "incorrect");
+        card.querySelectorAll(".option-label").forEach((l) => l.classList.remove("is-correct", "is-wrong"));
+        document.getElementById(`vc-opt-${idx}-${q.answer}`).classList.add("is-correct");
+
+        if (userVal === q.answer) {
+          vcOk++;
+          card.classList.add("correct");
+          fb.className = "q-feedback visible ok";
+          fb.innerHTML = `✅ <strong>Correct!</strong> ${q.explanation}`;
+        } else {
+          card.classList.add("incorrect");
+          if (userVal >= 0) document.getElementById(`vc-opt-${idx}-${userVal}`).classList.add("is-wrong");
+          fb.className = "q-feedback visible err";
+          fb.innerHTML = `❌ <strong>${userVal === -1 ? "Not answered." : "Not quite."}</strong> Answer: <strong>${LETTERS[q.answer]}</strong>. ${q.explanation}`;
+        }
+      });
+
+      // Check Part 3: Fill in the Blanks
+      book.fill.forEach((q, idx) => {
+        const card = document.getElementById(`fl-card-${idx}`);
+        const input = document.getElementById(`fl-input-${idx}`);
+        const fb = document.getElementById(`fl-fb-${idx}`);
+        const userVal = normalize(input.value);
+
+        card.classList.remove("correct", "incorrect");
+        input.classList.remove("input-correct", "input-wrong");
+        input.readOnly = true;
+
+        if (q.accept.map(normalize).includes(userVal)) {
+          flOk++;
+          card.classList.add("correct");
+          input.classList.add("input-correct");
+          fb.className = "q-feedback visible ok";
+          fb.innerHTML = `✅ <strong>Correct!</strong> ${q.explanation}`;
+        } else {
+          card.classList.add("incorrect");
+          input.classList.add("input-wrong");
+          fb.className = "q-feedback visible err";
+          fb.innerHTML = `❌ <strong>${userVal ? "Not quite." : "Not answered."}</strong> Correct answer: <strong>${q.answer}</strong>. ${q.explanation}`;
+        }
+      });
+
+      const total = tfOk + vcOk + flOk;
+      const pct = Math.round((total / 30) * 100);
+      document.getElementById("scoreBig").textContent = `${total} / 30 (${pct}%)`;
+
+      let msg = "";
+      if (pct >= 90) msg = "🌟 Amazing! You know this story really well!";
+      else if (pct >= 75) msg = "🎉 Great job! Just a few facts to review.";
+      else if (pct >= 60) msg = "👍 Good effort! Review the highlighted questions below.";
+      else msg = "💪 Keep reading and try again — you've got this!";
+      document.getElementById("scoreMessage").textContent = msg;
+
+      const badge = (n) => (n >= 8 ? "badge-good" : n >= 6 ? "badge-mid" : "badge-low");
+      document.getElementById("sectionBreakdown").innerHTML = `
+        <div class="breakdown-item"><span>Part 1: True or False</span><span class="badge ${badge(tfOk)}">${tfOk} / 10</span></div>
+        <div class="breakdown-item"><span>Part 2: Vocabulary</span><span class="badge ${badge(vcOk)}">${vcOk} / 10</span></div>
+        <div class="breakdown-item"><span>Part 3: Fill in the Blanks</span><span class="badge ${badge(flOk)}">${flOk} / 10</span></div>
+      `;
+
+      const panel = document.getElementById("resultsPanel");
+      panel.classList.add("visible");
+      panel.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function toggleMistakesFilter() {
+      showingMistakesOnly = !showingMistakesOnly;
+      document.getElementById("filterMistakesBtn").textContent = showingMistakesOnly
+        ? "📋 Show All Questions"
+        : "🔍 Show Only Mistakes";
+      document.querySelectorAll(".question-card").forEach((card) => {
+        card.classList.toggle("hidden-by-filter", showingMistakesOnly && card.classList.contains("correct"));
+      });
+    }
+
+    function resetExam() {
+      switchBook(activeBookKey);
+    }
+
+    function printBlankExam() {
+      document.body.classList.remove("print-key");
+      document.body.classList.add("print-exam");
+      window.print();
+    }
+
+    function printAnswerKey() {
+      document.body.classList.remove("print-exam");
+      document.body.classList.add("print-key");
+      window.print();
+      setTimeout(() => {
+        document.body.classList.remove("print-key");
+        document.body.classList.add("print-exam");
+      }, 500);
+    }
+
+    init();
+  </script>
+</body>
+</html>
