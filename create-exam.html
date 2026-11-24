@@ -1,0 +1,1433 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crear Examen desde Fotos — 5th Grade English Practice</title>
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --card: #ffffff;
+      --primary: #ae3ec9;
+      --primary-dark: #862e9c;
+      --primary-soft: #f8f0fc;
+      --accent: #0ca678;
+      --accent-soft: #e6fcf5;
+      --danger: #e03131;
+      --danger-soft: #fff5f5;
+      --warning: #f08c00;
+      --warning-soft: #fff9db;
+      --text: #1e293b;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --radius: 14px;
+      --shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding-bottom: 80px;
+    }
+
+    /* Mode Navigation Bar */
+    .mode-nav {
+      background: #1e293b;
+      padding: 10px 20px;
+    }
+
+    .mode-nav-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .mode-brand {
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .mode-tabs {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .mode-tab {
+      text-decoration: none;
+      color: #cbd5e1;
+      font-size: 0.84rem;
+      font-weight: 600;
+      padding: 6px 11px;
+      border-radius: 999px;
+      transition: all 0.15s ease;
+    }
+
+    .mode-tab:hover {
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+    }
+
+    .mode-tab.active {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    /* Sticky Bar (shown when exam is active) */
+    .sticky-bar {
+      display: none;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 20px;
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
+    }
+
+    .sticky-bar.visible { display: block; }
+
+    .sticky-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .progress-wrap { flex: 1; min-width: 170px; }
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .progress-track {
+      height: 10px;
+      background: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--primary), #da77f2);
+      border-radius: 999px;
+      transition: width 0.25s ease;
+    }
+
+    .toolbar-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.88rem;
+      padding: 8px 14px;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); }
+
+    .btn-outline { background: #fff; color: var(--text); border: 1.5px solid var(--border); }
+    .btn-outline:hover { border-color: var(--primary); color: var(--primary-dark); background: var(--primary-soft); }
+
+    .container {
+      max-width: 900px;
+      margin: 28px auto 0;
+      padding: 0 20px;
+    }
+
+    /* Generator Card */
+    .hero-header {
+      background: linear-gradient(135deg, #ae3ec9 0%, #7048e8 100%);
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 26px 30px;
+      box-shadow: var(--shadow);
+      margin-bottom: 22px;
+    }
+
+    .hero-header h1 {
+      margin: 0 0 6px;
+      font-size: 1.8rem;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-header p {
+      margin: 0;
+      opacity: 0.94;
+      font-size: 0.98rem;
+    }
+
+    .builder-card {
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px 26px;
+      box-shadow: var(--shadow);
+    }
+
+    /* Dropzone */
+    .dropzone {
+      border: 2px dashed #cc5de8;
+      background: #fdf7ff;
+      border-radius: 14px;
+      padding: 28px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      margin-bottom: 16px;
+    }
+
+    .dropzone:hover, .dropzone.dragover {
+      background: #f8f0fc;
+      border-color: var(--primary-dark);
+    }
+
+    .dropzone-icon { font-size: 2.2rem; margin-bottom: 6px; }
+    .dropzone-title { font-weight: 700; font-size: 1.05rem; color: var(--primary-dark); }
+    .dropzone-sub { font-size: 0.88rem; color: var(--muted); margin-top: 4px; }
+
+    .preview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .preview-item {
+      position: relative;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      background: #f8fafc;
+      aspect-ratio: 1 / 1;
+    }
+
+    .preview-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .preview-remove {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: rgba(15, 23, 42, 0.78);
+      color: #fff;
+      font-size: 0.85rem;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .preview-remove:hover { background: var(--danger); }
+
+    /* Form Grid */
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    @media (max-width: 640px) {
+      .form-grid { grid-template-columns: 1fr; }
+    }
+
+    .field label {
+      display: block;
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 5px;
+    }
+
+    .field select,
+    .field input,
+    .field textarea {
+      width: 100%;
+      padding: 9px 12px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 0.94rem;
+      color: var(--text);
+      background: #fff;
+      outline: none;
+    }
+
+    .field select:focus,
+    .field input:focus,
+    .field textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(174, 62, 201, 0.14);
+    }
+
+    .field-full { grid-column: 1 / -1; }
+
+    .error-banner {
+      display: none;
+      background: var(--danger-soft);
+      border: 1.5px solid #ffa8a8;
+      color: #c92a2a;
+      padding: 12px 15px;
+      border-radius: 10px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+    .error-banner.visible { display: block; }
+
+    .generate-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .btn-large { font-size: 1.04rem; padding: 13px 26px; }
+
+    .loading-box {
+      display: none;
+      align-items: center;
+      gap: 12px;
+      background: var(--primary-soft);
+      border: 1.5px solid #eebefa;
+      color: var(--primary-dark);
+      padding: 14px 18px;
+      border-radius: 12px;
+      margin-top: 16px;
+      font-weight: 600;
+    }
+    .loading-box.visible { display: flex; }
+
+    .spinner {
+      width: 22px;
+      height: 22px;
+      border: 3px solid #e599f7;
+      border-top-color: var(--primary-dark);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      flex-shrink: 0;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ==================== GENERATED EXAM STYLES ==================== */
+    #examView { display: none; }
+    #examView.visible { display: block; }
+
+    .exam-header {
+      background: linear-gradient(135deg, #ae3ec9 0%, #7048e8 100%);
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 26px 30px;
+      box-shadow: var(--shadow);
+      margin-bottom: 22px;
+    }
+
+    .exam-header h1 { margin: 0 0 6px; font-size: 1.75rem; }
+    .exam-header p { margin: 0 0 16px; opacity: 0.94; }
+
+    .student-info {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.16);
+      padding: 14px;
+      border-radius: 10px;
+    }
+
+    .student-field label {
+      display: block;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      opacity: 0.92;
+      margin-bottom: 4px;
+      font-weight: 600;
+    }
+
+    .student-field input {
+      width: 100%;
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: none;
+      font-size: 0.95rem;
+      font-family: inherit;
+      background: rgba(255, 255, 255, 0.96);
+      color: var(--text);
+    }
+
+    .print-header { display: none; }
+
+    .results-panel {
+      display: none;
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 22px 26px;
+      box-shadow: var(--shadow);
+      border: 2px solid var(--primary);
+      margin-bottom: 24px;
+    }
+    .results-panel.visible { display: block; }
+
+    .results-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .score-big { font-size: 2.2rem; font-weight: 800; color: var(--primary-dark); line-height: 1.1; }
+    .score-message { font-size: 1.05rem; font-weight: 600; margin-top: 4px; }
+
+    .section-breakdown {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    .breakdown-item {
+      background: var(--bg);
+      padding: 10px 12px;
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+
+    .badge { padding: 3px 9px; border-radius: 999px; font-size: 0.8rem; font-weight: 700; }
+    .badge-good { background: var(--accent-soft); color: #087f5b; }
+    .badge-mid { background: var(--warning-soft); color: #b45309; }
+    .badge-low { background: var(--danger-soft); color: var(--danger); }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 26px 0 12px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #eebefa;
+    }
+
+    .section-num {
+      background: var(--primary);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.82rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      text-transform: uppercase;
+    }
+
+    .section-title h2 { margin: 0; font-size: 1.22rem; color: var(--primary-dark); }
+
+    .word-bank {
+      background: #fdf7ff;
+      border: 1.5px dashed #da77f2;
+      border-radius: 12px;
+      padding: 12px 16px;
+      margin-bottom: 14px;
+    }
+    .word-bank.hidden { display: none; }
+    .word-bank-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--primary-dark);
+      margin-bottom: 8px;
+      display: block;
+    }
+    .word-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .word-chip {
+      background: #fff;
+      border: 1.5px solid #e599f7;
+      color: var(--primary-dark);
+      font-weight: 600;
+      font-size: 0.9rem;
+      padding: 4px 11px;
+      border-radius: 999px;
+    }
+    .word-chip.used {
+      background: #e2e8f0;
+      border-color: #cbd5e1;
+      color: #94a3b8;
+      text-decoration: line-through;
+    }
+
+    .question-card {
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      margin-bottom: 13px;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.03);
+    }
+    .question-card.correct { border-color: var(--accent); background: #fbfffe; }
+    .question-card.incorrect { border-color: var(--danger); background: #fffafa; }
+    .question-card.hidden-by-filter { display: none; }
+
+    .q-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .q-text { font-size: 1.03rem; font-weight: 600; }
+    .q-sentence { font-size: 1.03rem; line-height: 2; font-weight: 500; }
+    .q-num { color: var(--primary-dark); font-weight: 800; margin-right: 6px; }
+    .q-hint { font-size: 0.86rem; color: var(--muted); font-style: italic; margin-left: 4px; }
+    .q-topic {
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: var(--muted);
+      background: var(--bg);
+      padding: 3px 9px;
+      border-radius: 999px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    @media (max-width: 600px) {
+      .options-grid { grid-template-columns: 1fr; }
+      .student-info { grid-template-columns: 1fr; }
+    }
+
+    .option-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      cursor: pointer;
+      background: #fff;
+      font-size: 0.95rem;
+      user-select: none;
+    }
+    .option-label:hover { border-color: #da77f2; background: #fdf7ff; }
+    .option-label input[type="radio"] { display: none; }
+
+    .opt-letter {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--bg);
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 0.82rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      border: 1.5px solid var(--border);
+    }
+
+    .option-label.selected { border-color: var(--primary); background: var(--primary-soft); }
+    .option-label.selected .opt-letter { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .option-label.is-correct { border-color: var(--accent) !important; background: var(--accent-soft) !important; font-weight: 600; }
+    .option-label.is-correct .opt-letter { background: var(--accent) !important; color: #fff !important; border-color: var(--accent) !important; }
+    .option-label.is-wrong { border-color: var(--danger) !important; background: var(--danger-soft) !important; }
+    .option-label.is-wrong .opt-letter { background: var(--danger) !important; color: #fff !important; border-color: var(--danger) !important; }
+
+    .blank-input {
+      font-family: inherit;
+      font-size: 0.96rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      background: #f8fafc;
+      border: 2px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 3px 10px;
+      margin: 0 4px;
+      width: 185px;
+      max-width: 100%;
+      outline: none;
+    }
+    .blank-input:focus { border-color: var(--primary); background: #fff; }
+    .blank-input.input-correct { border-color: var(--accent); background: var(--accent-soft); color: #087f5b; }
+    .blank-input.input-wrong { border-color: var(--danger); background: var(--danger-soft); color: #c92a2a; }
+
+    .print-blank-line { display: none; }
+
+    .q-feedback {
+      display: none;
+      margin-top: 10px;
+      padding: 9px 13px;
+      border-radius: 9px;
+      font-size: 0.9rem;
+    }
+    .q-feedback.visible { display: block; }
+    .q-feedback.ok { background: var(--accent-soft); color: #087f5b; }
+    .q-feedback.err { background: var(--danger-soft); color: #c92a2a; }
+
+    .submit-footer {
+      margin-top: 28px;
+      text-align: center;
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 22px;
+      border: 1.5px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .answer-key-sheet { display: none; }
+
+    /* ==================== PRINT STYLES ==================== */
+    @media print {
+      body { background: #fff !important; color: #000 !important; padding: 0 !important; font-size: 10.5pt; }
+      .mode-nav, .sticky-bar, #builderView, .results-panel, .submit-footer, .exam-header, .q-feedback, .q-topic {
+        display: none !important;
+      }
+      .container { max-width: 100% !important; margin: 0 !important; padding: 0 !important; }
+      #examView { display: block !important; }
+
+      body.print-exam .print-header {
+        display: block !important;
+        border-bottom: 2px solid #000;
+        padding-bottom: 10px;
+        margin-bottom: 14px;
+      }
+      .print-header h1 { margin: 0 0 8px; font-size: 16pt; }
+      .print-meta { display: flex; justify-content: space-between; gap: 20px; font-size: 10.5pt; }
+
+      body.print-exam .section-title { margin: 14px 0 6px; padding-bottom: 4px; border-bottom: 1.5px solid #333; break-after: avoid; }
+      body.print-exam .section-num { background: #eee !important; color: #000 !important; border: 1px solid #333; }
+      body.print-exam .section-title h2 { color: #000 !important; font-size: 12pt; }
+      body.print-exam .word-bank { display: block !important; background: #f9f9f9 !important; border: 1px solid #666 !important; padding: 7px 10px !important; break-inside: avoid; }
+      body.print-exam .word-bank-label { color: #000 !important; }
+      body.print-exam .word-chip { background: #fff !important; border: 1px solid #999 !important; color: #000 !important; text-decoration: none !important; }
+
+      body.print-exam .question-card {
+        display: block !important;
+        border: 1px solid #ccc !important;
+        background: #fff !important;
+        box-shadow: none !important;
+        padding: 8px 11px !important;
+        margin-bottom: 7px !important;
+        break-inside: avoid;
+      }
+      body.print-exam .q-num { color: #000 !important; }
+      body.print-exam .options-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 5px 14px !important; }
+      body.print-exam .option-label { border: none !important; background: transparent !important; padding: 2px 4px !important; font-weight: 400 !important; }
+      body.print-exam .opt-letter { width: 20px; height: 20px; background: #fff !important; color: #000 !important; border: 1.2px solid #000 !important; font-size: 8.5pt; }
+      body.print-exam .blank-input { display: none !important; }
+      body.print-exam .print-blank-line { display: inline-block !important; border-bottom: 1.2px solid #000; width: 150px; margin: 0 4px; }
+
+      body.print-key #examForm { display: none !important; }
+      body.print-key .answer-key-sheet { display: block !important; }
+      .answer-key-sheet h1 { font-size: 15pt; margin: 0 0 4px; }
+      .answer-key-sheet p { margin: 0 0 12px; font-size: 9.5pt; color: #444; }
+      .ak-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 4px 20px; font-size: 9.5pt; }
+      .ak-row { display: flex; justify-content: space-between; border-bottom: 1px solid #ddd; padding: 3px 2px; }
+      .ak-num { font-weight: 700; width: 28px; }
+      .ak-ans { flex: 1; font-weight: 600; }
+      .ak-topic { color: #555; font-size: 8.5pt; }
+    }
+  </style>
+</head>
+<body class="print-exam">
+
+  <!-- Mode Switcher -->
+  <nav class="mode-nav">
+    <div class="mode-nav-inner">
+      <span class="mode-brand">📚 5th Grade English Practice</span>
+      <div class="mode-tabs">
+        <a href="index.html" class="mode-tab">📝 Multiple Choice (50)</a>
+        <a href="fill-in-the-blanks.html" class="mode-tab">✍️ Fill in the Blanks (50)</a>
+        <a href="will-vs-going-to.html" class="mode-tab">🔮 Will vs. Going to (30)</a>
+        <a href="will-vs-going-to-2.html" class="mode-tab">⚡ Will vs. Going to #2 (20)</a>
+        <a href="create-exam.html" class="mode-tab active">✨ Crear Examen</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Sticky Toolbar (only visible when an exam is generated) -->
+  <div class="sticky-bar" id="stickyBar">
+    <div class="sticky-inner">
+      <div class="progress-wrap">
+        <div class="progress-label">
+          <span id="progressText">0 / 0 answered</span>
+          <span id="progressPct">0%</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+      <div class="toolbar-actions">
+        <button type="button" class="btn-outline" onclick="backToBuilder()">➕ Nuevo Examen</button>
+        <button type="button" class="btn-outline" id="toggleBankBtn" style="display:none;" onclick="toggleWordBanks()">🙈 Hide Word Banks</button>
+        <button type="button" class="btn-outline" onclick="printBlankExam()">🖨️ Print Exam</button>
+        <button type="button" class="btn-outline" onclick="printAnswerKey()">🔑 Answer Key</button>
+        <button type="button" class="btn-primary" onclick="checkExam()">✅ Check Answers</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- ==================== BUILDER VIEW ==================== -->
+    <div id="builderView">
+      <header class="hero-header">
+        <h1>✨ Crear Examen desde Capturas</h1>
+        <p>Subí 1 o varias fotos de carpetas, libros o capturas de pantalla y generá un examen interactivo + imprimible en segundos.</p>
+      </header>
+
+      <div class="builder-card">
+        <div class="error-banner" id="errorBanner"></div>
+
+        <!-- Upload Dropzone -->
+        <div class="dropzone" id="dropzone" onclick="document.getElementById('fileInput').click()">
+          <div class="dropzone-icon">📸</div>
+          <div class="dropzone-title">Hacé clic para elegir fotos o arrastralas acá</div>
+          <div class="dropzone-sub">Podés subir hasta 10 capturas (JPG, PNG, WEBP) o pegar con Ctrl+V</div>
+          <input type="file" id="fileInput" accept="image/*" multiple style="display:none;" />
+        </div>
+
+        <div class="preview-grid" id="previewGrid"></div>
+
+        <!-- Options -->
+        <div class="form-grid">
+          <div class="field">
+            <label for="examType">Tipo de examen</label>
+            <select id="examType">
+              <option value="multiple-choice">Multiple Choice (A, B, C, D)</option>
+              <option value="fill-in-the-blanks">Fill in the Blanks (completar + Word Bank)</option>
+              <option value="mixed">Mixto (Multiple Choice + Fill in the Blanks)</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="questionCount">Cantidad de preguntas</label>
+            <select id="questionCount">
+              <option value="10">10 preguntas (repaso rápido)</option>
+              <option value="15">15 preguntas</option>
+              <option value="20" selected>20 preguntas (recomendado)</option>
+              <option value="30">30 preguntas (completo)</option>
+              <option value="40">40 preguntas</option>
+              <option value="50">50 preguntas (a fondo)</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="gradeLevel">Nivel / Grado</label>
+            <select id="gradeLevel">
+              <option value="4th grade primary (9-10 years old)">4° grado de primaria (9-10 años)</option>
+              <option value="5th grade primary (10-11 years old)" selected>5° grado de primaria (10-11 años)</option>
+              <option value="6th grade primary (11-12 years old)">6° grado de primaria (11-12 años)</option>
+              <option value="Secondary school (13-15 years old)">Secundaria básica (13-15 años)</option>
+              <option value="High school (16-17 years old)">Secundaria superior (16-17 años)</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="language">Idioma del examen</label>
+            <select id="language">
+              <option value="english" selected>Todo en inglés (estilo examen del cole)</option>
+              <option value="bilingual">Consignas en español + respuestas en inglés</option>
+              <option value="spanish">Todo en español (otras materias)</option>
+            </select>
+          </div>
+
+          <div class="field field-full">
+            <label for="extraNotes">Indicaciones extra (opcional)</label>
+            <textarea id="extraNotes" rows="2" placeholder="Ej: Hacer foco en verbos irregulares, incluir preguntas de will vs going to, etc."></textarea>
+          </div>
+
+          <div class="field field-full">
+            <label for="accessCode">Código de acceso (si fue configurado)</label>
+            <input type="password" id="accessCode" placeholder="Ingresá el código de acceso..." />
+          </div>
+        </div>
+
+        <div class="generate-row">
+          <span id="imgCountLabel" style="font-size:0.9rem;color:var(--muted);font-weight:600;">0 imágenes cargadas</span>
+          <button type="button" class="btn-primary btn-large" id="generateBtn" onclick="generateExam()">
+            ✨ Generar Examen
+          </button>
+        </div>
+
+        <div class="loading-box" id="loadingBox">
+          <div class="spinner"></div>
+          <span id="loadingText">Analizando las capturas y armando tu examen... esto tarda entre 10 y 25 segundos.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== GENERATED EXAM VIEW ==================== -->
+    <div id="examView">
+      <header class="exam-header">
+        <h1 id="examTitle">Generated Exam</h1>
+        <p id="examSubtitle"></p>
+        <div class="student-info">
+          <div class="student-field">
+            <label for="studentName">Student Name</label>
+            <input type="text" id="studentName" placeholder="Write your name here..." />
+          </div>
+          <div class="student-field">
+            <label for="examDate">Date</label>
+            <input type="date" id="examDate" />
+          </div>
+        </div>
+      </header>
+
+      <div class="print-header">
+        <h1 id="printTitle">Exam</h1>
+        <div class="print-meta">
+          <span><strong>Name:</strong> ______________________________</span>
+          <span><strong>Date:</strong> _______________</span>
+          <span id="printScoreMeta"><strong>Score:</strong> _____ / 20</span>
+        </div>
+      </div>
+
+      <section class="results-panel" id="resultsPanel">
+        <div class="results-top">
+          <div>
+            <div class="score-big" id="scoreBig">0 / 0 (0%)</div>
+            <div class="score-message" id="scoreMessage"></div>
+          </div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <button type="button" class="btn-outline" id="filterMistakesBtn" onclick="toggleMistakesFilter()">🔍 Show Only Mistakes</button>
+            <button type="button" class="btn-primary" onclick="resetExam()">🔄 Try Again</button>
+          </div>
+        </div>
+        <div class="section-breakdown" id="sectionBreakdown"></div>
+      </section>
+
+      <form id="examForm" autocomplete="off" onsubmit="return false;"></form>
+
+      <div class="submit-footer">
+        <p style="margin:0 0 14px;color:var(--muted);">Finished answering? Click below to check your score and see explanations!</p>
+        <button type="button" class="btn-primary btn-large" onclick="checkExam()">✅ Finish &amp; Check My Answers</button>
+      </div>
+
+      <section class="answer-key-sheet" id="answerKeySheet">
+        <h1 id="akTitle">Answer Key</h1>
+        <p id="akSubtitle"></p>
+        <div class="ak-grid" id="answerKeyGrid"></div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    const LETTERS = ["A", "B", "C", "D"];
+    const MAX_IMAGES = 10;
+    let uploadedImages = []; // { mimeType, data, previewUrl }
+    let currentExam = null;
+    let flatQuestions = [];
+    let examChecked = false;
+    let showingMistakesOnly = false;
+    let banksHidden = false;
+
+    // Init
+    (function init() {
+      const savedCode = sessionStorage.getItem("exam_access_code");
+      if (savedCode) document.getElementById("accessCode").value = savedCode;
+
+      const dateInput = document.getElementById("examDate");
+      if (dateInput) dateInput.value = new Date().toISOString().split("T")[0];
+
+      const fileInput = document.getElementById("fileInput");
+      fileInput.addEventListener("change", (e) => handleFiles(e.target.files));
+
+      const dropzone = document.getElementById("dropzone");
+      dropzone.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        dropzone.classList.add("dragover");
+      });
+      dropzone.addEventListener("dragleave", () => dropzone.classList.remove("dragover"));
+      dropzone.addEventListener("drop", (e) => {
+        e.preventDefault();
+        dropzone.classList.remove("dragover");
+        handleFiles(e.dataTransfer.files);
+      });
+
+      // Allow pasting screenshots with Ctrl+V
+      document.addEventListener("paste", (e) => {
+        if (document.getElementById("builderView").style.display === "none") return;
+        const items = e.clipboardData?.items || [];
+        const files = [];
+        for (const item of items) {
+          if (item.type.startsWith("image/")) {
+            const f = item.getAsFile();
+            if (f) files.push(f);
+          }
+        }
+        if (files.length) handleFiles(files);
+      });
+
+      // Restore last generated exam if present in sessionStorage
+      try {
+        const cached = sessionStorage.getItem("last_generated_exam");
+        if (cached) {
+          currentExam = JSON.parse(cached);
+          showExamView();
+        }
+      } catch (_) {}
+    })();
+
+    function showError(msg) {
+      const el = document.getElementById("errorBanner");
+      if (!msg) {
+        el.classList.remove("visible");
+        el.textContent = "";
+      } else {
+        el.textContent = "⚠️ " + msg;
+        el.classList.add("visible");
+      }
+    }
+
+    // Compress image via canvas so 10 screenshots fit comfortably under 4.5MB
+    function compressImage(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onerror = reject;
+        reader.onload = () => {
+          const img = new Image();
+          img.onerror = reject;
+          img.onload = () => {
+            const MAX_DIM = 1280;
+            let { width, height } = img;
+            if (width > MAX_DIM || height > MAX_DIM) {
+              if (width > height) {
+                height = Math.round((height * MAX_DIM) / width);
+                width = MAX_DIM;
+              } else {
+                width = Math.round((width * MAX_DIM) / height);
+                height = MAX_DIM;
+              }
+            }
+            const canvas = document.createElement("canvas");
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0, width, height);
+            const dataUrl = canvas.toDataURL("image/jpeg", 0.78);
+            const base64 = dataUrl.split(",")[1];
+            resolve({ mimeType: "image/jpeg", data: base64, previewUrl: dataUrl });
+          };
+          img.src = reader.result;
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    async function handleFiles(fileList) {
+      showError("");
+      const files = Array.from(fileList || []).filter((f) => f.type.startsWith("image/"));
+      if (!files.length) return;
+
+      for (const file of files) {
+        if (uploadedImages.length >= MAX_IMAGES) {
+          showError(`Máximo ${MAX_IMAGES} imágenes por examen.`);
+          break;
+        }
+        try {
+          const compressed = await compressImage(file);
+          uploadedImages.push(compressed);
+        } catch (err) {
+          showError("No se pudo leer una de las imágenes.");
+        }
+      }
+      document.getElementById("fileInput").value = "";
+      renderPreviews();
+    }
+
+    function removeImage(idx) {
+      uploadedImages.splice(idx, 1);
+      renderPreviews();
+    }
+
+    function renderPreviews() {
+      const grid = document.getElementById("previewGrid");
+      grid.innerHTML = uploadedImages
+        .map(
+          (img, idx) => `
+          <div class="preview-item">
+            <img src="${img.previewUrl}" alt="Captura ${idx + 1}" />
+            <button type="button" class="preview-remove" onclick="removeImage(${idx})" title="Quitar">×</button>
+          </div>
+        `
+        )
+        .join("");
+
+      const count = uploadedImages.length;
+      document.getElementById("imgCountLabel").textContent =
+        count === 1 ? "1 imagen cargada" : `${count} imágenes cargadas`;
+    }
+
+    async function generateExam() {
+      showError("");
+      if (uploadedImages.length === 0) {
+        showError("Subí al menos una captura de pantalla antes de generar el examen.");
+        return;
+      }
+
+      const accessCode = document.getElementById("accessCode").value.trim();
+      if (accessCode) sessionStorage.setItem("exam_access_code", accessCode);
+
+      const payload = {
+        images: uploadedImages.map(({ mimeType, data }) => ({ mimeType, data })),
+        examType: document.getElementById("examType").value,
+        questionCount: parseInt(document.getElementById("questionCount").value, 10),
+        gradeLevel: document.getElementById("gradeLevel").value,
+        language: document.getElementById("language").value,
+        extraNotes: document.getElementById("extraNotes").value.trim(),
+        accessCode
+      };
+
+      const btn = document.getElementById("generateBtn");
+      const loading = document.getElementById("loadingBox");
+      btn.disabled = true;
+      loading.classList.add("visible");
+
+      try {
+        const res = await fetch("/api/generate-exam", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+
+        const contentType = res.headers.get("content-type") || "";
+        if (!contentType.includes("application/json")) {
+          throw new Error(
+            "El backend (/api/generate-exam) no respondió JSON. Asegurate de abrir esta página desde tu despliegue en Vercel (no desde GitHub Pages)."
+          );
+        }
+
+        const data = await res.json();
+        if (!res.ok) {
+          throw new Error(data.error || `Error del servidor (${res.status}).`);
+        }
+
+        currentExam = data.exam;
+        sessionStorage.setItem("last_generated_exam", JSON.stringify(currentExam));
+        showExamView();
+      } catch (err) {
+        showError(err.message || "Error al conectar con el servidor.");
+      } finally {
+        btn.disabled = false;
+        loading.classList.remove("visible");
+      }
+    }
+
+    function normalize(str) {
+      return (str || "").trim().toLowerCase().replace(/’/g, "'").replace(/\s+/g, " ");
+    }
+
+    function getShuffledWords(words, seed) {
+      const arr = [...words];
+      let s = seed * 9301 + 49297;
+      for (let i = arr.length - 1; i > 0; i--) {
+        s = (s * 9301 + 49297) % 233280;
+        const j = s % (i + 1);
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    function backToBuilder() {
+      document.getElementById("examView").classList.remove("visible");
+      document.getElementById("stickyBar").classList.remove("visible");
+      document.getElementById("builderView").style.display = "block";
+      sessionStorage.removeItem("last_generated_exam");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function showExamView() {
+      examChecked = false;
+      showingMistakesOnly = false;
+      banksHidden = false;
+      document.getElementById("resultsPanel").classList.remove("visible");
+      document.getElementById("filterMistakesBtn").textContent = "🔍 Show Only Mistakes";
+
+      document.getElementById("builderView").style.display = "none";
+      document.getElementById("examView").classList.add("visible");
+      document.getElementById("stickyBar").classList.add("visible");
+
+      document.getElementById("examTitle").textContent = currentExam.title || "Custom Exam";
+      document.getElementById("examSubtitle").textContent = currentExam.subtitle || "";
+      document.getElementById("printTitle").textContent = currentExam.title || "Custom Exam";
+      document.getElementById("akTitle").textContent = `${currentExam.title || "Custom Exam"} — Answer Key`;
+
+      renderGeneratedExam();
+      renderAnswerKey();
+      updateProgress();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function renderGeneratedExam() {
+      const form = document.getElementById("examForm");
+      form.innerHTML = "";
+      flatQuestions = [];
+      let hasAnyFill = false;
+      let qGlobal = 0;
+
+      (currentExam.sections || []).forEach((sec, sIdx) => {
+        const secId = sec.id || sIdx + 1;
+        const secDiv = document.createElement("div");
+        secDiv.innerHTML = `
+          <div class="section-title">
+            <span class="section-num">Section ${secId}</span>
+            <h2>${sec.title || "Questions"}</h2>
+          </div>
+        `;
+
+        const fillQsInSec = (sec.questions || []).filter((q) => q.type === "fill");
+        if (fillQsInSec.length > 0) {
+          hasAnyFill = true;
+          const uniqueAnswers = [...new Set(fillQsInSec.map((q) => String(q.answer || "")))];
+          const shuffled = getShuffledWords(uniqueAnswers, secId + 11);
+          const bankDiv = document.createElement("div");
+          bankDiv.className = "word-bank";
+          bankDiv.id = `bank-${secId}`;
+          bankDiv.innerHTML = `
+            <span class="word-bank-label">Word Bank — Section ${secId}</span>
+            <div class="word-chips">
+              ${shuffled.map((w) => `<span class="word-chip" data-word="${normalize(w)}">${w}</span>`).join("")}
+            </div>
+          `;
+          secDiv.appendChild(bankDiv);
+        }
+
+        (sec.questions || []).forEach((qObj) => {
+          const idx = flatQuestions.length;
+          qGlobal++;
+          const normalizedQ = { ...qObj, secId, secTitle: sec.title || `Section ${secId}`, idx };
+          flatQuestions.push(normalizedQ);
+
+          const card = document.createElement("div");
+          card.className = "question-card";
+          card.id = `q-card-${idx}`;
+
+          if (qObj.type === "fill") {
+            const inputHtml = `<input type="text" class="blank-input" id="input-${idx}" placeholder="type here..." oninput="updateProgress()" /><span class="print-blank-line"></span>`;
+            const sentence = String(qObj.q || "").includes("___")
+              ? String(qObj.q).replace("___", inputHtml)
+              : `${qObj.q} ${inputHtml}`;
+            const hintHtml = qObj.hint ? ` <span class="q-hint">${qObj.hint}</span>` : "";
+
+            card.innerHTML = `
+              <div class="q-header">
+                <div class="q-sentence"><span class="q-num">${qGlobal}.</span>${sentence}${hintHtml}</div>
+                ${qObj.topic ? `<span class="q-topic">${qObj.topic}</span>` : ""}
+              </div>
+              <div class="q-feedback" id="fb-${idx}"></div>
+            `;
+          } else {
+            const opts = Array.isArray(qObj.options) ? qObj.options : [];
+            const optionsHtml = opts
+              .map(
+                (opt, optIdx) => `
+                <label class="option-label" id="opt-${idx}-${optIdx}" onclick="selectMc(${idx}, ${optIdx})">
+                  <input type="radio" name="q${idx}" value="${optIdx}" />
+                  <span class="opt-letter">${LETTERS[optIdx] || optIdx + 1}</span>
+                  <span>${opt}</span>
+                </label>
+              `
+              )
+              .join("");
+
+            card.innerHTML = `
+              <div class="q-header">
+                <div class="q-text"><span class="q-num">${qGlobal}.</span>${qObj.q}</div>
+                ${qObj.topic ? `<span class="q-topic">${qObj.topic}</span>` : ""}
+              </div>
+              <div class="options-grid">${optionsHtml}</div>
+              <div class="q-feedback" id="fb-${idx}"></div>
+            `;
+          }
+
+          secDiv.appendChild(card);
+        });
+
+        form.appendChild(secDiv);
+      });
+
+      document.getElementById("toggleBankBtn").style.display = hasAnyFill ? "inline-flex" : "none";
+      document.getElementById("printScoreMeta").innerHTML = `<strong>Score:</strong> _____ / ${flatQuestions.length}`;
+      document.getElementById("akSubtitle").textContent = `Total: ${flatQuestions.length} questions`;
+    }
+
+    function renderAnswerKey() {
+      const grid = document.getElementById("answerKeyGrid");
+      grid.innerHTML = flatQuestions
+        .map((q, idx) => {
+          const ansText =
+            q.type === "fill"
+              ? q.answer
+              : `${LETTERS[q.answer]} — ${(q.options || [])[q.answer] || ""}`;
+          return `
+            <div class="ak-row">
+              <span class="ak-num">${idx + 1}.</span>
+              <span class="ak-ans">${ansText}</span>
+              <span class="ak-topic">${q.topic || ""}</span>
+            </div>
+          `;
+        })
+        .join("");
+    }
+
+    function selectMc(idx, optIdx) {
+      if (examChecked) return;
+      document.querySelectorAll(`#q-card-${idx} .option-label`).forEach((l) => l.classList.remove("selected"));
+      const chosen = document.getElementById(`opt-${idx}-${optIdx}`);
+      if (chosen) {
+        chosen.classList.add("selected");
+        const r = chosen.querySelector("input[type='radio']");
+        if (r) r.checked = true;
+      }
+      updateProgress();
+    }
+
+    function updateProgress() {
+      if (!flatQuestions.length) return;
+      let answered = 0;
+      const typedBySec = {};
+
+      flatQuestions.forEach((q, idx) => {
+        if (!typedBySec[q.secId]) typedBySec[q.secId] = new Set();
+        if (q.type === "fill") {
+          const el = document.getElementById(`input-${idx}`);
+          const val = normalize(el?.value);
+          if (val) {
+            answered++;
+            typedBySec[q.secId].add(val);
+          }
+        } else {
+          if (document.querySelector(`input[name="q${idx}"]:checked`)) answered++;
+        }
+      });
+
+      const pct = Math.round((answered / flatQuestions.length) * 100);
+      document.getElementById("progressText").textContent = `${answered} / ${flatQuestions.length} answered`;
+      document.getElementById("progressPct").textContent = `${pct}%`;
+      document.getElementById("progressFill").style.width = `${pct}%`;
+
+      Object.entries(typedBySec).forEach(([secId, set]) => {
+        document.querySelectorAll(`#bank-${secId} .word-chip`).forEach((chip) => {
+          chip.classList.toggle("used", set.has(chip.dataset.word));
+        });
+      });
+    }
+
+    function toggleWordBanks() {
+      banksHidden = !banksHidden;
+      document.getElementById("toggleBankBtn").textContent = banksHidden
+        ? "👀 Show Word Banks"
+        : "🙈 Hide Word Banks";
+      document.querySelectorAll(".word-bank").forEach((b) => b.classList.toggle("hidden", banksHidden));
+    }
+
+    function checkExam() {
+      let unanswered = 0;
+      flatQuestions.forEach((q, idx) => {
+        if (q.type === "fill") {
+          if (!normalize(document.getElementById(`input-${idx}`).value)) unanswered++;
+        } else {
+          if (!document.querySelector(`input[name="q${idx}"]:checked`)) unanswered++;
+        }
+      });
+
+      if (unanswered > 0 && !examChecked) {
+        if (!confirm(`You still have ${unanswered} unanswered question(s). Check now anyway?`)) return;
+      }
+
+      examChecked = true;
+      let totalCorrect = 0;
+      const secScores = {};
+
+      flatQuestions.forEach((q, idx) => {
+        if (!secScores[q.secId]) secScores[q.secId] = { title: q.secTitle, correct: 0, total: 0 };
+        secScores[q.secId].total++;
+
+        const card = document.getElementById(`q-card-${idx}`);
+        const fb = document.getElementById(`fb-${idx}`);
+        card.classList.remove("correct", "incorrect");
+
+        if (q.type === "fill") {
+          const input = document.getElementById(`input-${idx}`);
+          const userVal = normalize(input.value);
+          input.readOnly = true;
+          input.classList.remove("input-correct", "input-wrong");
+
+          const accepted = Array.isArray(q.accept) && q.accept.length ? q.accept : [q.answer];
+          const isOk = accepted.map(normalize).includes(userVal);
+
+          if (isOk) {
+            totalCorrect++;
+            secScores[q.secId].correct++;
+            card.classList.add("correct");
+            input.classList.add("input-correct");
+            fb.className = "q-feedback visible ok";
+            fb.innerHTML = `✅ <strong>Correct!</strong> ${q.explanation || ""}`;
+          } else {
+            card.classList.add("incorrect");
+            input.classList.add("input-wrong");
+            fb.className = "q-feedback visible err";
+            fb.innerHTML = `❌ <strong>${userVal ? "Not quite." : "Not answered."}</strong> Answer: <strong>${q.answer}</strong>. ${q.explanation || ""}`;
+          }
+        } else {
+          const checked = document.querySelector(`input[name="q${idx}"]:checked`);
+          const userVal = checked ? parseInt(checked.value, 10) : -1;
+          card.querySelectorAll(".option-label").forEach((l) => l.classList.remove("is-correct", "is-wrong"));
+
+          const correctLbl = document.getElementById(`opt-${idx}-${q.answer}`);
+          if (correctLbl) correctLbl.classList.add("is-correct");
+
+          if (userVal === q.answer) {
+            totalCorrect++;
+            secScores[q.secId].correct++;
+            card.classList.add("correct");
+            fb.className = "q-feedback visible ok";
+            fb.innerHTML = `✅ <strong>Correct!</strong> ${q.explanation || ""}`;
+          } else {
+            card.classList.add("incorrect");
+            if (userVal >= 0) {
+              const wrongLbl = document.getElementById(`opt-${idx}-${userVal}`);
+              if (wrongLbl) wrongLbl.classList.add("is-wrong");
+            }
+            fb.className = "q-feedback visible err";
+            fb.innerHTML = `❌ <strong>${userVal === -1 ? "Not answered." : "Not quite."}</strong> Answer: <strong>${LETTERS[q.answer]} (${(q.options || [])[q.answer] || ""})</strong>. ${q.explanation || ""}`;
+          }
+        }
+      });
+
+      const pct = Math.round((totalCorrect / flatQuestions.length) * 100);
+      document.getElementById("scoreBig").textContent = `${totalCorrect} / ${flatQuestions.length} (${pct}%)`;
+
+      let msg = "";
+      if (pct >= 90) msg = "🌟 Outstanding job!";
+      else if (pct >= 75) msg = "🎉 Great work! Just a few to review.";
+      else if (pct >= 60) msg = "👍 Good effort! Review the highlighted ones below.";
+      else msg = "💪 Keep practising and try again!";
+      document.getElementById("scoreMessage").textContent = msg;
+
+      document.getElementById("sectionBreakdown").innerHTML = Object.entries(secScores)
+        .map(([secId, st]) => {
+          const spct = Math.round((st.correct / st.total) * 100);
+          const cls = spct >= 80 ? "badge-good" : spct >= 60 ? "badge-mid" : "badge-low";
+          return `
+            <div class="breakdown-item">
+              <span>Sec ${secId}: ${st.title}</span>
+              <span class="badge ${cls}">${st.correct}/${st.total}</span>
+            </div>
+          `;
+        })
+        .join("");
+
+      const panel = document.getElementById("resultsPanel");
+      panel.classList.add("visible");
+      panel.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function toggleMistakesFilter() {
+      showingMistakesOnly = !showingMistakesOnly;
+      document.getElementById("filterMistakesBtn").textContent = showingMistakesOnly
+        ? "📋 Show All Questions"
+        : "🔍 Show Only Mistakes";
+      flatQuestions.forEach((_, idx) => {
+        const card = document.getElementById(`q-card-${idx}`);
+        card.classList.toggle("hidden-by-filter", showingMistakesOnly && card.classList.contains("correct"));
+      });
+    }
+
+    function resetExam() {
+      examChecked = false;
+      showingMistakesOnly = false;
+      document.getElementById("filterMistakesBtn").textContent = "🔍 Show Only Mistakes";
+      document.getElementById("resultsPanel").classList.remove("visible");
+
+      flatQuestions.forEach((q, idx) => {
+        const card = document.getElementById(`q-card-${idx}`);
+        const fb = document.getElementById(`fb-${idx}`);
+        card.classList.remove("correct", "incorrect", "hidden-by-filter");
+        fb.className = "q-feedback";
+        fb.innerHTML = "";
+
+        if (q.type === "fill") {
+          const input = document.getElementById(`input-${idx}`);
+          input.value = "";
+          input.readOnly = false;
+          input.classList.remove("input-correct", "input-wrong");
+        } else {
+          card.querySelectorAll(".option-label").forEach((l) => {
+            l.classList.remove("selected", "is-correct", "is-wrong");
+            const r = l.querySelector("input[type='radio']");
+            if (r) r.checked = false;
+          });
+        }
+      });
+
+      updateProgress();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function printBlankExam() {
+      document.body.classList.remove("print-key");
+      document.body.classList.add("print-exam");
+      window.print();
+    }
+
+    function printAnswerKey() {
+      document.body.classList.remove("print-exam");
+      document.body.classList.add("print-key");
+      window.print();
+      setTimeout(() => {
+        document.body.classList.remove("print-key");
+        document.body.classList.add("print-exam");
+      }, 500);
+    }
+  </script>
+</body>
+</html>
